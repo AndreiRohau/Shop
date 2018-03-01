@@ -1,12 +1,12 @@
 package by.asrohau.shop.bean;
 
-public class Book {
+public class Product {
 	private String title;
 	private String author;
 	
-	public Book() {}
+	public Product() {}
 	
-	public Book(String title, String author) {
+	public Product(String title, String author) {
 		super();
 		this.title = title;
 		this.author = author;
@@ -45,7 +45,7 @@ public class Book {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Book other = (Book) obj;
+		Product other = (Product) obj;
 		if (author == null) {
 			if (other.author != null)
 				return false;
@@ -61,7 +61,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", author=" + author + "]";
+		return "Product [title=" + title + ", author=" + author + "]";
 	}
 
 }

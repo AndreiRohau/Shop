@@ -12,7 +12,6 @@ public class UserServiceImpl implements UserService {
 	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
 
 	public UserServiceImpl() {
-
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package by.asrohau.shop.service;
 
-import by.asrohau.shop.service.impl.BookServiceImpl;
+import by.asrohau.shop.service.impl.AdminServiceImpl;
+import by.asrohau.shop.service.impl.ProductServiceImpl;
 import by.asrohau.shop.service.impl.UserServiceImpl;
 
 public class ServiceFactory {
@@ -8,7 +9,8 @@ public class ServiceFactory {
 	private static final ServiceFactory INSTANCE = new ServiceFactory();
 
 	private final UserService userService = new UserServiceImpl();
-	private final BookService bookService = new BookServiceImpl();
+	private final AdminService adminService = new AdminServiceImpl();
+	private final ProductService productService = new ProductServiceImpl();
 	
 	private ServiceFactory() {}
 
@@ -20,8 +22,11 @@ public class ServiceFactory {
 		return userService;
 	}
 
-	public BookService getBookService() {
-		return bookService;
+	public ProductService getProductService() {
+		return productService;
 	}
-	
+
+	public AdminService getAdminService() {
+		return adminService;
+	}
 }
