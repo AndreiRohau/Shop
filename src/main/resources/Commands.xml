@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+    <command>
+        <webname>registration</webname>
+        <classname>RegistrationCommand</classname>
+    </command>
+
+    <command>
+        <webname>logination</webname>
+        <classname>LoginationCommand</classname>
+    </command>
+
+    <command>
+        <webname>change_password</webname>
+        <classname>ChangePasswordCommand</classname>
+    </command>
+    <command>
+        <webname>delete_user</webname>
+        <classname>DeleteUserCommand</classname>
+    </command>
+    <command>
+        <webname>change_language</webname>
+        <classname>ChangeLanguageCommand</classname>
+    </command>
+    <command>
+        <webname>add_book</webname>
+        <classname>AddBookCommand</classname>
+    </command>
+    <command>
+        <webname>try_xml</webname>
+        <classname>TryXMLCmd</classname>
+    </command>
+</commands>
