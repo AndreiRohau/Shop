@@ -13,7 +13,7 @@
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
-<fmt:message bundle="${loc}" key="local.library" var="library" />
+<fmt:message bundle="${loc}" key="local.shop" var="shop" />
 <fmt:message bundle="${loc}" key="local.hello" var="hello" />
 <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
 <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
@@ -34,7 +34,7 @@
 	<div class="header">
 
 		<div id="header1">
-			<p><c:out value="${library}"/></p>
+			<p><c:out value="${shop}"/></p>
 			<p><c:out value="${hello}"/> <c:out value="${userName}"/> !!!</p>
 		</div>
 		
