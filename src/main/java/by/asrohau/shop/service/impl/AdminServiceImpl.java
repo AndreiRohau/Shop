@@ -1,6 +1,7 @@
 package by.asrohau.shop.service.impl;
 
 import by.asrohau.shop.bean.UserDTO;
+import by.asrohau.shop.dao.AdminDAO;
 import by.asrohau.shop.dao.DAOFactory;
 import by.asrohau.shop.dao.UserDAO;
 import by.asrohau.shop.dao.exception.DAOException;
@@ -9,7 +10,7 @@ import by.asrohau.shop.service.exception.ServiceException;
 
 public class AdminServiceImpl implements AdminService {
 
-    private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
+    private final AdminDAO adminDAO = DAOFactory.getInstance().getAdminDAO();
 
     public AdminServiceImpl() {
     }
@@ -29,7 +30,7 @@ public class AdminServiceImpl implements AdminService {
         // validation!!! stub
         if (validation(login, password)) {
             try {
-                return userDAO.findUserWithLoginAndPassword(login, password);
+                return adminDAO.findUserWithLoginAndPassword(login, password);
             } catch (DAOException e) {
                 throw new ServiceException(e);
             }
