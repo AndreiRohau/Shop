@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import by.asrohau.shop.bean.User;
 import by.asrohau.shop.controller.command.Command;
 import by.asrohau.shop.controller.exception.ControllerException;
 import by.asrohau.shop.service.ServiceFactory;
@@ -18,16 +19,15 @@ public class DeleteUserCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to delete User Command");
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
 
+		User user = new User(request.getParameter("login"), request.getParameter("password"));
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
 
 		boolean isChanged = false;
 
 		try {
-			isChanged = userService.deleteUser(login.trim(), password.trim());
+			isChanged = userService.deleteUser(user);
 			
 			String goToPage;
 			if (isChanged) {

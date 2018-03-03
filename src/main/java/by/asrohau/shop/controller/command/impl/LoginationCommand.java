@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import by.asrohau.shop.bean.User;
 import by.asrohau.shop.bean.UserDTO;
 import by.asrohau.shop.controller.command.Command;
 import by.asrohau.shop.controller.exception.ControllerException;
@@ -21,23 +22,21 @@ public class LoginationCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to logination");
 
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
-
+		User user = new User(request.getParameter("login"),  request.getParameter("password"));
+		UserDTO userDTO;
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
-		UserDTO userDTO;
 		String goToPage;
 
 		try {
-			if(!login.equals("Admin")){
+			if(!request.getParameter("login").equals("Admin")){
 				UserService userService = serviceFactory.getUserService();
-				userDTO = userService.logination(login.trim(), password.trim());
-				goToPage = "/jsp/main.jsp";
+				userDTO = userService.logination(user);
+				goToPage = "/jsp/user/main.jsp";
 			} else {
 				AdminService adminService = serviceFactory.getAdminService();
-				userDTO = adminService.logination(login.trim(), password.trim());
-				goToPage = "/jsp/admin.jsp";
+				userDTO = adminService.logination(user);
+				goToPage = "/jsp/admin/admin.jsp";
 			}
 
 			if (userDTO != null) {

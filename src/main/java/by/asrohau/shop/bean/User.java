@@ -4,7 +4,8 @@ public class User {
 
 	private String login;
 	private String password;
-	
+	private String newPassword;
+
 	public User() {}
 	
 	public User(String login, String password) {
@@ -27,6 +28,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 
 	@Override

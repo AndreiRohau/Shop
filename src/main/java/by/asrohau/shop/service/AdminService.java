@@ -1,5 +1,6 @@
 package by.asrohau.shop.service;
 
+import by.asrohau.shop.bean.User;
 import by.asrohau.shop.bean.UserDTO;
 import by.asrohau.shop.service.exception.ServiceException;
 
@@ -8,7 +9,7 @@ import by.asrohau.shop.service.exception.ServiceException;
  */
 public interface AdminService {
     boolean validation(String login, String password);
-    UserDTO logination(String login, String password) throws ServiceException;
+    UserDTO logination(User user) throws ServiceException;
 
 
 }

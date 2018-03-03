@@ -19,11 +19,11 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 	private String DELETE_USER_QUERY = "DELETE FROM shop.users WHERE login = ? AND password = ?";
 
 	@Override
-	public UserDTO findUserWithLoginAndPassword(String login, String password) throws DAOException {
+	public UserDTO findUserWithLoginAndPassword(User user) throws DAOException {
 		try (PreparedStatement preparedStatement = getConnection()
 				.prepareStatement(FIND_USER_WITH_LOGIN_PASSWORD_QUERY)) {
-			preparedStatement.setString(1, login);
-			preparedStatement.setString(2, password);
+			preparedStatement.setString(1, user.getLogin());
+			preparedStatement.setString(2, user.getPassword());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			UserDTO userDTO = new UserDTO();
 
@@ -36,7 +36,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 			if (userDTO.getLogin() != null) {
 				return userDTO;
 			}
-			System.out.println("Did not find User with login = " + login);
+			System.out.println("Did not find User with login = " + user.getLogin());
 			return null;
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -45,9 +45,9 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 	}
 
 	@Override
-	public UserDTO findUserWithLogin(String login) throws DAOException {
+	public UserDTO findUserWithLogin(User user) throws DAOException {
 		try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_USER_WITH_LOGIN_QUERY)) {
-			preparedStatement.setString(1, login);
+			preparedStatement.setString(1, user.getLogin());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			UserDTO userDTO = new UserDTO();
 
@@ -60,7 +60,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 			if (userDTO.getLogin() != null) {
 				return userDTO;
 			}
-			System.out.println("Did not find User with login = " + login);
+			System.out.println("Did not find User with login = " + user.getLogin());
 			return null;
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -69,10 +69,10 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 	}
 
 	@Override
-	public boolean saveUser(String login, String password) throws DAOException {
+	public boolean saveUser(User user) throws DAOException {
 		try (PreparedStatement statement = getConnection().prepareStatement(SAVE_USER_QUERY)) {
-			statement.setString(1, login);
-			statement.setString(2, password);
+			statement.setString(1, user.getLogin());
+			statement.setString(2, user.getPassword());
 
 			statement.executeUpdate();
 			statement.close();
@@ -84,11 +84,11 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 	}
 
 	@Override
-	public boolean changePassword(String login, String password, String newPassword) throws DAOException {
+	public boolean changePassword(User user) throws DAOException {
 		try (PreparedStatement statement = getConnection().prepareStatement(CHANGE_PASSWORD_QUERY)) {
-			statement.setString(1, newPassword);
-			statement.setString(2, login);
-			statement.setString(3, password);
+			statement.setString(1, user.getNewPassword());
+			statement.setString(2, user.getLogin());
+			statement.setString(3, user.getPassword());
 
 			statement.executeUpdate();
 			statement.close();
@@ -100,10 +100,10 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 	}
 
 	@Override
-	public boolean deleteUser(String login, String password) throws DAOException {
+	public boolean deleteUser(User user) throws DAOException {
 		try (PreparedStatement statement = getConnection().prepareStatement(DELETE_USER_QUERY)) {
-			statement.setString(1, login);
-			statement.setString(2, password);
+			statement.setString(1, user.getLogin());
+			statement.setString(2, user.getPassword());
 
 			statement.executeUpdate();
 			statement.close();

@@ -1,5 +1,6 @@
 package by.asrohau.shop.service.impl;
 
+import by.asrohau.shop.bean.User;
 import by.asrohau.shop.bean.UserDTO;
 import by.asrohau.shop.dao.DAOFactory;
 import by.asrohau.shop.dao.UserDAO;
@@ -25,13 +26,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDTO logination(String login, String password) throws ServiceException {
+	public UserDTO logination(User user) throws ServiceException {
 
 		// validation!!! stub
-		if (validation(login, password)) {
+		if (validation(user.getLogin(), user.getPassword())) {
 
 			try {
-				return userDAO.findUserWithLoginAndPassword(login, password);
+				return userDAO.findUserWithLoginAndPassword(user);
 			} catch (DAOException e) {
 				throw new ServiceException(e);
 			}
@@ -42,14 +43,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean registration(String login, String password) throws ServiceException {
+	public boolean registration(User user) throws ServiceException {
 
 		// validation!!! stub
-		if (validation(login, password)) {
+		if (validation(user.getLogin(), user.getPassword())) {
 
 			try {
-				if (userDAO.findUserWithLogin(login) == null) {
-					return userDAO.saveUser(login, password);
+				if (userDAO.findUserWithLogin(user) == null) {
+					return userDAO.saveUser(user);
 				}
 
 			} catch (DAOException e) {
@@ -61,14 +62,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean changePassword(String login, String password, String newPassword) throws ServiceException {
+	public boolean changePassword(User user) throws ServiceException {
 
 		// validation!!! stub
-		if (validation(login, newPassword)) {
+		if (validation(user.getLogin(), user.getPassword())) {
 
 			try {
-				if (userDAO.findUserWithLoginAndPassword(login, password) != null) {
-					return userDAO.changePassword(login, password, newPassword);
+				if (userDAO.findUserWithLoginAndPassword(user) != null) {
+					return userDAO.changePassword(user);
 				}
 				
 			} catch (DAOException e) {
@@ -80,14 +81,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean deleteUser(String login, String password) throws ServiceException {
+	public boolean deleteUser(User user) throws ServiceException {
 
 		// validation!!! stub
-		if (validation(login, password)) {
+		if (validation(user.getLogin(), user.getPassword())) {
 
 			try {
-				if (userDAO.findUserWithLoginAndPassword(login, password) != null) {
-					return userDAO.deleteUser(login, password);
+				if (userDAO.findUserWithLoginAndPassword(user) != null) {
+					return userDAO.deleteUser(user);
 				}
 				
 			} catch (DAOException e) {

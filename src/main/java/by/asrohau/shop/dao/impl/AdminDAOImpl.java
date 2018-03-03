@@ -1,5 +1,6 @@
 package by.asrohau.shop.dao.impl;
 
+import by.asrohau.shop.bean.User;
 import by.asrohau.shop.bean.UserDTO;
 import by.asrohau.shop.dao.AbstractDAO;
 import by.asrohau.shop.dao.AdminDAO;
@@ -14,11 +15,11 @@ public class AdminDAOImpl extends AbstractDAO<UserDTO> implements AdminDAO {
     private String FIND_USER_WITH_LOGIN_PASSWORD_QUERY = "SELECT * FROM shop.users WHERE login = ? AND password = ?";
 
     @Override
-    public UserDTO findUserWithLoginAndPassword(String login, String password) throws DAOException {
+    public UserDTO findUserWithLoginAndPassword(User user) throws DAOException {
         try (PreparedStatement preparedStatement = getConnection()
                 .prepareStatement(FIND_USER_WITH_LOGIN_PASSWORD_QUERY)) {
-            preparedStatement.setString(1, login);
-            preparedStatement.setString(2, password);
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
             ResultSet resultSet = preparedStatement.executeQuery();
             UserDTO userDTO = new UserDTO();
 
@@ -31,7 +32,7 @@ public class AdminDAOImpl extends AbstractDAO<UserDTO> implements AdminDAO {
             if (userDTO.getLogin() != null) {
                 return userDTO;
             }
-            System.out.println("Did not find User with login = " + login);
+            System.out.println("Did not find User with login = " + user.getLogin());
             return null;
         } catch (SQLException e) {
             throw new DAOException(e);

@@ -1,5 +1,6 @@
 package by.asrohau.shop.dao;
 
+import by.asrohau.shop.bean.User;
 import by.asrohau.shop.bean.UserDTO;
 import by.asrohau.shop.dao.exception.DAOException;
 
@@ -8,6 +9,6 @@ import by.asrohau.shop.dao.exception.DAOException;
  */
 public interface AdminDAO {
 
-    UserDTO findUserWithLoginAndPassword(String login, String password) throws DAOException;
+    UserDTO findUserWithLoginAndPassword(User user) throws DAOException;
 
 }
