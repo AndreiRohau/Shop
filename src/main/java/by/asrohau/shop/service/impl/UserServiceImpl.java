@@ -16,9 +16,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean validation(String login, String password) {
+	public boolean validation(User user) {
 		String toCompare = "";
-		if (!toCompare.equals(login) && !toCompare.equals(password)) {
+		if (!toCompare.equals(user.getLogin()) && !toCompare.equals(user.getPassword())) {
 			return true;
 		} else {
 			return false;
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 	public UserDTO logination(User user) throws ServiceException {
 
 		// validation!!! stub
-		if (validation(user.getLogin(), user.getPassword())) {
+		if (validation(user)) {
 
 			try {
 				return userDAO.findUserWithLoginAndPassword(user);
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 	public boolean registration(User user) throws ServiceException {
 
 		// validation!!! stub
-		if (validation(user.getLogin(), user.getPassword())) {
+		if (validation(user)) {
 
 			try {
 				if (userDAO.findUserWithLogin(user) == null) {
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	public boolean changePassword(User user) throws ServiceException {
 
 		// validation!!! stub
-		if (validation(user.getLogin(), user.getPassword())) {
+		if (validation(user)) {
 
 			try {
 				if (userDAO.findUserWithLoginAndPassword(user) != null) {
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
 	public boolean deleteUser(User user) throws ServiceException {
 
 		// validation!!! stub
-		if (validation(user.getLogin(), user.getPassword())) {
+		if (validation(user)) {
 
 			try {
 				if (userDAO.findUserWithLoginAndPassword(user) != null) {

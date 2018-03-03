@@ -6,7 +6,7 @@ import by.asrohau.shop.service.exception.ServiceException;
 
 public interface UserService {
 	
-	boolean validation(String login, String password);
+	boolean validation(User user);
 	UserDTO logination(User user) throws ServiceException;
 	boolean registration(User user) throws ServiceException;
 	boolean changePassword(User user) throws ServiceException;
