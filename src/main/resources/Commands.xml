@@ -23,8 +23,8 @@
         <classname>ChangeLanguageCommand</classname>
     </command>
     <command>
-        <webname>add_book</webname>
-        <classname>AddBookCommand</classname>
+        <webname>goToPage</webname>
+        <classname>GoToPageCommand</classname>
     </command>
     <command>
         <webname>try_xml</webname>

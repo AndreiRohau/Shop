@@ -35,10 +35,6 @@ public class FrontController extends HttpServlet {
 		try {
 			Map commandMap = CommandFactory.getInstance().getCommandMap();
 			Command command = (Command) commandMap.get(request.getParameter("command"));
-
-			HttpSession session = request.getSession(true);
-			session.getId(); //to dev!!!
-
 			command.execute(request, response);
 
 		} catch (ControllerException e) {

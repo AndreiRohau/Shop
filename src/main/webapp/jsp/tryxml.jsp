@@ -64,7 +64,7 @@
 
 	<div class="footer" >
 		<div id="footer" >
-			<a href="http://localhost:8080/ilib/" style="background-color: #a1311f">HOME page</a>
+			<a href="http://localhost:8080/shop/" style="background-color: #a1311f">HOME page</a>
 		</div>
 	</div>
 </body>
