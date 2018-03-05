@@ -19,16 +19,14 @@ public class RegistrationCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to REGISTRATION");
-		System.out.println(request.getParameter("login"));
-		boolean isRegistered = false;
 
+		boolean isRegistered = false;
 		User user = new User(request.getParameter("login"), request.getParameter("password"));
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
 
 		try {
 			isRegistered = userService.registration(user);
-			
 			String goToPage;
 			if (isRegistered) {
 				request.setAttribute("isRegistered", "You registered successfully");
@@ -40,14 +38,9 @@ public class RegistrationCommand implements Command {
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);
 			
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		} catch (ServletException e) {
-			throw new ControllerException(e);
-		} catch (IOException e) {
+		} catch (ServiceException | ServletException | IOException e) {
 			throw new ControllerException(e);
 		}
-
 	}
 
 }

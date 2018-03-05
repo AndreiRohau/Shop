@@ -28,7 +28,6 @@ public class DeleteUserCommand implements Command {
 
 		try {
 			isChanged = userService.deleteUser(user);
-			
 			String goToPage;
 			if (isChanged) {
 				goToPage = "index.jsp";
@@ -40,11 +39,7 @@ public class DeleteUserCommand implements Command {
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);
 			
-		} catch (ServiceException e) {
-			throw new ControllerException(e);
-		} catch (ServletException e) {
-			throw new ControllerException(e);
-		} catch (IOException e) {
+		} catch (ServiceException | ServletException | IOException e) {
 			throw new ControllerException(e);
 		}
 

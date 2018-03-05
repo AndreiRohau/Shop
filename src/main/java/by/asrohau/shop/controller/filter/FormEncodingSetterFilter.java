@@ -1,4 +1,4 @@
-package by.asrohau.shop.controller;
+package by.asrohau.shop.controller.filter;
 
 import java.io.*;
 import javax.servlet.*;

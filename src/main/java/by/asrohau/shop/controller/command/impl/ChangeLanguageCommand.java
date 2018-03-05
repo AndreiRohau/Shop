@@ -30,9 +30,7 @@ public class ChangeLanguageCommand  implements Command {
 			dispatcher.forward(request, response);
 
 
-		} catch (ServletException e) {
-			throw new ControllerException(e);
-		} catch (IOException e) {
+		} catch (ServletException | IOException e) {
 			throw new ControllerException(e);
 		}
 	

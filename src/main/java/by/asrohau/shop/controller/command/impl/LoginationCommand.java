@@ -38,7 +38,6 @@ public class LoginationCommand implements Command {
 				userDTO = adminService.logination(user);
 				goToPage = "/jsp/admin/main.jsp";
 			}
-
 			if (userDTO != null) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("userName", userDTO.getLogin());
@@ -47,9 +46,6 @@ public class LoginationCommand implements Command {
 				goToPage = "error.jsp";
 				request.setAttribute("errorMessage", "no such user");
 			}
-			//for ENCODING checks
-			System.out.println(userDTO.getLogin());
-
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);
 
