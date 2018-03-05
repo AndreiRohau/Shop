@@ -3,7 +3,7 @@ package by.asrohau.shop.controller.filter;
 import java.io.*;
 import javax.servlet.*;
 
-public class FormEncodingSetterFilter implements Filter{
+public class EncodingFilter implements Filter{
 
     private static final String FILTERABLE_CONTENT_TYPE="application/x-www-form-urlencoded";
 
