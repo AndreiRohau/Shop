@@ -19,6 +19,7 @@ public class RegistrationCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to REGISTRATION");
+		System.out.println(request.getParameter("login"));
 		boolean isRegistered = false;
 
 		User user = new User(request.getParameter("login"), request.getParameter("password"));

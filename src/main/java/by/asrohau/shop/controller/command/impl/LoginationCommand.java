@@ -22,7 +22,7 @@ public class LoginationCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to logination");
-
+		System.out.println(request.getParameter("login"));
 		User user = new User(request.getParameter("login"),  request.getParameter("password"));
 		UserDTO userDTO;
 		String goToPage;

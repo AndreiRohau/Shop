@@ -33,4 +33,10 @@
     <url-pattern>/i18n-tutorial/*</url-pattern>
   </filter-mapping>
   <!-- Form Encoding Setter Filter           END-->
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jsp</url-pattern>
+      <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+  </jsp-config>
 </web-app>
