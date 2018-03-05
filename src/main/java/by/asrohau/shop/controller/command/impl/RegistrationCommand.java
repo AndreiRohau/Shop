@@ -36,7 +36,6 @@ public class RegistrationCommand implements Command {
 				goToPage = "error.jsp";
 				request.setAttribute("errorMessage", "cant register");
 			}
-			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);
 			

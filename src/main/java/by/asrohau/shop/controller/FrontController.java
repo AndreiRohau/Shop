@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import by.asrohau.shop.controller.command.Command;
 import by.asrohau.shop.controller.command.CommandFactory;
@@ -31,6 +30,9 @@ public class FrontController extends HttpServlet {
 			throws ServletException, IOException {
 
 		System.out.println("in servlet : command : " + request.getParameter("command"));
+
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
 
 		try {
 			Map commandMap = CommandFactory.getInstance().getCommandMap();

@@ -25,8 +25,6 @@
 		<fmt:message bundle="${loc}" key="local.logbutton" var="log_button" />
 		<fmt:message bundle="${loc}" key="local.regbutton" var="reg_button" />
 
-		<%--<c:set var="isRegistered" scope="session"> ${requestScope.isRegistered}</c:set>--%>
-
 	</head>
 	<body>
 

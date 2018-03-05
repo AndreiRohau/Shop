@@ -70,8 +70,8 @@
 
 			<div id="content">
 				<H1>Easy start.</H1>
-				<a href="" ><p>Search.</p></a>
-				<a href="" ><p>View all products.</p></a>
+				<p><a href="" >Search.</a></p>
+				<p><a href="" >View all products.</a></p>
 			</div>
 
 		</div>

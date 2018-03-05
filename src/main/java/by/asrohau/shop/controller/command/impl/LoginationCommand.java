@@ -25,9 +25,8 @@ public class LoginationCommand implements Command {
 
 		User user = new User(request.getParameter("login"),  request.getParameter("password"));
 		UserDTO userDTO;
-		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-
 		String goToPage;
+		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
 		try {
 			if(!request.getParameter("login").equals("Admin")){
@@ -37,23 +36,20 @@ public class LoginationCommand implements Command {
 			} else {
 				AdminService adminService = serviceFactory.getAdminService();
 				userDTO = adminService.logination(user);
-				goToPage = "/jsp/admin/admin.jsp";
+				goToPage = "/jsp/admin/main.jsp";
 			}
-			HttpSession session = request.getSession(true);
+
 			if (userDTO != null) {
-				//стартануть сессию юзера конкретного - first using request attributes, now trying to use session
-
-				//request.setAttribute("userName", userDTO.getLogin());
+				HttpSession session = request.getSession(true);
 				session.setAttribute("userName", userDTO.getLogin());
-
 
 			} else {
 				goToPage = "error.jsp";
 				request.setAttribute("errorMessage", "no such user");
 			}
-			System.out.println(request.getSession().getAttribute("userName"));
-			System.out.println(session.getAttribute("userName"));
-			request.setAttribute("atr", "myatr");
+			//for ENCODING checks
+			System.out.println(userDTO.getLogin());
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);
 
