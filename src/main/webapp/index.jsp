@@ -98,7 +98,10 @@
 		<div class="footer" >
 			<div id="footer" >
 				<h1>footer</h1>
-				<p> - indeX - page - </p>
+
+					<a href="http://localhost:8080/shop/" style="background-color: #a1311f">HOME page</a>
+					<a href="http://localhost:8080/shop/jsp/tryxml.jsp" style="background-color: #a1311f">jsp/tryxml.jsp page</a>
+
 				<form action="FrontController" method="post">
 					<input type="hidden" name="command" value="try_xml"/>
 					<input type="submit" name = "okey" value="try XML new command"/>

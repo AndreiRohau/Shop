@@ -22,6 +22,12 @@ public class LoginationCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to logination");
+
+		System.out.println("request.getContextPath(): " + request.getContextPath());
+		System.out.println("request.getPathInfo(): " + request.getPathInfo());
+		System.out.println("request.getRequestURI(): " + request.getRequestURI());
+		System.out.println("request.getRequestURL(): " + request.getRequestURL());
+
 		System.out.println(request.getParameter("login"));
 		User user = new User(request.getParameter("login"),  request.getParameter("password"));
 		UserDTO userDTO;

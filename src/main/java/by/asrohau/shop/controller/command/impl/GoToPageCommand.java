@@ -15,6 +15,11 @@ public class GoToPageCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
         System.out.println("We got to GoToPageCommand");
 
+        System.out.println("request.getContextPath(): " + request.getContextPath());
+        System.out.println("request.getPathInfo(): " + request.getPathInfo());
+        System.out.println("request.getRequestURI(): " + request.getRequestURI());
+        System.out.println("request.getRequestURL(): " + request.getRequestURL());
+
         try {
             String goToPage = request.getParameter("address");
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
