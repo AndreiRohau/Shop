@@ -35,7 +35,7 @@
 				</div>
 
 				<div id="header2" >
-					<div >
+					<div>
 						<form action="FrontController" method="post">
 							<input type="hidden" name="command" value="change_language"/>
 							<input type="hidden" name="local" value="en"/>
