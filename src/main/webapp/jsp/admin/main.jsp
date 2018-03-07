@@ -82,12 +82,15 @@
 
 </div>
 
-<div class="footer" >
-    <div id="footer" >
-        <h1>footer</h1>
-        <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
-
-    </div>
-</div>
-</body>
+        <div class="footer" >
+            <div id="footer" >
+                <h1>footer</h1>
+                <p>
+                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
+                      -->
+                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">administration</a>
+                </p>
+            </div>
+        </div>
+    </body>
 </html>

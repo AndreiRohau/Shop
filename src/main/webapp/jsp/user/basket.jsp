@@ -32,7 +32,7 @@
 
             <div id="header1">
                 <p><c:out value="${shop}"/></p>
-                <p><c:out value="${hello}"/> <c:out value="${sessionScope.userName}"/> !!!</p>
+                <p>Basket: <c:out value="${sessionScope.userName}"/> !!!</p>
             </div>
 
             <div id="header2" style="display:flex; flex-flow: row wrap; justify-content:space-between">
@@ -89,6 +89,8 @@
                     <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
                       -->
                     <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
+                      -->
+                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fbasket.jsp">basket</a>
                 </p>
             </div>
         </div>

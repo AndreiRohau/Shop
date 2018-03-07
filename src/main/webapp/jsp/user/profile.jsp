@@ -9,12 +9,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
-        <title>Shop</title>
+        <title>Profile</title>
 
         <fmt:setLocale value="${sessionScope.local}" />
         <fmt:setBundle basename="localization.local" var="loc" />
         <fmt:message bundle="${loc}" key="local.shop" var="shop" />
-        <fmt:message bundle="${loc}" key="local.hello" var="hello" />
         <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
         <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
         <fmt:message bundle="${loc}" key="local.locbutton.name.ch" var="ch_button" />
@@ -32,7 +31,7 @@
 
             <div id="header1">
                 <p><c:out value="${shop}"/></p>
-                <p><c:out value="${hello}"/> <c:out value="${sessionScope.userName}"/> !!!</p>
+                <p>Profile: <c:out value="${sessionScope.userName}"/> !!!</p>
             </div>
 
             <div id="header2" style="display:flex; flex-flow: row wrap; justify-content:space-between">
@@ -120,6 +119,8 @@
                     <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
                       -->
                     <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
+                      -->
+                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fprofile.jsp">profile</a>
                 </p>
             </div>
         </div>
