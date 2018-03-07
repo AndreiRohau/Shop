@@ -86,11 +86,11 @@
             <div id="footer" >
                 <h1>footer</h1>
                 <p style="text-decoration-color: yellow">
-                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
+                    <a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
                       -->
-                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
+                    <a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
                       -->
-                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fbasket.jsp">basket</a>
+                    <a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fbasket.jsp">basket</a>
                 </p>
             </div>
         </div>

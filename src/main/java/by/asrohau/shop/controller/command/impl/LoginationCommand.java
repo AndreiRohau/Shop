@@ -34,7 +34,8 @@ public class LoginationCommand implements Command {
 					goToPage = "/jsp/user/main.jsp";
 					request.getSession(true).setAttribute("address", goToPage);
 				} else {
-					goToPage = "index.jsp";
+					goToPage = "error.jsp";
+					request.getSession(true).setAttribute("address", goToPage);
 				}
 			} else if (request.getParameter("login").equals("Admin") && request.getSession().getAttribute("userName") == null) {
 				AdminService adminService = serviceFactory.getAdminService();
@@ -43,10 +44,12 @@ public class LoginationCommand implements Command {
 					goToPage = "/jsp/admin/main.jsp";
 					request.getSession(true).setAttribute("address", goToPage);
 				} else {
-					goToPage = "index.jsp";
+					goToPage = "error.jsp";
+					request.getSession(true).setAttribute("address", goToPage);
 				}
 			} else {
-				goToPage = "index.jsp";
+				goToPage = "error.jsp";
+				request.getSession(true).setAttribute("address", goToPage);
 			}
 
 			request.getSession(true).setAttribute("address", goToPage);

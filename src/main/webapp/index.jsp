@@ -119,9 +119,9 @@
 	<div id="footer">
 		<h1>footer</h1>
 		<p>
-			<a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
+			<a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
 			  -->
-			<a style="background-color: aquamarine" href="FrontController?command=try_xml&address=%2Fjsp%2Ftryxml.jsp">try new xml command</a>
+			<a href="FrontController?command=try_xml&address=%2Fjsp%2Ftryxml.jsp">try new xml command</a>
 		</p>
 	</div>
 </div>

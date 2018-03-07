@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class AdminDAOImpl extends AbstractDAO<UserDTO> implements AdminDAO {
 
-    private String FIND_USER_WITH_LOGIN_PASSWORD_QUERY = "SELECT * FROM shop.users WHERE login = ? AND password = ?";
+    private String FIND_USER_WITH_LOGIN_PASSWORD_QUERY = "SELECT * FROM shop.admins WHERE login = ? AND password = ?";
 
     @Override
     public UserDTO findUserWithLoginAndPassword(User user) throws DAOException {

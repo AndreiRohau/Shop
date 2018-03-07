@@ -116,11 +116,11 @@
             <div id="footer" >
                 <h1>footer</h1>
                 <p>
-                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
+                    <a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
                       -->
-                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
+                    <a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
                       -->
-                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fprofile.jsp">profile</a>
+                    <a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fprofile.jsp">profile</a>
                 </p>
             </div>
         </div>
