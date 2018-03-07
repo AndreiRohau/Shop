@@ -40,11 +40,10 @@ public class LoginationCommand implements Command {
 				goToPage = "index.jsp";
 			}
 
+			request.getSession().setAttribute("address", goToPage);
+
 			if (userDTO != null) {
 				request.getSession().setAttribute("userName", userDTO.getLogin());
-//			} else if (goToPage == null){
-//				goToPage = "error.jsp";
-//				request.setAttribute("errorMessage", "no such user");
 			} else {
 				request.setAttribute("errorMessage", "no such user");
 			}

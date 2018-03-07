@@ -38,27 +38,32 @@
                 <p><c:out value="${hello}"/> <c:out value="${userName}"/> !!!</p>
             </div>
 
-            <div id="header2">
-                <form action="FrontController" method="post">
-                    <input type="hidden" name="command" value="change_language"/>
-                    <input type="hidden" name="local" value="en"/>
-                    <input type="submit" value="${en_button}"/>
-                </form>
-                <form action="FrontController" method="post">
-                    <input type="hidden" name="command" value="change_language"/>
-                    <input type="hidden" name="local" value="ru"/>
-                    <input type="submit" value="${ru_button}"/>
-                </form>
-                <form action="FrontController" method="post">
-                    <input type="hidden" name="command" value="change_language"/>
-                    <input type="hidden" name="local" value="ch"/>
-                    <input type="submit" value="${ch_button}"/>
-                </form>
-                <form action="FrontController" method="post">
-                    <input type="hidden" name="command" value="logout"/>
-                    <input type="submit" value="Log out"/>
-                </form>
+            <div id="header2" style="display:flex; flex-flow: row wrap; justify-content:space-between">
+                <div>
+                    <form action="FrontController" method="post">
+                        <input type="hidden" name="command" value="change_language">
+                        <input type="hidden" name="local" value="en">
+                        <input type="submit" value="ENG">
+                    </form>
+                    <form action="FrontController" method="post">
+                        <input type="hidden" name="command" value="change_language">
+                        <input type="hidden" name="local" value="ru">
+                        <input type="submit" value="РУС">
+                    </form>
+                    <form action="FrontController" method="post">
+                        <input type="hidden" name="command" value="change_language">
+                        <input type="hidden" name="local" value="ch">
+                        <input type="submit" value="汉语">
+                    </form>
+                </div>
+                <div>
+                    <form action="FrontController" method="post" style="height:100%">
+                        <input type="hidden" name="command" value="logout">
+                        <input type="submit" value="Log out" style="height:100%">
+                    </form>
+                </div>
             </div>
+
 
         </div>
 
