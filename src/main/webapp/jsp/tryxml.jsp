@@ -17,9 +17,6 @@
 <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
 <fmt:message bundle="${loc}" key="local.locbutton.name.ch" var="ch_button" />
 
-<c:set var="isChanged" scope="session">${request.getAttribute("isChanged")}</c:set>
-<c:set var="userName" scope="session">${request.getAttribute("userName")}</c:set>
-
 </head>
 <body>
 	<div class="header">

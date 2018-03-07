@@ -26,24 +26,34 @@ public class LoginationCommand implements Command {
 		UserDTO userDTO = null;
 		String goToPage;
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		request.getSession().setAttribute("address", "/jsp/user/main.jsp");
 		try {
 			if(!request.getParameter("login").equals("Admin") && request.getSession().getAttribute("userName") == null){
 				UserService userService = serviceFactory.getUserService();
 				userDTO = userService.logination(user);
-				goToPage = "/jsp/user/main.jsp";
-			} else if (request.getSession().getAttribute("userName") == null) {
+				if (userDTO != null) {
+					goToPage = "/jsp/user/main.jsp";
+					request.getSession(true).setAttribute("address", goToPage);
+				} else {
+					goToPage = "index.jsp";
+				}
+			} else if (request.getParameter("login").equals("Admin") && request.getSession().getAttribute("userName") == null) {
 				AdminService adminService = serviceFactory.getAdminService();
 				userDTO = adminService.logination(user);
-				goToPage = "/jsp/admin/main.jsp";
+				if(userDTO != null) {
+					goToPage = "/jsp/admin/main.jsp";
+					request.getSession(true).setAttribute("address", goToPage);
+				} else {
+					goToPage = "index.jsp";
+				}
 			} else {
 				goToPage = "index.jsp";
 			}
 
-			request.getSession().setAttribute("address", goToPage);
+			request.getSession(true).setAttribute("address", goToPage);
 
 			if (userDTO != null) {
 				request.getSession().setAttribute("userName", userDTO.getLogin());
+				System.out.println("inlogin set user or admin is " + request.getSession().getAttribute("userName"));
 			} else {
 				request.setAttribute("errorMessage", "no such user");
 			}

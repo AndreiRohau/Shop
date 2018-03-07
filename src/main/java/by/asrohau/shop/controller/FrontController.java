@@ -47,6 +47,7 @@ public class FrontController extends HttpServlet {
 					request.getSession().getAttribute("userName") != null) {
 				command = (Command) commandMap.get(request.getParameter("command"));
 			} else {
+				System.out.println(request.getSession().getAttribute("userName") + " is null/!?!?!");
 				command = (Command) commandMap.get("goToPage");
 			}
 			command.execute(request, response);

@@ -26,16 +26,13 @@
     <fmt:message bundle="${loc}" key="local.changePasswordButton" var="changePasswordButton" />
     <fmt:message bundle="${loc}" key="local.deleteAccountButton" var="deleteAccountButton" />
 
-    <c:set var="isChanged" scope="session">${request.getAttribute("isChanged")}</c:set>
-    <c:set var="userName" scope="session">${request.getAttribute("userName")}</c:set>
-
 </head>
 <body>
 <div class="header">
 
     <div id="header1">
         <p><c:out value="${shop}"/></p>
-        <p><c:out value="${hello}"/> <c:out value="${userName}"/> !!!</p>
+        <p><c:out value="${hello}"/> <c:out value="${sessionScope.userName}"/> !!!</p>
     </div>
 
     <div id="header2" style="display:flex; flex-flow: row wrap; justify-content:space-between">
