@@ -16,6 +16,7 @@ public class TryXMLCmd implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
         System.out.println("try XML");
+        request.getSession().setAttribute("address", "/jsp/tryxml.jsp");
         try {
             String goToPage = "/jsp/tryxml.jsp";
 

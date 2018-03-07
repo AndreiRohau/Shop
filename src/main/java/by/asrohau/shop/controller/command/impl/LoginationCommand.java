@@ -6,7 +6,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import by.asrohau.shop.bean.User;
 import by.asrohau.shop.bean.UserDTO;
@@ -23,35 +22,33 @@ public class LoginationCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to logination");
 
-		System.out.println("request.getContextPath(): " + request.getContextPath());
-		System.out.println("request.getPathInfo(): " + request.getPathInfo());
-		System.out.println("request.getRequestURI(): " + request.getRequestURI());
-		System.out.println("request.getRequestURL(): " + request.getRequestURL());
-
-		System.out.println(request.getParameter("login"));
 		User user = new User(request.getParameter("login"),  request.getParameter("password"));
-		UserDTO userDTO;
+		UserDTO userDTO = null;
 		String goToPage;
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-
+		request.getSession().setAttribute("address", "/jsp/user/main.jsp");
 		try {
-			if(!request.getParameter("login").equals("Admin")){
+			if(!request.getParameter("login").equals("Admin") && request.getSession().getAttribute("userName") == null){
 				UserService userService = serviceFactory.getUserService();
 				userDTO = userService.logination(user);
 				goToPage = "/jsp/user/main.jsp";
-			} else {
+			} else if (request.getSession().getAttribute("userName") == null) {
 				AdminService adminService = serviceFactory.getAdminService();
 				userDTO = adminService.logination(user);
 				goToPage = "/jsp/admin/main.jsp";
-			}
-			if (userDTO != null) {
-				HttpSession session = request.getSession(true);
-				session.setAttribute("userName", userDTO.getLogin());
-
 			} else {
-				goToPage = "error.jsp";
+				goToPage = "index.jsp";
+			}
+
+			if (userDTO != null) {
+				request.getSession().setAttribute("userName", userDTO.getLogin());
+//			} else if (goToPage == null){
+//				goToPage = "error.jsp";
+//				request.setAttribute("errorMessage", "no such user");
+			} else {
 				request.setAttribute("errorMessage", "no such user");
 			}
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);
 

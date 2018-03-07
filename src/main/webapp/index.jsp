@@ -51,6 +51,11 @@
 							<input type="hidden" name="local" value="ch"/>
 							<input type="submit" value="${ch_button}"/>
 						</form>
+						<form action="FrontController" method="post">
+							<input type="hidden" name="command" value="logout"/>
+							<input type="submit" value="Log out"/>
+						</form>
+
 					</div>
 				</div>
 
@@ -92,20 +97,23 @@
 			<div id="content">
 				<H1>Invitation</H1>
 				<p>To start using shop you have to log in. If you visit us for the first time then sign up!</p>
+				<p>
+					<a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
+				</p>
+
 			</div>
 		</div>
 
 		<div class="footer" >
 			<div id="footer" >
 				<h1>footer</h1>
-
-					<a href="http://localhost:8080/shop/" style="background-color: #a1311f">HOME page</a>
-					<a href="http://localhost:8080/shop/jsp/tryxml.jsp" style="background-color: #a1311f">jsp/tryxml.jsp page</a>
-
-				<form action="FrontController" method="post">
-					<input type="hidden" name="command" value="try_xml"/>
-					<input type="submit" name = "okey" value="try XML new command"/>
-				</form>
+				<p>
+					<a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
+					  -->
+					<a style="background-color: aquamarine" href="FrontController?command=try_xml&address=%2Fjsp%2Ftryxml.jsp">
+						try new xml command
+					</a>
+				</p>
 			</div>
 		</div>
 

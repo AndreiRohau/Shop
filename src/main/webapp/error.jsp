@@ -15,6 +15,6 @@
 <%=(String) request.getAttribute("errorMessage")%>
  <h1></h1> 
  
- <h1><a href="index.jsp">Return to INDEX</a></h1>
+ <h1><a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">return to INDEX</a></h1>
 </body>
 </html>

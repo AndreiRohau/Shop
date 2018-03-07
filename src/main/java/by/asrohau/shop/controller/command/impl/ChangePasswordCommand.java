@@ -19,13 +19,13 @@ public class ChangePasswordCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
-		System.out.println("We got to changePassword");
+		System.out.println("We got to ChangePasswordCommand");
 
 		User user = new User(request.getParameter("login"), request.getParameter("password"));
 		user.setNewPassword(request.getParameter("newPassword"));
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
-
+		request.getSession().setAttribute("address", "/jsp/user/profile.jsp");
 		boolean isChanged = false;
 
 		try {

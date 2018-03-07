@@ -14,14 +14,22 @@
         <webname>change_password</webname>
         <classname>ChangePasswordCommand</classname>
     </command>
+
     <command>
         <webname>delete_user</webname>
         <classname>DeleteUserCommand</classname>
     </command>
+
     <command>
         <webname>change_language</webname>
         <classname>ChangeLanguageCommand</classname>
     </command>
+
+    <command>
+        <webname>logout</webname>
+        <classname>LogoutCommand</classname>
+    </command>
+
     <command>
         <webname>goToPage</webname>
         <classname>GoToPageCommand</classname>

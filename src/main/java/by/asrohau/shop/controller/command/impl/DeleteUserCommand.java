@@ -23,16 +23,17 @@ public class DeleteUserCommand implements Command {
 		User user = new User(request.getParameter("login"), request.getParameter("password"));
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
-
-		boolean isChanged = false;
+		request.getSession().setAttribute("address", "index.jsp");
+		boolean isChanged; //=false
 
 		try {
 			isChanged = userService.deleteUser(user);
 			String goToPage;
 			if (isChanged) {
+				request.getSession().invalidate();
 				goToPage = "index.jsp";
 			} else {
-				goToPage = "error.jsp";
+				goToPage = "/jsp/user/profile.jsp";
 				request.setAttribute("errorMessage", "cannot delete user");
 			}
 

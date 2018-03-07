@@ -51,6 +51,10 @@
                     <input type="hidden" name="local" value="ch"/>
                     <input type="submit" value="${ch_button}"/>
                 </form>
+                <form action="FrontController" method="post">
+                    <input type="hidden" name="command" value="logout"/>
+                    <input type="submit" value="Log out"/>
+                </form>
             </div>
 
         </div>
@@ -79,6 +83,7 @@
                 <br/>
                 <hr/>
                 <p><c:out value="${deleteAccountText}"/></p>
+                <span><c:out value="${requestScope.errorMessage}"/></span>
                 <hr/>
                 <form action="FrontController" method="post">
                     <input type="hidden" name="command" value="delete_user"/><br/>
@@ -106,7 +111,11 @@
         <div class="footer" >
             <div id="footer" >
                 <h1>footer</h1>
-                <p> - main - page - </p>
+                <p>
+                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
+                      -->
+                    <a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
+                </p>
             </div>
         </div>
     </body>

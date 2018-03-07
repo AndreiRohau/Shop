@@ -46,6 +46,10 @@
 					<input type="hidden" name="local" value="ch"/>
 					<input type="submit" value="${ch_button}"/>
 				</form>
+				<form action="FrontController" method="post">
+					<input type="hidden" name="command" value="logout"/>
+					<input type="submit" value="Log out"/>
+				</form>
 			</div>
 
 		</div>
@@ -53,18 +57,16 @@
 
 		<div class="middle">
 			<div id="menu">
-
-				<form action="FrontController" method="post">
-					<input type="hidden" name="command" value="goToPage"/>
-					<input type="hidden" name="address" value="/jsp/user/profile.jsp"/>
-					<input type="submit" value="${goToProfile_button}"/>
-				</form>
-				<form action="FrontController" method="post">
-					<input type="hidden" name="command" value="goToPage"/>
-					<input type="hidden" name="address" value="/jsp/user/basket.jsp"/>
-					<input type="submit" value="${goToBasket_button}"/>
-				</form>
-
+				<p>
+					<a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fprofile.jsp">
+						${goToProfile_button}
+					</a>
+				</p>
+				<p>
+					<a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fbasket.jsp">
+						${goToBasket_button}
+					</a>
+				</p>
 
 			</div>
 
@@ -79,7 +81,12 @@
 		<div class="footer" >
 			<div id="footer" >
 				<h1>footer</h1>
-				<p> - main - page - </p>
+				<p>
+					<a style="background-color: aquamarine" href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
+					<a style="background-color: aquamarine" href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
+
+					
+				</p>
 			</div>
 		</div>
 	</body>
