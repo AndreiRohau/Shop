@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Administration</title>
+    <title>ManageShop</title>
 
     <fmt:setLocale value="${sessionScope.local}" />
     <fmt:setBundle basename="localization.local" var="loc" />
@@ -18,9 +18,8 @@
     <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
     <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
     <fmt:message bundle="${loc}" key="local.locbutton.name.ch" var="ch_button" />
-    <fmt:message bundle="${loc}" key="local.manageProducts" var="manageProducts" />
-    <fmt:message bundle="${loc}" key="local.manageClients" var="manageClients" />
-    <fmt:message bundle="${loc}" key="local.manageOrders" var="manageOrders" />
+
+    <fmt:message bundle="${loc}" key="local.login" var="login" />
 
 
 </head>
@@ -64,15 +63,17 @@
 
 <div class="middle">
     <div id="menu">
-        <p>
-            <a href="FrontController?command=goToPage&address=manageProducts.jsp">${manageProducts}</a>
-        </p>
-        <p>
-            <a href="FrontController?command=goToPage&address=manageClients.jsp">${manageClients}</a>
-        </p>
-        <p>
-            <a href="FrontController?command=goToPage&address=manageOrders.jsp">${manageOrders}</a>
-        </p>
+        <form action="FrontController" method="post">
+            <span><c:out value="${requestScope.isAdded}"/></span>
+            <input type="hidden" name="command" value="addNewProduct"/>
+            <c:out value="${login}" />: PRODUCT!!! NAME<br/>
+            <input type="text" name="name" value=""/><br/>
+            <c:out value="${login}" />: PRODUCT!!! TYPE<br/>
+            <input type="text" name="type" value=""/><br/>
+            <c:out value="${login}" />: PRODUCT!!! PRICE<br/>
+            <input type="text" name="price" value=""/><br/>
+            <input type="submit" name="sign in" value="ADD_NEW_PROD!!!"/>
+        </form>
     </div>
 
     <div id="content">

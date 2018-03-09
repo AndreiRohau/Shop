@@ -63,12 +63,12 @@
 		<div class="middle">
 			<div id="menu">
 				<p>
-					<a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fprofile.jsp">
+					<a href="FrontController?command=goToPage&address=profile.jsp">
 						${goToProfile_button}
 					</a>
 				</p>
 				<p>
-					<a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fbasket.jsp">
+					<a href="FrontController?command=goToPage&address=basket.jsp">
 						${goToBasket_button}
 					</a>
 				</p>
@@ -89,7 +89,7 @@
 				<p>
 					<a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
 					  -->
-					<a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
+					<a href="FrontController?command=goToPage&address=main.jsp">main</a>
 
 				</p>
 			</div>

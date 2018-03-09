@@ -1,67 +1,80 @@
 package by.asrohau.shop.bean;
 
 public class Product {
-	private String title;
-	private String author;
-	
+	private String id;
+	private String name;
+	private String type;
+	private String price;
+
+
 	public Product() {}
-	
-	public Product(String title, String author) {
-		super();
-		this.title = title;
-		this.author = author;
+
+	public Product(String name, String type, String price) {
+		this.name = name;
+		this.type = type;
+		this.price = price;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getId() {
+		return id;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getAuthor() {
-		return author;
+	public String getName() {
+		return name;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Product product = (Product) o;
+
+		if (id != null ? !id.equals(product.id) : product.id != null) return false;
+		if (name != null ? !name.equals(product.name) : product.name != null) return false;
+		if (type != null ? !type.equals(product.type) : product.type != null) return false;
+		return price != null ? price.equals(product.price) : product.price == null;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((author == null) ? 0 : author.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (type != null ? type.hashCode() : 0);
+		result = 31 * result + (price != null ? price.hashCode() : 0);
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (author == null) {
-			if (other.author != null)
-				return false;
-		} else if (!author.equals(other.author))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return "Product [title=" + title + ", author=" + author + "]";
+		return "Product{" +
+				"name='" + name + '\'' +
+				", type='" + type + '\'' +
+				", price='" + price + '\'' +
+				'}';
 	}
-
 }

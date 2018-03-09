@@ -32,31 +32,25 @@ public class LoginationCommand implements Command {
 				userDTO = userService.logination(user);
 				if (userDTO != null) {
 					goToPage = "/jsp/user/main.jsp";
-					request.getSession(true).setAttribute("address", goToPage);
 				} else {
 					goToPage = "error.jsp";
-					request.getSession(true).setAttribute("address", goToPage);
 				}
 			} else if (request.getParameter("login").equals("Admin") && request.getSession().getAttribute("userName") == null) {
 				AdminService adminService = serviceFactory.getAdminService();
 				userDTO = adminService.logination(user);
 				if(userDTO != null) {
 					goToPage = "/jsp/admin/main.jsp";
-					request.getSession(true).setAttribute("address", goToPage);
 				} else {
 					goToPage = "error.jsp";
-					request.getSession(true).setAttribute("address", goToPage);
 				}
 			} else {
 				goToPage = "error.jsp";
-				request.getSession(true).setAttribute("address", goToPage);
 			}
 
 			request.getSession(true).setAttribute("address", goToPage);
 
 			if (userDTO != null) {
 				request.getSession().setAttribute("userName", userDTO.getLogin());
-				System.out.println("inlogin set user or admin is " + request.getSession().getAttribute("userName"));
 			} else {
 				request.setAttribute("errorMessage", "no such user");
 			}

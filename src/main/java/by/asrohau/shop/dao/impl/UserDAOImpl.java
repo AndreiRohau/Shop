@@ -28,6 +28,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 			UserDTO userDTO = new UserDTO();
 
 			while (resultSet.next()) {
+				userDTO.setLogin(resultSet.getString(1));
 				userDTO.setLogin(resultSet.getString(2));
 			}
 			preparedStatement.close();
@@ -52,6 +53,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 			UserDTO userDTO = new UserDTO();
 
 			while (resultSet.next()) {
+				userDTO.setLogin(resultSet.getString(1));
 				userDTO.setLogin(resultSet.getString(2));
 			}
 			preparedStatement.close();

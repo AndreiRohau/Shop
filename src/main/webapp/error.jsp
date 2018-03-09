@@ -15,7 +15,7 @@
 <h1>Error ocupied:</h1>
 
  <h2><%=(String) request.getAttribute("errorMessage")%></h2>
- 
+ <!-- sessionScope.address = /jsp/FOLDER/PAGE.JSP - нужно вытянуть только PAGE.JSP -->
  <h3><a href="FrontController?command=goToPage&address=${sessionScope.address}">return to last page</a></h3>
  <h3><a href="FrontController?command=goToPage&address=index.jsp">return to INDEX</a></h3>
 </body>

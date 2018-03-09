@@ -109,7 +109,7 @@
 		<H1>Invitation</H1>
 		<p>To start using shop you have to log in. If you visit us for the first time then sign up!</p>
 		<p>
-			<a href="FrontController?command=goToPage&address=%2Fjsp%2Fuser%2Fmain.jsp">main</a>
+			<a href="FrontController?command=goToPage&address=main.jsp">main</a>
 		</p>
 
 	</div>
@@ -120,8 +120,6 @@
 		<h1>footer</h1>
 		<p>
 			<a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
-			  -->
-			<a href="FrontController?command=try_xml&address=%2Fjsp%2Ftryxml.jsp">try new xml command</a>
 		</p>
 	</div>
 </div>

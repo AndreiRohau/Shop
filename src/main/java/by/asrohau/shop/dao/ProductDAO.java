@@ -1,12 +1,13 @@
 package by.asrohau.shop.dao;
 
 import by.asrohau.shop.bean.Product;
+import by.asrohau.shop.dao.exception.DAOException;
 
 public interface ProductDAO {
 
-	Product findProduct(Product product);
-	boolean addProduct(Product product);
-	boolean updateProduct(Product product, String[] productInfo);
-	boolean deleteProduct(Product product);
+	Product findProduct(Product product) throws DAOException;
+	boolean addProduct(Product product) throws DAOException;
+	boolean updateProduct(Product product) throws DAOException;
+	boolean deleteProduct(Product product) throws DAOException;
 
 }

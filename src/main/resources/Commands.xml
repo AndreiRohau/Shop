@@ -35,7 +35,7 @@
         <classname>GoToPageCommand</classname>
     </command>
     <command>
-        <webname>try_xml</webname>
-        <classname>TryXMLCmd</classname>
+        <webname>addNewProduct</webname>
+        <classname>AddNewProductCommand</classname>
     </command>
 </commands>

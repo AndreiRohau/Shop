@@ -17,21 +17,22 @@ public class GoToPageCommand implements Command {
 
         try {
             String goToPage;
-            if (request.getSession().getAttribute("userName") != null) {
+            if (request.getSession().getAttribute("userName") != null &&
+                    !request.getParameter("address").matches("index.jsp") &&
+                    !request.getParameter("address").matches("error.jsp")) {
 
-                if(request.getSession().getAttribute("userName").equals("Admin") &&
-                        request.getParameter("address").matches("/jsp/user/main.jsp")) {
-
-                    goToPage = "/jsp/admin/main.jsp";
+                if(request.getSession().getAttribute("userName").equals("Admin")) {
+                    goToPage = "/jsp/admin/" + request.getParameter("address");
                     System.out.println("aaaaadmin" + request.getSession().getAttribute("userName"));
                 } else {
-                    goToPage = request.getParameter("address");
+                    goToPage = "/jsp/user/" + request.getParameter("address");
                     System.out.println("uuuuser" + request.getSession().getAttribute("userName"));
                 }
 
             } else {
                 goToPage = "index.jsp";
             }
+
             request.getSession().setAttribute("address", goToPage);
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 

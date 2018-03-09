@@ -2,6 +2,7 @@ package by.asrohau.shop.bean;
 
 public class UserDTO {
 
+	private String id;
 	private String login;
 
 	public UserDTO() {}
@@ -16,6 +17,14 @@ public class UserDTO {
 		this.login = user.getLogin();
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getLogin() {
 		return login;
 	}
@@ -25,33 +34,28 @@ public class UserDTO {
 	}
 
 	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		UserDTO userDTO = (UserDTO) o;
+
+		if (id != null ? !id.equals(userDTO.id) : userDTO.id != null) return false;
+		return login != null ? login.equals(userDTO.login) : userDTO.login == null;
+	}
+
+	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (login != null ? login.hashCode() : 0);
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserDTO other = (UserDTO) obj;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return "UserDTO [login=" + login + "]";
+		return "UserDTO{" +
+				"id='" + id + '\'' +
+				", login='" + login + '\'' +
+				'}';
 	}
-	
 }
