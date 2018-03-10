@@ -19,14 +19,13 @@ public class RegistrationCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to REGISTRATION");
-
 		boolean isRegistered;
 		User user = new User(request.getParameter("login"), request.getParameter("password"));
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
 		request.getSession().setAttribute("address", "index.jsp");
 		try {
-			isRegistered = (String) request.getSession().getAttribute("userName") == null
+			isRegistered = request.getSession().getAttribute("userName") == null
 					&& userService.registration(user);
 
 			String goToPage;
@@ -35,7 +34,7 @@ public class RegistrationCommand implements Command {
 				goToPage = "index.jsp";
 			} else {
 				goToPage = "error.jsp";
-				String message = (String) request.getSession().getAttribute("userName") == null
+				String message = request.getSession().getAttribute("userName") == null
 						? "Login exists" : "Log out!";
 				request.setAttribute("errorMessage", message);
 			}
