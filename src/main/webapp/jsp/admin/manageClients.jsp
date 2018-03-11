@@ -74,8 +74,14 @@
         <H1></H1>
         <p>HERE ARE</p>
         <c:forEach items="${requestScope.usersArray}" var="user">
-            <p>${user.toString()}</p><br>
-            <p>${user}</p><br>
+            <form action="FrontController" method="post">
+                <input type="hidden" name="command" value="goToPage" />
+                <input type="hidden" name="address" value="editClient.jsp" />
+                <input type="submit" name="user" value="${user}" /><br/>
+            </form>
+
+            <%--<p>${user.toString()}</p><br>--%>
+            <%--<p>${user}</p><br>--%>
         </c:forEach>
     </div>
 

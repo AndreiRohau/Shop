@@ -17,6 +17,9 @@ public class GoToPageCommand implements Command {
 
         try {
             String goToPage;
+            if(request.getParameter("user") != null){
+                request.setAttribute("user", request.getParameter("user"));
+            }
             if (request.getSession().getAttribute("userName") != null &&
                     !request.getParameter("address").matches("index.jsp") &&
                     !request.getParameter("address").matches("error.jsp")) {
