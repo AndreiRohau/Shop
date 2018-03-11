@@ -27,11 +27,7 @@ public class DeleteUserCommand implements Command {
 		boolean isChanged = false;
 
 		try {
-//			if(request.getSession().getAttribute("userName").equals(user.getLogin())){
-//				isChanged = userService.deleteUser(user);
-//			}
 			isChanged = request.getSession().getAttribute("userName").equals(user.getLogin()) && userService.deleteUser(user);
-			//isChanged = request.getSession().getAttribute("userName").equals(user.getLogin()) ? userService.deleteUser(user) : false;
 			String goToPage;
 			if (isChanged) {
 				request.getSession().invalidate();
