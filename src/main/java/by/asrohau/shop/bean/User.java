@@ -2,6 +2,7 @@ package by.asrohau.shop.bean;
 
 public class User {
 
+	private int id;
 	private String login;
 	private String password;
 	private String newPassword;
@@ -9,9 +10,22 @@ public class User {
 	public User() {}
 	
 	public User(String login, String password) {
-		super();
 		this.login = login;
 		this.password = password;
+	}
+
+	public User(int id, String login, String password) {
+		this.id = id;
+		this.login = login;
+		this.password = password;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getLogin() {
@@ -39,39 +53,34 @@ public class User {
 	}
 
 	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		User user = (User) o;
+
+		if (id != user.id) return false;
+		if (login != null ? !login.equals(user.login) : user.login != null) return false;
+		if (password != null ? !password.equals(user.password) : user.password != null) return false;
+		return newPassword != null ? newPassword.equals(user.newPassword) : user.newPassword == null;
+	}
+
+	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		int result = id;
+		result = 31 * result + (login != null ? login.hashCode() : 0);
+		result = 31 * result + (password != null ? password.hashCode() : 0);
+		result = 31 * result + (newPassword != null ? newPassword.hashCode() : 0);
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return "User [login=" + login + ", password=" + password + "]";
+		return "User{" +
+				"id=" + id +
+				", login='" + login + '\'' +
+				", password='" + password + '\'' +
+				", newPassword='" + newPassword + '\'' +
+				'}';
 	}
-		
 }

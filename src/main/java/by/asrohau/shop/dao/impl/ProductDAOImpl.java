@@ -26,7 +26,7 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 			Product foundProduct = new Product();
 
 			while (resultSet.next()) {
-				foundProduct.setId(resultSet.getString(1));
+				foundProduct.setId(resultSet.getInt(1));
 				foundProduct.setName(resultSet.getString(2));
 				foundProduct.setType(resultSet.getString(3));
 				foundProduct.setPrice(resultSet.getString(4));
@@ -67,7 +67,7 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 			statement.setString(1, product.getName());
 			statement.setString(2, product.getType());
 			statement.setString(3, product.getPrice());
-			statement.setString(4, product.getId());
+			statement.setInt(4, product.getId());
 
 			statement.executeUpdate();
 			statement.close();
@@ -81,7 +81,7 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 	@Override
 	public boolean deleteProduct(Product product) throws DAOException {
 		try (PreparedStatement statement = getConnection().prepareStatement(DELETE_PRODUCT_QUERY)) {
-			statement.setString(1, product.getId());
+			statement.setInt(1, product.getId());
 			statement.setString(2, product.getName());
 			statement.setString(3, product.getType());
 			statement.setString(4, product.getPrice());

@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>ManageShop</title>
+    <title>Manage Clients</title>
 
     <fmt:setLocale value="${sessionScope.local}" />
     <fmt:setBundle basename="localization.local" var="loc" />
@@ -64,41 +64,34 @@
 <div class="middle">
     <div id="menu">
         <form action="FrontController" method="post">
-            <span><c:out value="${requestScope.isAdded}"/></span>
-            <input type="hidden" name="command" value="addNewProduct"/>
-            <c:out value="${login}" />: PRODUCT!!! NAME<br/>
-            <input type="text" name="name" value=""/><br/>
-            <c:out value="${login}" />: PRODUCT!!! TYPE<br/>
-            <input type="text" name="type" value=""/><br/>
-            <c:out value="${login}" />: PRODUCT!!! PRICE<br/>
-            <input type="text" name="price" value=""/><br/>
-            <input type="submit" name="sign in" value="ADD_NEW_PROD!!!"/>
+            <p>Get all users</p>
+            <input type="hidden" name="command" value="selectAllUsers"/>
+            <input type="submit" name="get_users" value="Get them!"/>
         </form>
     </div>
 
     <div id="content">
-        <H1>SOME IMPORTANT CONTANT OF THIS PAGE</H1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <H1></H1>
+        <p>HERE ARE</p>
+        <c:forEach items="${requestScope.usersArray}" var="user">
+            <p>${user.toString()}</p><br>
+            <p>${user}</p><br>
+        </c:forEach>
     </div>
 
 </div>
 
-        <div class="footer" >
-            <div id="footer" >
-                <h1>footer</h1>
-                <p>
-                    <a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
-                      -->
-                    <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
-                    -->
-                    <a href="FrontController?command=goToPage&address=manageProducts.jsp">SHOP</a>
-                </p>
-            </div>
-        </div>
-    </body>
+<div class="footer" >
+    <div id="footer" >
+        <h1>footer</h1>
+        <p>
+            <a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
+            -->
+            <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
+            -->
+            <a href="FrontController?command=goToPage&address=manageClients.jsp">CLIENTS</a>
+        </p>
+    </div>
+</div>
+</body>
 </html>

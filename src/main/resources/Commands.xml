@@ -38,4 +38,8 @@
         <webname>addNewProduct</webname>
         <classname>AddNewProductCommand</classname>
     </command>
+    <command>
+        <webname>selectAllUsers</webname>
+        <classname>SelectAllUsersCommand</classname>
+    </command>
 </commands>

@@ -4,11 +4,10 @@ import by.asrohau.shop.bean.User;
 import by.asrohau.shop.bean.UserDTO;
 import by.asrohau.shop.dao.exception.DAOException;
 
-/**
- * Created by rohau.andrei on 02-Mar-18.
- */
+import java.util.ArrayList;
+
 public interface AdminDAO {
 
     UserDTO findUserWithLoginAndPassword(User user) throws DAOException;
-
+    ArrayList<User> selectAllUsers() throws DAOException;
 }

@@ -4,10 +4,11 @@ import by.asrohau.shop.bean.User;
 import by.asrohau.shop.bean.UserDTO;
 import by.asrohau.shop.dao.AdminDAO;
 import by.asrohau.shop.dao.DAOFactory;
-import by.asrohau.shop.dao.UserDAO;
 import by.asrohau.shop.dao.exception.DAOException;
 import by.asrohau.shop.service.AdminService;
 import by.asrohau.shop.service.exception.ServiceException;
+
+import java.util.ArrayList;
 
 public class AdminServiceImpl implements AdminService {
 
@@ -39,4 +40,18 @@ public class AdminServiceImpl implements AdminService {
         return null;
     }
 
+    @Override
+    public ArrayList<User> getAllUsers() throws ServiceException {
+        try {
+
+            ArrayList<User> userArrayList = adminDAO.selectAllUsers();
+            for(User userx : userArrayList){
+                System.out.println("in sevice");
+                System.out.println(userx.toString());
+            }
+            return userArrayList;
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

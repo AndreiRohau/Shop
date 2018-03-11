@@ -23,7 +23,7 @@ public class DeleteUserCommand implements Command {
 		User user = new User(request.getParameter("login").trim(), request.getParameter("password").trim());
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
-		request.getSession().setAttribute("address", "index.jsp");
+
 		boolean isChanged = false;
 
 		try {
@@ -36,7 +36,7 @@ public class DeleteUserCommand implements Command {
 				goToPage = "/jsp/user/profile.jsp";
 				request.setAttribute("errorMessage", "cannot delete user");
 			}
-
+			request.getSession().setAttribute("address", goToPage);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);
 			

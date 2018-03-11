@@ -1,7 +1,7 @@
 package by.asrohau.shop.bean;
 
 public class Product {
-	private String id;
+	private int id;
 	private String name;
 	private String type;
 	private String price;
@@ -15,11 +15,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -54,7 +54,7 @@ public class Product {
 
 		Product product = (Product) o;
 
-		if (id != null ? !id.equals(product.id) : product.id != null) return false;
+		if (id != product.id) return false;
 		if (name != null ? !name.equals(product.name) : product.name != null) return false;
 		if (type != null ? !type.equals(product.type) : product.type != null) return false;
 		return price != null ? price.equals(product.price) : product.price == null;
@@ -62,7 +62,7 @@ public class Product {
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
+		int result = id;
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (type != null ? type.hashCode() : 0);
 		result = 31 * result + (price != null ? price.hashCode() : 0);
@@ -72,7 +72,8 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product{" +
-				"name='" + name + '\'' +
+				"id=" + id +
+				", name='" + name + '\'' +
 				", type='" + type + '\'' +
 				", price='" + price + '\'' +
 				'}';
