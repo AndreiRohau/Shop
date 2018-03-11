@@ -24,10 +24,13 @@ public class DeleteUserCommand implements Command {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
 		request.getSession().setAttribute("address", "index.jsp");
-		boolean isChanged; //=false
+		boolean isChanged = false;
 
 		try {
-			isChanged = userService.deleteUser(user);
+//			if(request.getSession().getAttribute("userName").equals(user.getLogin())){
+//				isChanged = userService.deleteUser(user);
+//			}
+			isChanged = request.getSession().getAttribute("userName").equals(user.getLogin()) ? userService.deleteUser(user) : false;
 			String goToPage;
 			if (isChanged) {
 				request.getSession().invalidate();
