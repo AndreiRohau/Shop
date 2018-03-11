@@ -17,9 +17,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public boolean validation(String login, String password) {
+    public boolean validation(User user) {
         String toCompare = "";
-        if (!toCompare.equals(login) && !toCompare.equals(password)) {
+        if (!toCompare.equals(user.getLogin()) && !toCompare.equals(user.getPassword())) {
             return true;
         } else {
             return false;
@@ -29,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public UserDTO logination(User user) throws ServiceException {
         // validation!!! stub
-        if (validation(user.getLogin(), user.getPassword())) {
+        if (validation(user)) {
             try {
                 return adminDAO.findUserWithLoginAndPassword(user);
             } catch (DAOException e) {

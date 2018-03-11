@@ -21,8 +21,8 @@ public class ChangePasswordCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to ChangePasswordCommand");
 
-		User user = new User(request.getParameter("login"), request.getParameter("password"));
-		user.setNewPassword(request.getParameter("newPassword"));
+		User user = new User(request.getParameter("login").trim(), request.getParameter("password").trim());
+		user.setNewPassword(request.getParameter("newPassword").trim());
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
 		request.getSession().setAttribute("address", "/jsp/user/profile.jsp");
@@ -40,7 +40,7 @@ public class ChangePasswordCommand implements Command {
 				goToPage = (String) request.getSession().getAttribute("address"); //was just address
 			} else {
 				goToPage = "error.jsp";
-				request.setAttribute("errorMessage", "cannot change password");
+				request.setAttribute("errorMessage", "Can NOT change password.");
 			}
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);

@@ -10,19 +10,19 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Error page</title>
- <c:set var="addressJSTL" value="${sessionScope.address.split('/')[3]}"/>
+ <!--<c:set var="addressJSTL" value="${sessionScope.address.split('/')[3]}"/>-->
 </head>
 
 <body style="background-color: burlywood">
 
 <hr/>
-
-<h1>Error ocupied:</h1>
+<h1>Error ocupied:</h1><hr/>
 
  <h2><%=(String) request.getAttribute("errorMessage")%></h2>
+<hr/>
  <!-- sessionScope.address = /jsp/FOLDER/PAGE.JSP - нужно вытянуть только PAGE.JSP -->
  <h3><a href="FrontController?command=goToPage&address=<%=address%>">return to last page</a></h3>
- <h3><a href="FrontController?command=goToPage&address=${addressJSTL}">return to last page</a></h3>
+ <!--<h3><a href="FrontController?command=goToPage&address=${addressJSTL}">return to last page</a></h3>-->
  <h3><a href="FrontController?command=goToPage&address=index.jsp">return to INDEX</a></h3>
 </body>
 </html>

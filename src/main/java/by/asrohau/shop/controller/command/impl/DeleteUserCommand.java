@@ -20,7 +20,7 @@ public class DeleteUserCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to delete User Command");
 
-		User user = new User(request.getParameter("login"), request.getParameter("password"));
+		User user = new User(request.getParameter("login").trim(), request.getParameter("password").trim());
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
 		request.getSession().setAttribute("address", "index.jsp");

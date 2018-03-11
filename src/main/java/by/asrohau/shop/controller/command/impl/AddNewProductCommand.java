@@ -20,7 +20,7 @@ public class AddNewProductCommand implements Command {
         System.out.println("We got to AddProductCommand");
 
         boolean isAdded; //= false
-        Product newProduct = new Product(request.getParameter("name"), request.getParameter("type"), request.getParameter("price"));
+        Product newProduct = new Product(request.getParameter("name").trim(), request.getParameter("type").trim(), request.getParameter("price").trim());
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ProductService productService = serviceFactory.getProductService();
         request.getSession().setAttribute("address", "/jsp/admin/manageProducts.jsp");
@@ -33,7 +33,7 @@ public class AddNewProductCommand implements Command {
                 goToPage = (String) request.getSession().getAttribute("address");
             } else {
                 goToPage = "error.jsp";
-                request.setAttribute("errorMessage", "cant add this product, try again!");
+                request.setAttribute("errorMessage", "Can NOT add this product, try again!");
             }
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);

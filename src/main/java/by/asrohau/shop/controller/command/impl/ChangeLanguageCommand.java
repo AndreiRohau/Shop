@@ -17,13 +17,9 @@ public class ChangeLanguageCommand  implements Command {
 
 		System.out.println("We got to ChangeLanguageCommand");
 		try {
-			HttpSession httpSession = request.getSession(true);
-			httpSession.setAttribute("local", request.getParameter("local"));
-			String goToPage = (String) request.getSession().getAttribute("address");
 
-			if (goToPage == null){
-				goToPage = "index.jsp";
-			}
+			request.getSession(true).setAttribute("local", request.getParameter("local"));
+			String goToPage = (String) request.getSession().getAttribute("address") == null ? "index.jsp" : (String) request.getSession().getAttribute("address");
 
 			request.getRequestDispatcher(goToPage).forward(request, response);
 		} catch ( ServletException | IOException e) {

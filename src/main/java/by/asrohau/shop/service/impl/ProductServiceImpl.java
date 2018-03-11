@@ -16,7 +16,9 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public boolean validation(Product product) {
 		String toCompare = "";
-		if (!toCompare.equals(product.getName()) && !toCompare.equals(product.getPrice())) {
+		if (!toCompare.equals(product.getName()) &&
+				!toCompare.equals(product.getType()) &&
+				!toCompare.equals(product.getPrice())) {
 			return true;
 		} else {
 			return false;

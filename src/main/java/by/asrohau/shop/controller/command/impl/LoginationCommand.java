@@ -22,16 +22,18 @@ public class LoginationCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to logination");
 
-		User user = new User(request.getParameter("login"),  request.getParameter("password"));
-		UserDTO userDTO = null;
+		User user = new User(request.getParameter("login").trim(),  request.getParameter("password").trim());
+		UserDTO userDTO; //was null said was redundant
 		String goToPage;
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
+		String errorMessage = "No such User";
 		try {
 			if(!request.getParameter("login").equals("Admin") && request.getSession().getAttribute("userName") == null){
 				UserService userService = serviceFactory.getUserService();
 				userDTO = userService.logination(user);
 				if (userDTO != null) {
 					goToPage = "/jsp/user/main.jsp";
+					request.getSession().setAttribute("userName", userDTO.getLogin());
 				} else {
 					goToPage = "error.jsp";
 				}
@@ -40,20 +42,17 @@ public class LoginationCommand implements Command {
 				userDTO = adminService.logination(user);
 				if(userDTO != null) {
 					goToPage = "/jsp/admin/main.jsp";
+					request.getSession().setAttribute("userName", userDTO.getLogin());
 				} else {
 					goToPage = "error.jsp";
 				}
 			} else {
 				goToPage = "error.jsp";
+				errorMessage = "Log out";
 			}
 
 			request.getSession(true).setAttribute("address", goToPage);
-
-			if (userDTO != null) {
-				request.getSession().setAttribute("userName", userDTO.getLogin());
-			} else {
-				request.setAttribute("errorMessage", "no such user");
-			}
+			request.setAttribute("errorMessage", errorMessage);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);

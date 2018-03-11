@@ -20,12 +20,13 @@ public class RegistrationCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		System.out.println("We got to REGISTRATION");
 		boolean isRegistered;
-		User user = new User(request.getParameter("login"), request.getParameter("password"));
+		User user = new User(request.getParameter("login").trim(), request.getParameter("password").trim());
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
 		request.getSession().setAttribute("address", "index.jsp");
 		try {
 			isRegistered = request.getSession().getAttribute("userName") == null
+					&& !request.getParameter("login").equals("Admin")
 					&& userService.registration(user);
 
 			String goToPage;
