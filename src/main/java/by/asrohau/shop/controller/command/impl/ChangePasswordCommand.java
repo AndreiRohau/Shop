@@ -30,7 +30,7 @@ public class ChangePasswordCommand implements Command {
 
 		try {
 
-			isChanged = request.getSession().getAttribute("userName").equals(user.getLogin()) ? userService.changePassword(user) : false;
+			isChanged = request.getSession().getAttribute("userName").equals(user.getLogin()) && userService.changePassword(user);
 			UserDTO userDTO = new UserDTO();
 			userDTO.setLogin(user.getLogin());
 
