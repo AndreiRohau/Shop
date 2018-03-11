@@ -108,9 +108,6 @@
 	<div id="content">
 		<H1>Invitation</H1>
 		<p>To start using shop you have to log in. If you visit us for the first time then sign up!</p>
-		<p>
-			<a href="FrontController?command=goToPage&address=main.jsp">main</a>
-		</p>
 
 	</div>
 </div>
@@ -120,6 +117,8 @@
 		<h1>footer</h1>
 		<p>
 			<a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
+			 -->
+			<a href="FrontController?command=goToPage&address=main.jsp">MAIN</a>
 		</p>
 	</div>
 </div>

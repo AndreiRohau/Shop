@@ -88,9 +88,9 @@
                 <p style="text-decoration-color: yellow">
                     <a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
                       -->
-                    <a href="FrontController?command=goToPage&address=main.jsp">main</a>
+                    <a href="FrontController?command=goToPage&address=main.jsp">MAIN</a>
                       -->
-                    <a href="FrontController?command=goToPage&address=basket.jsp">basket</a>
+                    <a href="FrontController?command=goToPage&address=basket.jsp">BASKET</a>
                 </p>
             </div>
         </div>

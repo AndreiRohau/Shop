@@ -94,7 +94,7 @@
                 <p>
                     <a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
                       -->
-                    <a href="FrontController?command=goToPage&address=main.jsp">administration</a>
+                    <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
                 </p>
             </div>
         </div>
