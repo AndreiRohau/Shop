@@ -12,7 +12,9 @@ import java.util.ArrayList;
 public interface AdminService {
     boolean validation(User user);
     UserDTO logination(User user) throws ServiceException;
-    ArrayList<User> getAllUsers () throws ServiceException;
+    ArrayList<User> getAllUsers() throws ServiceException;
+    User findUserWithId(User user) throws ServiceException;
+    boolean updateUser(User user) throws ServiceException;
 
 
 }

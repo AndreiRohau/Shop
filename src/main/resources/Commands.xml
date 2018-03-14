@@ -42,4 +42,12 @@
         <webname>selectAllUsers</webname>
         <classname>SelectAllUsersCommand</classname>
     </command>
+    <command>
+        <webname>editClient</webname>
+        <classname>EditClientCommand</classname>
+    </command>
+    <command>
+        <webname>updateClient</webname>
+        <classname>UpdateClientCommand</classname>
+    </command>
 </commands>

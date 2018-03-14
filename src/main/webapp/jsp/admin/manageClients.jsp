@@ -73,16 +73,19 @@
     <div id="content">
         <H1></H1>
         <p>HERE ARE</p>
-        <c:forEach items="${requestScope.usersArray}" var="user">
-            <form action="FrontController" method="post">
-                <input type="hidden" name="command" value="goToPage" />
-                <input type="hidden" name="address" value="editClient.jsp" />
-                <input type="submit" name="user" value="${user}" /><br/>
-            </form>
 
-            <%--<p>${user.toString()}</p><br>--%>
-            <%--<p>${user}</p><br>--%>
+        <c:forEach items="${requestScope.usersArray}" var="userToEdit">
+            <div style="display:inline-block;">
+                <p>Id - ${userToEdit.id} - Login - ${userToEdit.login} - Password - ${userToEdit.password}</p>
+                <form action="FrontController" method="post">
+                    <input type="hidden" name="command" value="editClient" />
+                    <input type="hidden" name="userId" value="${userToEdit.id}" />
+                    <input type="submit" name="edit" value="Edit" /><br/>
+                </form>
+            </div>
+            <hr/>
         </c:forEach>
+
     </div>
 
 </div>

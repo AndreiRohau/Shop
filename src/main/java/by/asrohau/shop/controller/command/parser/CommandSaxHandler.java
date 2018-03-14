@@ -64,11 +64,7 @@ public class CommandSaxHandler extends DefaultHandler {
                             (Command) Class.forName(COMMAND_PATH + commandObj.getClassname()).newInstance());
                     commandObj = null;
                     break;
-                } catch (InstantiationException e) {
-                    new ControllerException(e);
-                } catch (IllegalAccessException e) {
-                    new ControllerException(e);
-                } catch (ClassNotFoundException e) {
+                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
                     new ControllerException(e);
                 }
 

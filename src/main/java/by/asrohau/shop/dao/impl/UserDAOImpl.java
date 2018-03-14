@@ -92,10 +92,11 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 			statement.setString(2, user.getLogin());
 			statement.setString(3, user.getPassword());
 
-			statement.executeUpdate();
+			int result = statement.executeUpdate();
 			statement.close();
 			connection.close();
-			return true;
+			// check the executed UPDATE
+			return (result != 0);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}

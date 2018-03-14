@@ -1,3 +1,4 @@
+<%@ page import="by.asrohau.shop.bean.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
@@ -20,7 +21,7 @@
     <fmt:message bundle="${loc}" key="local.locbutton.name.ch" var="ch_button" />
 
     <fmt:message bundle="${loc}" key="local.login" var="login" />
-
+    <fmt:message bundle="${loc}" key="local.password" var="password" />
 
 </head>
 <body>
@@ -71,9 +72,27 @@
     </div>
 
     <div id="content">
+
         <H1></H1>
         <p>HERE ARE</p>
-        <c:out value="${requestScope.get('user')}"/>
+        <c:set var="user_id" value="${requestScope.get('userToEdit').id}"/>
+        <c:set var="user_login" value="${requestScope.get('userToEdit').login}"/>
+        <c:set var="user_password" value="${requestScope.get('userToEdit').password}"/>
+        <p>ID is: ${user_id}</p>
+        <p>Login is: ${user_login}</p>
+        <p>Password is ${user_password}</p>
+        <hr/>
+        <form action="FrontController" method="post">
+            <input type="hidden" name="command" value="updateClient" />
+            <input type="hidden" name="id" value="${user_id}" />
+            <c:out value="${login}" />:<br/>
+            <input type="text" name="login" value="${user_login}" /><br/>
+            <c:out value="${password}" />:<br/>
+            <input type="text" name="password" value="${user_password}" /><br/>
+            <input type="submit" name="edit" value="Edit" />
+        </form>
+
+
     </div>
 
 </div>
@@ -87,6 +106,8 @@
             <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
             -->
             <a href="FrontController?command=goToPage&address=manageClients.jsp">CLIENTS</a>
+            -->
+            <a href="FrontController?command=editClient&userId=${user_id}" style="text-transform: uppercase">${user_login}</a>
         </p>
     </div>
 </div>

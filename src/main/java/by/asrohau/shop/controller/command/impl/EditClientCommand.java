@@ -15,23 +15,27 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SelectAllUsersCommand implements Command {
+public class EditClientCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
-        System.out.println("We got to SelectAllUsersCommand");
+        System.out.println("We got to EditClientCommand");
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         AdminService adminService = serviceFactory.getAdminService();
-        request.getSession().setAttribute("address", "/jsp/admin/manageClients.jsp");
+        request.getSession().setAttribute("address", "/jsp/admin/editClient.jsp");
         String goToPage;
+        User user  = new User();
+        user.setId(Integer.parseInt(request.getParameter("userId")));
         try {
-            ArrayList<User> userArrayList = adminService.getAllUsers();
-            for(User userx : userArrayList){
-                System.out.println(userx.toString());
+            user = adminService.findUserWithId(user);
+            if(user.getLogin() != null){
+                request.setAttribute("userToEdit", user);
+                goToPage = (String) request.getSession().getAttribute("address");
+                System.out.println(user.toString());
+            } else {
+                goToPage = "error.jsp";
             }
 
-            request.setAttribute("usersArray", userArrayList);
-            goToPage = (String) request.getSession().getAttribute("address");
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
 

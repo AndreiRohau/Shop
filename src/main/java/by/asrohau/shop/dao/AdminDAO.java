@@ -9,5 +9,7 @@ import java.util.ArrayList;
 public interface AdminDAO {
 
     UserDTO findUserWithLoginAndPassword(User user) throws DAOException;
+    User findUserWithId(User user) throws DAOException;
     ArrayList<User> selectAllUsers() throws DAOException;
+    boolean updateUser(User user) throws DAOException;
 }
