@@ -37,25 +37,25 @@
             <div id="header2" style="display:flex; flex-flow: row wrap; justify-content:space-between">
                 <div>
                     <form action="FrontController" method="post">
-                        <input type="hidden" name="command" value="change_language">
-                        <input type="hidden" name="local" value="en">
-                        <input type="submit" value="ENG">
+                        <input type="hidden" name="command" value="change_language"/>
+                        <input type="hidden" name="local" value="en"/>
+                        <input type="submit" value="ENG"/>
                     </form>
                     <form action="FrontController" method="post">
-                        <input type="hidden" name="command" value="change_language">
-                        <input type="hidden" name="local" value="ru">
-                        <input type="submit" value="РУС">
+                        <input type="hidden" name="command" value="change_language"/>
+                        <input type="hidden" name="local" value="ru"/>
+                        <input type="submit" value="РУС"/>
                     </form>
                     <form action="FrontController" method="post">
-                        <input type="hidden" name="command" value="change_language">
-                        <input type="hidden" name="local" value="ch">
-                        <input type="submit" value="汉语">
+                        <input type="hidden" name="command" value="change_language"/>
+                        <input type="hidden" name="local" value="ch"/>
+                        <input type="submit" value="汉语"/>
                     </form>
                 </div>
                 <div>
                     <form action="FrontController" method="post" style="height:100%">
-                        <input type="hidden" name="command" value="logout">
-                        <input type="submit" value="Log out" style="height:100%">
+                        <input type="hidden" name="command" value="logout"/>
+                        <input type="submit" value="Log out" style="height:100%"/>
                     </form>
                 </div>
             </div>
