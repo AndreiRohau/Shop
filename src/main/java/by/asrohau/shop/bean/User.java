@@ -7,8 +7,8 @@ public class User {
 	private String password;
 	private String newPassword;
 
-	public User() {}
-	
+	public User(){}
+
 	public User(String login, String password) {
 		this.login = login;
 		this.password = password;
@@ -18,6 +18,19 @@ public class User {
 		this.id = id;
 		this.login = login;
 		this.password = password;
+	}
+
+	public User(String login, String password, String newPassword) {
+		this.login = login;
+		this.password = password;
+		this.newPassword = newPassword;
+	}
+
+	public User(int id, String login, String password, String newPassword) {
+		this.id = id;
+		this.login = login;
+		this.password = password;
+		this.newPassword = newPassword;
 	}
 
 	public int getId() {

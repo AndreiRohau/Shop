@@ -10,7 +10,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Error page</title>
- <!--<c:set var="addressJSTL" value="${sessionScope.address.split('/')[3]}"/>-->
+ <%--<c:set var="addressJSTL" value="${sessionScope.address.split('/')[3]}"/>--%>
 </head>
 
 <body style="background-color: burlywood">

@@ -22,11 +22,6 @@ public class FrontController extends HttpServlet {
 		super();
 	}
 
-	@Override
-	public void init() throws ServletException {
-		super.init();
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doExecute(request, response);
 	}
