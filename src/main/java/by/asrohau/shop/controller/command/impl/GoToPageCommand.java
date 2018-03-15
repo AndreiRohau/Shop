@@ -19,11 +19,6 @@ public class GoToPageCommand implements Command {
         try {
             String goToPage;
 
-            //for editing user STARTS
-            if(request.getParameter("userToEdit") != null){
-                request.setAttribute("userToEdit", request.getParameter("userToEdit"));
-            }
-            //ENDS
 
             if (request.getSession().getAttribute("userName") != null &&
                     !request.getParameter("address").matches("index.jsp") &&
