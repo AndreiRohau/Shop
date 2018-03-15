@@ -8,6 +8,8 @@ import by.asrohau.shop.dao.exception.DAOException;
 import by.asrohau.shop.service.UserService;
 import by.asrohau.shop.service.exception.ServiceException;
 
+import java.util.ArrayList;
+
 public class UserServiceImpl implements UserService {
 
 	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
@@ -82,21 +84,49 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean deleteUser(User user) throws ServiceException {
-
 		// validation!!! stub
 		if (validation(user)) {
-
 			try {
 				if (userDAO.findUserWithLoginAndPassword(user) != null) {
 					return userDAO.deleteUser(user);
 				}
-				
 			} catch (DAOException e) {
 				throw new ServiceException(e);
 			}
 		}
-
 		return false;
 	}
 
+	@Override
+	public ArrayList<User> getAllUsers() throws ServiceException {
+		try {
+			return userDAO.selectAllUsers();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public User findUserWithId(User user) throws ServiceException {
+		//validation!!! stub
+
+		try {
+			return userDAO.findUserWithId(user);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public boolean updateUser(User user) throws ServiceException {
+		// validation!!! stub
+		if (validation(user)) {
+			try {
+				return userDAO.updateUser(user);
+			} catch (DAOException e) {
+				throw new ServiceException(e);
+			}
+		}
+		return false;
+	}
 }

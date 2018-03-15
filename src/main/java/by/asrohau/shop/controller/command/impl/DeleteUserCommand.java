@@ -27,11 +27,16 @@ public class DeleteUserCommand implements Command {
 		boolean isChanged = false;
 
 		try {
-			isChanged = request.getSession().getAttribute("userName").equals(user.getLogin()) && userService.deleteUser(user);
+			boolean isUser = request.getSession().getAttribute("userName").equals(user.getLogin());
+			boolean isAdmin = request.getSession().getAttribute("userName").equals("Admin");
+			isChanged = isUser || isAdmin;
+			isChanged = (isChanged && userService.deleteUser(user));
 			String goToPage;
-			if (isChanged) {
+			if (isChanged && isUser) {
 				request.getSession().invalidate();
 				goToPage = "index.jsp";
+			} else if (isChanged) {
+				goToPage = "/jsp/admin/manageClients.jsp";
 			} else {
 				goToPage = "/jsp/user/profile.jsp";
 				request.setAttribute("errorMessage", "cannot delete user");

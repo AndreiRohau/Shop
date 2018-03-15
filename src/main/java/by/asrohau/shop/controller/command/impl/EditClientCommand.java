@@ -6,6 +6,7 @@ import by.asrohau.shop.controller.exception.ControllerException;
 import by.asrohau.shop.service.AdminService;
 import by.asrohau.shop.service.ProductService;
 import by.asrohau.shop.service.ServiceFactory;
+import by.asrohau.shop.service.UserService;
 import by.asrohau.shop.service.exception.ServiceException;
 
 import javax.servlet.RequestDispatcher;
@@ -21,13 +22,13 @@ public class EditClientCommand implements Command {
         System.out.println("We got to EditClientCommand");
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
-        AdminService adminService = serviceFactory.getAdminService();
+        UserService userService = serviceFactory.getUserService();
         request.getSession().setAttribute("address", "/jsp/admin/editClient.jsp");
         String goToPage;
         User user  = new User();
         user.setId(Integer.parseInt(request.getParameter("userId")));
         try {
-            user = adminService.findUserWithId(user);
+            user = userService.findUserWithId(user);
             if(user.getLogin() != null){
                 request.setAttribute("userToEdit", user);
                 goToPage = (String) request.getSession().getAttribute("address");

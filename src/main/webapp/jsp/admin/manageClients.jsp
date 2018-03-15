@@ -19,9 +19,6 @@
         <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
         <fmt:message bundle="${loc}" key="local.locbutton.name.ch" var="ch_button" />
 
-        <fmt:message bundle="${loc}" key="local.login" var="login" />
-
-
     </head>
     <body>
         <div class="header">
@@ -72,7 +69,7 @@
 
                 <c:forEach items="${requestScope.usersArray}" var="userToEdit">
                     <div style="display:inline-block;">
-                        <p>Id - ${userToEdit.id} - Login - ${userToEdit.login} - Password - ${userToEdit.password}</p>
+                        <p>Id - ${userToEdit.id} | Login - ${userToEdit.login} | Password - ${userToEdit.password}</p>
                         <form action="FrontController" method="post">
                             <input type="hidden" name="command" value="editClient" />
                             <input type="hidden" name="userId" value="${userToEdit.id}" />

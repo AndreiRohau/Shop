@@ -28,7 +28,6 @@
     </head>
     <body>
         <div class="header">
-
             <div id="header1">
                 <p><c:out value="${shop}"/></p>
                 <p>Profile: <c:out value="${sessionScope.userName}"/> !!!</p>
@@ -59,10 +58,7 @@
                     </form>
                 </div>
             </div>
-
-
         </div>
-
 
         <div class="middle">
             <div id="menu">
@@ -109,7 +105,6 @@
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
-
         </div>
 
         <div class="footer" >

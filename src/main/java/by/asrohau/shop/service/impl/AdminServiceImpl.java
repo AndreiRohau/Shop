@@ -36,36 +36,4 @@ public class AdminServiceImpl implements AdminService {
         return null;
     }
 
-    @Override
-    public ArrayList<User> getAllUsers() throws ServiceException {
-        try {
-            return adminDAO.selectAllUsers();
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public User findUserWithId(User user) throws ServiceException {
-        //validation!!! stub
-
-        try {
-            return adminDAO.findUserWithId(user);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public boolean updateUser(User user) throws ServiceException {
-        // validation!!! stub
-        if (validation(user)) {
-            try {
-                return adminDAO.updateUser(user);
-            } catch (DAOException e) {
-                throw new ServiceException(e);
-            }
-        }
-        return false;
-    }
 }

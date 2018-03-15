@@ -18,33 +18,7 @@ public class AdminDAOImpl extends AbstractDAO<UserDTO> implements AdminDAO {
     private String FIND_USER_WITH_ID_QUERY = "SELECT * FROM shop.users WHERE id = ?";
     private String UPDATE_USER_QUERY = "UPDATE shop.users SET login = ?, password = ? WHERE id = ?";
 
-    @Override
-    public ArrayList<User> selectAllUsers() throws DAOException {
-        try (PreparedStatement preparedStatement = getConnection()
-                .prepareStatement(SELECT_ALL_USERS_QUERY)) {
-            ArrayList<User> userArrayList = new ArrayList<User>();
-            ResultSet resultSet = preparedStatement.executeQuery();
-            User user;
 
-            int id;
-            String login;
-            String password;
-            while (resultSet.next()) {
-                id = resultSet.getInt(1);
-                login = resultSet.getString(2);
-                password = resultSet.getString(3);
-                user = new User(id, login, password);
-                userArrayList.add(user);
-            }
-            preparedStatement.close();
-            connection.close();
-            return userArrayList;
-
-        } catch (SQLException e) {
-            System.out.println("dao exception while get all users");
-            throw new DAOException(e);
-        }
-    }
 
     @Override
     public UserDTO findUserWithLoginAndPassword(User user) throws DAOException {
@@ -64,54 +38,14 @@ public class AdminDAOImpl extends AbstractDAO<UserDTO> implements AdminDAO {
             if (userDTO.getLogin() != null) {
                 return userDTO;
             }
-            System.out.println("Did not find User with login = " + user.getLogin());
+            System.out.println("Did not find Admin with login = " + user.getLogin());
             return null;
         } catch (SQLException e) {
             throw new DAOException(e);
         }
     }
 
-    @Override
-    public User findUserWithId(User user) throws DAOException {
-        try (PreparedStatement preparedStatement = getConnection()
-                .prepareStatement(FIND_USER_WITH_ID_QUERY)) {
-            preparedStatement.setInt(1, user.getId());
-            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                user.setId(resultSet.getInt(1));
-                user.setLogin(resultSet.getString(2));
-                user.setPassword(resultSet.getString(3));
-            }
-            preparedStatement.close();
-            connection.close();
-
-            if (user.getLogin() != null) {
-                return user;
-            }
-            System.out.println("Did not find User with id = " + user.getId());
-            return null;
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
-
-    @Override
-    public boolean updateUser(User user) throws DAOException {
-        try (PreparedStatement preparedStatement = getConnection()
-                .prepareStatement(UPDATE_USER_QUERY)) {
-            preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setInt(3, user.getId());
-
-            int result = preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
-            return (result != 0);
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
 
 
 }

@@ -7,6 +7,8 @@ import by.asrohau.shop.dao.exception.DAOException;
 import by.asrohau.shop.service.ProductService;
 import by.asrohau.shop.service.exception.ServiceException;
 
+import java.util.ArrayList;
+
 public class ProductServiceImpl implements ProductService {
 
 	private final ProductDAO productDAO = DAOFactory.getInstance().getProductDAO();
@@ -62,14 +64,52 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public boolean deleteProduct(Product product) throws ServiceException {
+	public ArrayList<Product> getAllProducts() throws ServiceException {
+		try {
+			return productDAO.selectAllProducts();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public Product findProductWithId(Product product) throws ServiceException {
+		//validation!!! stub
+
+		try {
+			return productDAO.findProductWithId(product);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public boolean updateProduct(Product product) throws ServiceException {
+		// validation!!! stub
+		if (validation(product)) {
+			try {
+				return productDAO.updateProduct(product);
+			} catch (DAOException e) {
+				throw new ServiceException(e);
+			}
+		}
 		return false;
 	}
 
 	@Override
-	public boolean updateProduct(Product product, String[] productInfo) throws ServiceException {
+	public boolean deleteProduct(Product product) throws ServiceException {
+		// validation!!! stub
+		try {
+			if (productDAO.findProductWithId(product).getName() != null) {
+				return productDAO.deleteProduct(product);
+			}
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
 		return false;
 	}
+
+
 
 	@Override
 	public boolean reserveProduct(Product product) throws ServiceException {

@@ -3,6 +3,7 @@ package by.asrohau.shop.dao.impl;
 import by.asrohau.shop.bean.User;
 import by.asrohau.shop.service.AdminService;
 import by.asrohau.shop.service.ServiceFactory;
+import by.asrohau.shop.service.UserService;
 import by.asrohau.shop.service.exception.ServiceException;
 import org.junit.Test;
 
@@ -15,10 +16,10 @@ public class AdminDAOImplTest {
         User user = new User(42, "testupd", "testupd");
 
         ServiceFactory sf = ServiceFactory.getInstance();
-        AdminService as = sf.getAdminService();
+        UserService us = sf.getUserService();
 
         try {
-            as.updateUser(user);
+            us.updateUser(user);
         } catch (ServiceException e) {
             e.printStackTrace();
         }

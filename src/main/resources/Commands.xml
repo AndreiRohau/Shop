@@ -19,6 +19,10 @@
         <webname>delete_user</webname>
         <classname>DeleteUserCommand</classname>
     </command>
+    <command>
+        <webname>delete_product</webname>
+        <classname>DeleteProductCommand</classname>
+    </command>
 
     <command>
         <webname>change_language</webname>
@@ -43,11 +47,23 @@
         <classname>SelectAllUsersCommand</classname>
     </command>
     <command>
+        <webname>selectAllProducts</webname>
+        <classname>SelectAllProductsCommand</classname>
+    </command>
+    <command>
         <webname>editClient</webname>
         <classname>EditClientCommand</classname>
     </command>
     <command>
+        <webname>editProduct</webname>
+        <classname>EditProductCommand</classname>
+    </command>
+    <command>
         <webname>updateClient</webname>
         <classname>UpdateClientCommand</classname>
+    </command>
+    <command>
+        <webname>updateProduct</webname>
+        <classname>UpdateProductCommand</classname>
     </command>
 </commands>

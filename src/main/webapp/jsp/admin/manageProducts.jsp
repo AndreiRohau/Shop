@@ -19,9 +19,6 @@
         <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
         <fmt:message bundle="${loc}" key="local.locbutton.name.ch" var="ch_button" />
 
-        <fmt:message bundle="${loc}" key="local.login" var="login" />
-
-
     </head>
     <body>
         <div class="header">
@@ -62,25 +59,34 @@
                 <form action="FrontController" method="post">
                     <span><c:out value="${requestScope.isAdded}"/></span>
                     <input type="hidden" name="command" value="addNewProduct"/>
-                    <c:out value="${login}" />: PRODUCT!!! NAME<br/>
-                    <input type="text" name="name" value=""/><br/>
-                    <c:out value="${login}" />: PRODUCT!!! TYPE<br/>
-                    <input type="text" name="type" value=""/><br/>
-                    <c:out value="${login}" />: PRODUCT!!! PRICE<br/>
-                    <input type="text" name="price" value=""/><br/>
-                    <input type="submit" name="sign in" value="ADD_NEW_PROD!!!"/>
+                    <p><b>Set product name: </b><br/>
+                    <input type="text" name="name" value=""/></p><br/>
+                    <p><b>Set product type: </b><br/>
+                    <input type="text" name="type" value=""/></p><br/>
+                    <p><b>Set product price: </b><br/>
+                    <input type="text" name="price" value=""/></p><br/>
+                    <p><b>Set description: </b><br/>
+                    <textarea rows="10" cols="45" name="description"></textarea></p><br/>
+                    <p><input type="submit" name="Save_new_product" value="ADD"/></p>
                 </form>
             </div>
 
             <div id="content">
+                <form action="FrontController" method="post">
+                    <p><b>Get all products</b>
+                        <input type="hidden" name="command" value="selectAllProducts"/>
+                        <input type="submit" name="get_products" value="Get them!"/>
+                    </p>
+                </form>
+                <hr/>
                 <H1></H1>
                 <p>HERE ARE</p>
-                <c:forEach items="${requestScope.usersArray}" var="userToEdit">
+                <c:forEach items="${requestScope.productArray}" var="productToEdit">
                     <div style="display:inline-block;">
-                        <p>Id - ${userToEdit.id} - Login - ${userToEdit.login} - Password - ${userToEdit.password}</p>
+                        <p>Id - ${productToEdit.id} | Name - ${productToEdit.name} | Type - ${productToEdit.type} | Price - ${productToEdit.price}</p>
                         <form action="FrontController" method="post">
-                            <input type="hidden" name="command" value="editClient" />
-                            <input type="hidden" name="userId" value="${userToEdit.id}" />
+                            <input type="hidden" name="command" value="editProduct" />
+                            <input type="hidden" name="productId" value="${productToEdit.id}" />
                             <input type="submit" name="edit" value="Edit" /><br/>
                         </form>
                     </div>
@@ -97,7 +103,7 @@
                       -->
                     <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
                     -->
-                    <a href="FrontController?command=goToPage&address=manageProducts.jsp">SHOP</a>
+                    <a href="FrontController?command=goToPage&address=manageProducts.jsp">GOODS</a>
                 </p>
             </div>
         </div>

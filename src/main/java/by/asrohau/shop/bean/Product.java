@@ -5,14 +5,23 @@ public class Product {
 	private String name;
 	private String type;
 	private String price;
-
+	private String description;
 
 	public Product() {}
 
-	public Product(String name, String type, String price) {
+	public Product(String name, String type, String price, String description) {
 		this.name = name;
 		this.type = type;
 		this.price = price;
+		this.description = description;
+	}
+
+	public Product(int id, String name, String type, String price, String description) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.price = price;
+		this.description = description;
 	}
 
 	public int getId() {
@@ -47,6 +56,14 @@ public class Product {
 		this.price = price;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -57,7 +74,8 @@ public class Product {
 		if (id != product.id) return false;
 		if (name != null ? !name.equals(product.name) : product.name != null) return false;
 		if (type != null ? !type.equals(product.type) : product.type != null) return false;
-		return price != null ? price.equals(product.price) : product.price == null;
+		if (price != null ? !price.equals(product.price) : product.price != null) return false;
+		return description != null ? description.equals(product.description) : product.description == null;
 	}
 
 	@Override
@@ -66,6 +84,7 @@ public class Product {
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (type != null ? type.hashCode() : 0);
 		result = 31 * result + (price != null ? price.hashCode() : 0);
+		result = 31 * result + (description != null ? description.hashCode() : 0);
 		return result;
 	}
 
@@ -76,6 +95,7 @@ public class Product {
 				", name='" + name + '\'' +
 				", type='" + type + '\'' +
 				", price='" + price + '\'' +
+				", description='" + description + '\'' +
 				'}';
 	}
 }
