@@ -24,19 +24,22 @@ public class EditProductCommand implements Command {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ProductService productService = serviceFactory.getProductService();
-        request.getSession().setAttribute("address", "/jsp/admin/editProduct.jsp");
+        String lastCMD;
         String goToPage;
         Product product  = new Product();
         product.setId(Integer.parseInt(request.getParameter("productId")));
         try {
             product = productService.findProductWithId(product);
-            if(product.getName() != null){
+            if(product != null){
                 request.setAttribute("productToEdit", product);
-                goToPage = (String) request.getSession().getAttribute("address");
+                goToPage = "/jsp/admin/editProduct.jsp";
+                lastCMD = "FrontController?command=editProduct&productId=" + request.getParameter("productId");
+
             } else {
                 goToPage = "error.jsp";
+                lastCMD = "FrontController?command=goToPage&address=manageProducts.jsp";
             }
-
+            request.getSession().setAttribute("lastCMD", lastCMD);
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
 

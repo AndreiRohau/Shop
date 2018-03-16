@@ -26,7 +26,7 @@ public class ChangePasswordCommand implements Command {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
 
-		request.getSession().setAttribute("address", "/jsp/user/profile.jsp");
+		request.getSession().setAttribute("lastCMD", "FrontController?command=goToPage&address=profile.jsp");
 		boolean isChanged; //was false
 
 		try {
@@ -34,7 +34,7 @@ public class ChangePasswordCommand implements Command {
 			String goToPage;
 			if (isChanged) {
 				request.setAttribute("isChanged", "new password is: " + user.getNewPassword());
-				goToPage = (String) request.getSession().getAttribute("address"); //was just address
+				goToPage = "/jsp/user/profile.jsp"; //was just address
 			} else {
 				goToPage = "error.jsp";
 				request.setAttribute("errorMessage", "Can NOT change password.");

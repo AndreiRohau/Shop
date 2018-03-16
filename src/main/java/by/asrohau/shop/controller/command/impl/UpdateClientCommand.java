@@ -23,7 +23,7 @@ public class UpdateClientCommand implements Command {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
-        request.getSession().setAttribute("address", "/jsp/admin/editClient.jsp");
+        String lastCMD;
         String goToPage;
         User user  = new User(Integer.parseInt(request.getParameter("id")),
                 request.getParameter("login"),
@@ -32,11 +32,13 @@ public class UpdateClientCommand implements Command {
         try {
             if(userService.updateUser(user)){
                 request.setAttribute("userToEdit", user);
-                goToPage = (String) request.getSession().getAttribute("address");
+                lastCMD = "FrontController?command=editClient&userId=" + request.getParameter("id");
+                goToPage = "/jsp/admin/editClient.jsp";
             } else {
+                lastCMD = "FrontController?command=goToPage&address=manageClients.jsp";
                 goToPage = "error.jsp";
             }
-
+            request.getSession().setAttribute("lastCMD", lastCMD);
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
 

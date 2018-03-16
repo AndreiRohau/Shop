@@ -24,7 +24,7 @@ public class UpdateProductCommand implements Command {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ProductService productService = serviceFactory.getProductService();
-        request.getSession().setAttribute("address", "/jsp/admin/editProduct.jsp");
+        String lastCMD;
         String goToPage;
         Product product = new Product(Integer.parseInt(request.getParameter("id")),
                 request.getParameter("name"),
@@ -35,11 +35,13 @@ public class UpdateProductCommand implements Command {
         try {
             if(productService.updateProduct(product)){
                 request.setAttribute("productToEdit", product);
-                goToPage = (String) request.getSession().getAttribute("address");
+                lastCMD = "FrontController?command=editProduct&productId=" + request.getParameter("id");
+                goToPage = "/jsp/admin/editProduct.jsp";
             } else {
+                lastCMD = "FrontController?command=goToPage&address=manageProducts.jsp";
                 goToPage = "error.jsp";
             }
-
+            request.getSession().setAttribute("lastCMD", lastCMD);
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
 

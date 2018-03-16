@@ -19,7 +19,6 @@ public class GoToPageCommand implements Command {
         try {
             String goToPage;
 
-
             if (request.getSession().getAttribute("userName") != null &&
                     !request.getParameter("address").matches("index.jsp") &&
                     !request.getParameter("address").matches("error.jsp")) {
@@ -34,7 +33,7 @@ public class GoToPageCommand implements Command {
                 goToPage = "index.jsp";
             }
 
-            request.getSession().setAttribute("address", goToPage);
+            request.getSession().setAttribute("lastCMD", "FrontController?command=goToPage&address=" + request.getParameter("address"));
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
         } catch (IOException | ServletException e) {

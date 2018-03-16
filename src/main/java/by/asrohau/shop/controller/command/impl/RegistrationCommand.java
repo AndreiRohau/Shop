@@ -23,13 +23,13 @@ public class RegistrationCommand implements Command {
 		User user = new User(request.getParameter("login").trim(), request.getParameter("password").trim());
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
-		request.getSession().setAttribute("address", "index.jsp");
+		String lastCMD = "FrontController?command=goToPage&address=index.jsp";
+		String goToPage;
 		try {
 			isRegistered = request.getSession().getAttribute("userName") == null
 					&& !request.getParameter("login").equals("Admin")
 					&& userService.registration(user);
 
-			String goToPage;
 			if (isRegistered) {
 				request.setAttribute("isRegistered", "You registered successfully");
 				goToPage = "index.jsp";
@@ -39,6 +39,7 @@ public class RegistrationCommand implements Command {
 						? "Login exists" : "Log out!";
 				request.setAttribute("errorMessage", message);
 			}
+			request.getSession().setAttribute("lastCMD", lastCMD);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);
 			

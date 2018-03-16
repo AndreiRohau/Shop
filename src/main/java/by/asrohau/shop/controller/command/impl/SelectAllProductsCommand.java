@@ -23,16 +23,13 @@ public class SelectAllProductsCommand implements Command {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ProductService productService = serviceFactory.getProductService();
-        request.getSession().setAttribute("address", "/jsp/admin/manageProducts.jsp");
         String goToPage;
         try {
             ArrayList<Product> productArrayList = productService.getAllProducts();
-            for(Product prod : productArrayList){
-                System.out.println(prod.toString());
-            }
 
             request.setAttribute("productArray", productArrayList);
-            goToPage = (String) request.getSession().getAttribute("address");
+            request.getSession().setAttribute("lastCMD", "FrontController?command=selectAllProducts");
+            goToPage = "/jsp/admin/manageProducts.jsp";
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
 

@@ -32,16 +32,25 @@ public class DeleteUserCommand implements Command {
 			isChanged = isUser || isAdmin;
 			isChanged = (isChanged && userService.deleteUser(user));
 			String goToPage;
+			String lastCMD;
 			if (isChanged && isUser) {
 				request.getSession().invalidate();
 				goToPage = "index.jsp";
+				lastCMD = "FrontController?command=goToPage&address=index.jsp";
 			} else if (isChanged) {
 				goToPage = "/jsp/admin/manageClients.jsp";
-			} else {
+				lastCMD = "FrontController?command=goToPage&address=manageClients.jsp";
+			} else if (isUser){
 				goToPage = "/jsp/user/profile.jsp";
 				request.setAttribute("errorMessage", "cannot delete user");
+				lastCMD = "FrontController?command=goToPage&address=profile.jsp";
+			} else {
+				goToPage = "error.jsp";
+				request.setAttribute("errorMessage", "cannot delete user");
+				lastCMD = "FrontController?command=goToPage&address=manageClients.jsp";
 			}
-			request.getSession().setAttribute("address", goToPage);
+
+			request.getSession().setAttribute("lastCMD", lastCMD);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);
 			

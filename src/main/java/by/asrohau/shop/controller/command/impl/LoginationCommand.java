@@ -24,6 +24,7 @@ public class LoginationCommand implements Command {
 
 		User user = new User(request.getParameter("login").trim(),  request.getParameter("password").trim());
 		UserDTO userDTO; //was null said was redundant
+		String lastCMD;
 		String goToPage;
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		String errorMessage = "No such User";
@@ -33,8 +34,10 @@ public class LoginationCommand implements Command {
 				userDTO = userService.logination(user);
 				if (userDTO != null) {
 					goToPage = "/jsp/user/main.jsp";
+					lastCMD = "FrontController?command=goToPage&address=main.jsp";
 					request.getSession().setAttribute("userName", userDTO.getLogin());
 				} else {
+					lastCMD = "FrontController?command=goToPage&address=index.jsp";
 					goToPage = "error.jsp";
 				}
 			} else if (request.getParameter("login").equals("Admin") && request.getSession().getAttribute("userName") == null) {
@@ -42,18 +45,21 @@ public class LoginationCommand implements Command {
 				userDTO = adminService.logination(user);
 				if(userDTO != null) {
 					goToPage = "/jsp/admin/main.jsp";
+					lastCMD = "FrontController?command=goToPage&address=main.jsp";
 					request.getSession().setAttribute("userName", userDTO.getLogin());
 				} else {
+					lastCMD = "FrontController?command=goToPage&address=index.jsp";
 					goToPage = "error.jsp";
 				}
 			} else {
 				goToPage = "error.jsp";
 				errorMessage = "Log out";
+				lastCMD = "FrontController?command=goToPage&address=index.jsp";
 			}
 
-			request.getSession(true).setAttribute("address", goToPage);
-			request.setAttribute("errorMessage", errorMessage);
+			request.getSession(true).setAttribute("lastCMD", lastCMD);
 
+			request.setAttribute("errorMessage", errorMessage);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
 			dispatcher.forward(request, response);
 

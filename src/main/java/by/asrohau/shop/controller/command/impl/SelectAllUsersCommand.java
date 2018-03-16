@@ -23,16 +23,13 @@ public class SelectAllUsersCommand implements Command {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
-        request.getSession().setAttribute("address", "/jsp/admin/manageClients.jsp");
         String goToPage;
         try {
             ArrayList<User> userArrayList = userService.getAllUsers();
-            for(User userx : userArrayList){
-                System.out.println(userx.toString());
-            }
 
             request.setAttribute("usersArray", userArrayList);
-            goToPage = (String) request.getSession().getAttribute("address");
+            request.getSession().setAttribute("lastCMD", "FrontController?command=selectAllUsers");
+            goToPage = "/jsp/admin/manageClients.jsp";
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
 

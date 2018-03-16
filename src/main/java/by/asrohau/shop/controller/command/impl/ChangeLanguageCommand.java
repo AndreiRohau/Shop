@@ -19,13 +19,14 @@ public class ChangeLanguageCommand  implements Command {
 		try {
 
 			request.getSession(true).setAttribute("local", request.getParameter("local"));
-			String goToPage = (String) request.getSession().getAttribute("address") == null ? "index.jsp" : (String) request.getSession().getAttribute("address");
 
-			request.getRequestDispatcher(goToPage).forward(request, response);
-		} catch ( ServletException | IOException e) {
+			if (request.getSession(true).getAttribute("lastCMD") != null){
+				response.sendRedirect(String.valueOf(request.getSession(true).getAttribute("lastCMD")));
+			}else{
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+		} catch (ServletException | IOException e) {
 			throw new ControllerException(e);
 		}
-
-
 	}
 }

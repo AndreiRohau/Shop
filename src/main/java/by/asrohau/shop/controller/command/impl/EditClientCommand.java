@@ -23,20 +23,22 @@ public class EditClientCommand implements Command {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
-        request.getSession().setAttribute("address", "/jsp/admin/editClient.jsp");
+        String lastCMD;
         String goToPage;
         User user  = new User();
         user.setId(Integer.parseInt(request.getParameter("userId")));
         try {
             user = userService.findUserWithId(user);
-            if(user.getLogin() != null){
+            if(user != null){
                 request.setAttribute("userToEdit", user);
-                goToPage = (String) request.getSession().getAttribute("address");
-                System.out.println(user.toString());
+                goToPage = "/jsp/admin/editClient.jsp";
+                lastCMD = "FrontController?command=editClient&userId=" + request.getParameter("userId");
+
             } else {
                 goToPage = "error.jsp";
+                lastCMD = "FrontController?command=goToPage&address=manageClients.jsp";
             }
-
+            request.getSession().setAttribute("lastCMD", lastCMD);
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
 
