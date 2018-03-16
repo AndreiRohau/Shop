@@ -24,7 +24,7 @@ public class DeleteUserCommand implements Command {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		UserService userService = serviceFactory.getUserService();
 
-		boolean isChanged = false;
+		boolean isChanged; // = false
 
 		try {
 			boolean isUser = request.getSession().getAttribute("userName").equals(user.getLogin());
@@ -40,7 +40,7 @@ public class DeleteUserCommand implements Command {
 			} else if (isChanged) {
 				goToPage = "/jsp/admin/manageClients.jsp";
 				lastCMD = "FrontController?command=goToPage&address=manageClients.jsp";
-			} else if (isUser){
+			} else if (!isAdmin){
 				goToPage = "/jsp/user/profile.jsp";
 				request.setAttribute("errorMessage", "cannot delete user");
 				lastCMD = "FrontController?command=goToPage&address=profile.jsp";
