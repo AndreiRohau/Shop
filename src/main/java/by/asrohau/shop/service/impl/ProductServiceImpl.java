@@ -56,14 +56,13 @@ public class ProductServiceImpl implements ProductService {
 				throw new ServiceException(e);
 			}
 		}
-		System.out.println("findProduct(newProduct) " + productDAO.toString());
 		return false;
 	}
 
 	@Override
-	public ArrayList<Product> getAllProducts() throws ServiceException {
+	public ArrayList<Product> getAllProducts(int row) throws ServiceException {
 		try {
-			return productDAO.selectAllProducts();
+			return productDAO.selectAllProducts(row);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
@@ -106,7 +105,14 @@ public class ProductServiceImpl implements ProductService {
 		return false;
 	}
 
-
+	@Override
+	public int countProducts() throws ServiceException {
+		try {
+			return productDAO.countProducts();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
 
 	@Override
 	public boolean reserveProduct(Product product) throws ServiceException {

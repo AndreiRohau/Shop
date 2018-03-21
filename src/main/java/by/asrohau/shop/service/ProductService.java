@@ -9,7 +9,7 @@ public interface ProductService {
 
 	boolean validation(Product product);
 	boolean addNewProduct(Product newProduct) throws ServiceException;
-	ArrayList<Product> getAllProducts() throws ServiceException;
+	ArrayList<Product> getAllProducts(int row) throws ServiceException;
 	Product findProductWithId(Product product) throws ServiceException;
 	boolean updateProduct(Product product) throws ServiceException;
 
@@ -17,6 +17,6 @@ public interface ProductService {
 	Product findProductWithName(Product product) throws ServiceException;
 	boolean deleteProduct(Product product) throws ServiceException;
 	boolean reserveProduct(Product product) throws ServiceException;
-
+	int countProducts() throws  ServiceException;
 	
 }

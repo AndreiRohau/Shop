@@ -14,10 +14,11 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 
 	private String FIND_EQUAL_PRODUCT_QUERY = "SELECT * FROM shop.products WHERE company = ? AND name = ? AND type = ? AND price = ?";
 	private String ADD_NEW_PRODUCT_QUERY = "INSERT INTO shop.products (company, name, type, price, description) VALUES (?,?,?,?,?)";
-	private String SELECT_ALL_PRODUCTS_QUERY = "SELECT * FROM shop.products";
+	private String SELECT_ALL_PRODUCTS_QUERY = "SELECT * FROM shop.products LIMIT ?, ?";
 	private String FIND_PRODUCT_WITH_ID_QUERY = "SELECT * FROM shop.products WHERE id = ?";
 	private String UPDATE_PRODUCT_QUERY = "UPDATE shop.products SET company = ?, name = ?, type = ?, price = ?, description = ? WHERE id = ?";
 	private String DELETE_PRODUCT_QUERY = "DELETE FROM shop.products WHERE id = ?";
+	private String COUNT_PRODUCT_QUERY = "SELECT COUNT(*) FROM shop.products";
 
 	@Override
 	public Product findProduct(Product product) throws DAOException {
@@ -35,6 +36,7 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 				foundProduct.setName(resultSet.getString(3));
 				foundProduct.setType(resultSet.getString(4));
 				foundProduct.setPrice(resultSet.getString(5));
+				foundProduct.setDescription(resultSet.getString(6));
 			}
 			preparedStatement.close();
 			connection.close();
@@ -53,7 +55,7 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 	@Override
 	public boolean addProduct(Product product) throws DAOException {
 		try (PreparedStatement statement = getConnection().prepareStatement(ADD_NEW_PRODUCT_QUERY)) {
-			statement.setString(1, product.getName());
+			statement.setString(1, product.getCompany());
 			statement.setString(2, product.getName());
 			statement.setString(3, product.getType());
 			statement.setString(4, product.getPrice());
@@ -69,9 +71,11 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 	}
 
 	@Override
-	public ArrayList<Product> selectAllProducts() throws DAOException {
+	public ArrayList<Product> selectAllProducts(int row) throws DAOException {
 		try (PreparedStatement preparedStatement = getConnection()
 				.prepareStatement(SELECT_ALL_PRODUCTS_QUERY)) {
+			preparedStatement.setInt(1, row);
+			preparedStatement.setInt(2, 15);
 			ArrayList<Product> productArrayList = new ArrayList<Product>();
 			ResultSet resultSet = preparedStatement.executeQuery();
 			Product product;
@@ -163,4 +167,18 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 		}
 	}
 
+	@Override
+	public int countProducts() throws DAOException {
+		try (PreparedStatement statement = getConnection().prepareStatement(COUNT_PRODUCT_QUERY)) {
+			ResultSet resultSet = statement.executeQuery();
+
+			resultSet.next();
+			int i = resultSet.getInt(1);
+			statement.close();
+			connection.close();
+			return i;
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
 }

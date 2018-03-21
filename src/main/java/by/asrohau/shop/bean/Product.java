@@ -10,6 +10,13 @@ public class Product {
 
 	public Product() {}
 
+	public Product(String company, String name, String type, String price) {
+		this.company = company;
+		this.name = name;
+		this.type = type;
+		this.price = price;
+	}
+
 	public Product(String company, String name, String type, String price, String description) {
 		this.company = company;
 		this.name = name;

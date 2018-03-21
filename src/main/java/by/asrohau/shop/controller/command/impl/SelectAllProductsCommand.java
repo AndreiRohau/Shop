@@ -24,11 +24,27 @@ public class SelectAllProductsCommand implements Command {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ProductService productService = serviceFactory.getProductService();
         String goToPage;
-        try {
-            ArrayList<Product> productArrayList = productService.getAllProducts();
+        int currentPage;
+        int maxPage;
+        int row;
 
+        currentPage = Integer.parseInt(request.getParameter("page_num"));
+        row = (currentPage - 1)*15;
+
+
+        try {
+            //count amount of all products
+            maxPage = (int) Math.ceil(((double) productService.countProducts()) / 15);
+            System.out.println("maxPage is " + maxPage);
+
+            ArrayList<Product> productArrayList = productService.getAllProducts(row);
             request.setAttribute("productArray", productArrayList);
-            request.getSession().setAttribute("lastCMD", "FrontController?command=selectAllProducts");
+
+            request.setAttribute("maxPage", maxPage);
+            request.setAttribute("currentPage", currentPage);
+            request.getSession().setAttribute("lastCMD",
+                    "FrontController?command=selectAllProducts&page_num=" + currentPage);
+
             goToPage = "/jsp/admin/manageProducts.jsp";
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);

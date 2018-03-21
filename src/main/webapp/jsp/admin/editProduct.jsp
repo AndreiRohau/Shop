@@ -66,6 +66,7 @@
                 <form action="FrontController" method="post">
                     <p>Get all products</p>
                     <input type="hidden" name="command" value="selectAllProducts"/>
+                    <input type="hidden" name="page_num" value="1"/>
                     <input type="submit" name="get_products" value="Get them!"/>
                 </form>
             </div>
@@ -105,7 +106,7 @@
 
                     <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
                         <tr>
-                            <td>Company: <input type="text" name="name" value="${product_company}" title=""/></td>
+                            <td>Company: <input type="text" name="company" value="${product_company}" title=""/></td>
                             <td>Name: <input type="text" name="name" value="${product_name}" title=""/></td>
                             <td>Type: <input type="text" name="type" value="${product_type}" title=""/></td>
                             <td>Price: <input type="text" name="price" value="${product_price}" title=""/></td>

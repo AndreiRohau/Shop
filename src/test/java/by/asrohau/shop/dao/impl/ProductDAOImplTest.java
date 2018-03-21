@@ -35,20 +35,47 @@ public class ProductDAOImplTest {
 	}
 
 	@Test
-	public void deleteProductTest(){
-		Product product = new Product();
-		product.setId(9);
+	public void deleteProductTest() throws ServiceException {
+		Product newProduct = new Product("Sony", "Vaio", "Laptop", "3000");
+		Product existingProduct;
+
 
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		ProductService productService = serviceFactory.getProductService();
 
+		productService.addNewProduct(newProduct); //didnt find cause there was no duplicate
+		existingProduct = productService.findProduct(newProduct); // pull product to check its existance
+		System.out.println("existingProduct" + existingProduct);
+
 		try {
-			boolean b = productService.deleteProduct(product);
-			System.out.println(b);
+			boolean b = productService.deleteProduct(existingProduct);
+			System.out.println("was deleted - " + b);
+			System.out.println("try to find deleted product " + productService.findProduct(existingProduct));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
+	}
 
+	@Test
+	public void selectAllProductsTest() throws ServiceException {
+		int row = 24;
+		ServiceFactory serviceFactory = ServiceFactory.getInstance();
+		ProductService productService = serviceFactory.getProductService();
+		ArrayList<Product> productArrayList = new ArrayList<Product>();
+		productArrayList = productService.getAllProducts(row);
+
+		for(Product p : productArrayList){
+			System.out.println(p);
+		}
+	}
+
+	@Test
+	public void countProductsTest() throws ServiceException {
+		ServiceFactory serviceFactory = ServiceFactory.getInstance();
+		ProductService productService = serviceFactory.getProductService();
+
+		int i = productService.countProducts();
+		System.out.println(i);
 	}
 
 }

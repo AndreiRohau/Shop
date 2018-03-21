@@ -19,6 +19,9 @@
         <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
         <fmt:message bundle="${loc}" key="local.locbutton.name.ch" var="ch_button" />
 
+        <c:set var="current_page" value="${requestScope.get('currentPage')}"/>
+        <c:set var="max_page" value="${requestScope.get('maxPage')}"/>
+
     </head>
     <body>
         <div class="header">
@@ -79,6 +82,7 @@
                 <form action="FrontController" method="post">
                     <p><b>Get all products</b>
                         <input type="hidden" name="command" value="selectAllProducts"/>
+                        <input type="hidden" name="page_num" value="1"/>
                         <input type="submit" name="get_products" value="Get them!"/>
                     </p>
                 </form>
@@ -111,6 +115,20 @@
                         </tr>
                     </c:forEach>
                 </table>
+
+                <c:if test="${current_page != null}">
+                    <div width="100%" style="background-color: deepskyblue; font-size: 1em">    
+
+                    <c:forEach begin="1" end="${max_page}" var="i">
+                            <c:if test="${i != current_page}">
+                                <a href="FrontController?command=selectAllProducts&page_num=${i}">${i}</a>
+                            </c:if>
+                            <c:if test="${i == current_page}">
+                                <c:out value="${i}"/>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </c:if>
             </div>
         </div>
 
@@ -123,6 +141,11 @@
                     <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
                     -->
                     <a href="FrontController?command=goToPage&address=manageProducts.jsp">GOODS</a>
+
+                    <c:if test="${current_page != null}">
+                        -->
+                         <a href="FrontController?command=selectAllProducts&page_num=${current_page}">${current_page}</a>
+                    </c:if>
                 </p>
             </div>
         </div>
