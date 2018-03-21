@@ -21,6 +21,7 @@
         <fmt:message bundle="${loc}" key="local.deleteAccountButton" var="deleteAccountButton" />
         <c:set var="product_id" value="${requestScope.get('productToEdit').id}"/>
         <c:set var="product_name" value="${requestScope.get('productToEdit').name}"/>
+        <c:set var="product_company" value="${requestScope.get('productToEdit').company}"/>
         <c:set var="product_type" value="${requestScope.get('productToEdit').type}"/>
         <c:set var="product_price" value="${requestScope.get('productToEdit').price}"/>
         <c:set var="product_description" value="${requestScope.get('productToEdit').description}"/>
@@ -63,42 +64,60 @@
         <div class="middle">
             <div id="menu">
                 <form action="FrontController" method="post">
-                    <p>Get all users</p>
+                    <p>Get all products</p>
                     <input type="hidden" name="command" value="selectAllProducts"/>
                     <input type="submit" name="get_products" value="Get them!"/>
                 </form>
             </div>
 
             <div id="content">
-                <div style="display:flex; flex-flow: row wrap; justify-content:space-between">
-                    <div>
-                        <H1></H1>
-                        <p>Edit product</p>
-                        <p>ID is: ${product_id}</p>
-                        <p>Name is: ${product_name}</p>
-                        <p>Type is: ${product_type}</p>
-                        <p>Price is: ${product_price}</p>
-                    </div>
-                    <div>
-                        <form action="FrontController" method="post">
-                            <input type="hidden" name="command" value="delete_product"/><br/>
-                            <input type="hidden" name="id" value="${product_id}"/><br/>
-                            <input type="submit" name="delete" value="${deleteAccountButton}"/>
-                        </form>
-                    </div>
-                </div>
+
+                <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
+                    <tr>
+                        <td>ID</td>
+                        <td>COMPANY</td>
+                        <td>NAME</td>
+                        <td>TYPE</td>
+                        <td>PRICE</td>
+                        <td>Link</td>
+                    </tr>
+                    <tr>
+                        <td>${product_id}</td>
+                        <td>${product_company}</td>
+                        <td>${product_name}</td>
+                        <td>${product_type}</td>
+                        <td>${product_price}</td>
+                        <td>
+                            <form action="FrontController" method="post">
+                                <input type="hidden" name="command" value="delete_product"/><br/>
+                                <input type="hidden" name="id" value="${product_id}"/><br/>
+                                <input type="submit" name="delete" value="${deleteAccountButton}"/>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
                 <hr/>
+
                 <form action="FrontController" method="post">
                     <input type="hidden" name="command" value="updateProduct" />
                     <input type="hidden" name="id" value="${product_id}" />
-                    <p>Name:<br/>
-                    <input type="text" name="name" value="${product_name}" title=""/></p><br/>
-                    <p>Type:<br/>
-                    <input type="text" name="type" value="${product_type}" title=""/></p><br/>
-                    <p>Price:<br/>
-                    <input type="text" name="price" value="${product_price}" title=""/></p><br/>
-                    <p>Set description:<br/>
-                        <textarea rows="10" cols="45" name="description">${product_description}</textarea></p><br/>
+
+                    <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
+                        <tr>
+                            <td>Company: <input type="text" name="name" value="${product_company}" title=""/></td>
+                            <td>Name: <input type="text" name="name" value="${product_name}" title=""/></td>
+                            <td>Type: <input type="text" name="type" value="${product_type}" title=""/></td>
+                            <td>Price: <input type="text" name="price" value="${product_price}" title=""/></td>
+                        </tr>
+                        <br/>
+                        <tr>
+                            <td colspan="4"><br/>Set description:<br/>
+                                <textarea rows="10" cols="45" name="description">${product_description}</textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
                     <input type="submit" name="edit" value="Edit" />
                 </form>
 

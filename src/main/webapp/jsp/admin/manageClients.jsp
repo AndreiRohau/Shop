@@ -56,28 +56,41 @@
 
         <div class="middle">
             <div id="menu">
-                <form action="FrontController" method="post">
-                    <p>Get all users</p>
-                    <input type="hidden" name="command" value="selectAllUsers"/>
-                    <input type="submit" name="get_users" value="Get them!"/>
-                </form>
+
             </div>
 
             <div id="content">
-                <H1></H1>
-                <p>HERE ARE</p>
+                <form action="FrontController" method="post">
+                    <p><b>Get all users</b>
+                        <input type="hidden" name="command" value="selectAllUsers"/>
+                        <input type="submit" name="get_users" value="Get them!"/>
+                    </p>
+                </form>
+                <hr/>
+                <br/>
 
-                <c:forEach items="${requestScope.usersArray}" var="userToEdit">
-                    <div style="display:inline-block;">
-                        <p>Id - ${userToEdit.id} | Login - ${userToEdit.login} | Password - ${userToEdit.password}</p>
-                        <form action="FrontController" method="post">
-                            <input type="hidden" name="command" value="editClient" />
-                            <input type="hidden" name="userId" value="${userToEdit.id}" />
-                            <input type="submit" name="edit" value="Edit" /><br/>
-                        </form>
-                    </div>
-                    <hr/>
-                </c:forEach>
+                <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
+                    <tr>
+                        <td>ID</td>
+                        <td>LOGIN</td>
+                        <td>PASSWORD</td>
+                        <td>LINK</td>
+                    </tr>
+                    <c:forEach items="${requestScope.usersArray}" var="userToEdit">
+                        <tr>
+                            <td>${userToEdit.id}</td>
+                            <td>${userToEdit.login}</td>
+                            <td>${userToEdit.password}</td>
+                            <td>
+                                <form action="FrontController" method="post">
+                                    <input type="hidden" name="command" value="editClient" />
+                                    <input type="hidden" name="userId" value="${userToEdit.id}" />
+                                    <input type="submit" name="edit" value="Edit" /><br/>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
         </div>
 

@@ -71,32 +71,49 @@
             </div>
         
             <div id="content">
-                <div style="display:flex; flex-flow: row wrap; justify-content:space-between">
-                    <div>
-                        <H1></H1>
-                        <p>Edit user</p>
-                        <p>ID : ${user_id}</p>
-                        <p>${login} : ${user_login}</p>
-                        <p>${password} : ${user_password}</p>
-                    </div>
-                    <div>
-                        <form action="FrontController" method="post">
-                            <input type="hidden" name="command" value="delete_user"/><br/>
-                            <input type="hidden" name="login" value="${user_login}"/><br/>
-                            <input type="hidden" name="password" value="${user_password}"/><br/>
-                            <input type="submit" name="delete" value="${deleteAccountButton}"/>
-                        </form>
-                    </div>
-                </div>
 
+                <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd" >
+                    <tr>
+                        <td>ID</td>
+                        <td>LOGIN</td>
+                        <td>PASSWORD</td>
+                        <td>LINK</td>
+                    </tr>
+                    <tr>
+                        <td>${user_id}</td>
+                        <td>${user_login}</td>
+                        <td>${user_password}</td>
+                        <td>
+                            <form action="FrontController" method="post">
+                                <input type="hidden" name="command" value="delete_user"/><br/>
+                                <input type="hidden" name="login" value="${user_login}"/><br/>
+                                <input type="hidden" name="password" value="${user_password}"/><br/>
+                                <input type="submit" name="delete" value="${deleteAccountButton}"/>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
                 <hr/>
+                <br/>
+
                 <form action="FrontController" method="post">
                     <input type="hidden" name="command" value="updateClient" />
                     <input type="hidden" name="id" value="${user_id}" />
-                    <c:out value="${login}" />:<br/>
-                    <input type="text" name="login" value="${user_login}" title=""/><br/>
-                    <c:out value="${password}" />:<br/>
-                    <input type="text" name="password" value="${user_password}" title=""/><br/>
+
+                    <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
+                        <tr>
+                            <td>
+                                <c:out value="${login}" />:
+                                <input type="text" name="login" value="${user_login}" title=""/>
+                            </td>
+                            <td>
+                                <c:out value="${password}" />:
+                                <input type="text" name="password" value="${user_password}" title=""/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
                     <input type="submit" name="edit" value="Edit" />
                 </form>
                 

@@ -20,21 +20,23 @@ public class AddNewProductCommand implements Command {
         System.out.println("We got to AddProductCommand");
 
         boolean isAdded; //= false
-        Product newProduct = new Product(request.getParameter("name").trim(),
+        Product newProduct = new Product(request.getParameter("company").trim(),
+                request.getParameter("name").trim(),
                 request.getParameter("type").trim(),
                 request.getParameter("price").trim(),
                 request.getParameter("description").trim());
-        System.out.println("We've received descr: " + request.getParameter("description").trim());
+
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ProductService productService = serviceFactory.getProductService();
+
         request.getSession().setAttribute("lastCMD", "FrontController?command=goToPage&address=manageProducts.jsp");
         request.setAttribute("isAdded", null);
         try {
             isAdded = productService.addNewProduct(newProduct);
             String goToPage;
             if (isAdded) {
-                request.setAttribute("isAdded", "You have added new product successfully");
                 goToPage = "/jsp/admin/manageProducts.jsp";
+                request.setAttribute("isAdded", "You have added new product successfully");
             } else {
                 goToPage = "error.jsp";
                 request.setAttribute("errorMessage", "Can NOT add this product, try again!");

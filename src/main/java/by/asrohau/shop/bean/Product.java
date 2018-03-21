@@ -2,6 +2,7 @@ package by.asrohau.shop.bean;
 
 public class Product {
 	private int id;
+	private String company;
 	private String name;
 	private String type;
 	private String price;
@@ -9,15 +10,17 @@ public class Product {
 
 	public Product() {}
 
-	public Product(String name, String type, String price, String description) {
+	public Product(String company, String name, String type, String price, String description) {
+		this.company = company;
 		this.name = name;
 		this.type = type;
 		this.price = price;
 		this.description = description;
 	}
 
-	public Product(int id, String name, String type, String price, String description) {
+	public Product(int id, String company, String name, String type, String price, String description) {
 		this.id = id;
+		this.company = company;
 		this.name = name;
 		this.type = type;
 		this.price = price;
@@ -30,6 +33,14 @@ public class Product {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
 	}
 
 	public String getName() {
@@ -72,6 +83,7 @@ public class Product {
 		Product product = (Product) o;
 
 		if (id != product.id) return false;
+		if (company != null ? !company.equals(product.company) : product.company != null) return false;
 		if (name != null ? !name.equals(product.name) : product.name != null) return false;
 		if (type != null ? !type.equals(product.type) : product.type != null) return false;
 		if (price != null ? !price.equals(product.price) : product.price != null) return false;
@@ -81,6 +93,7 @@ public class Product {
 	@Override
 	public int hashCode() {
 		int result = id;
+		result = 31 * result + (company != null ? company.hashCode() : 0);
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (type != null ? type.hashCode() : 0);
 		result = 31 * result + (price != null ? price.hashCode() : 0);
@@ -92,6 +105,7 @@ public class Product {
 	public String toString() {
 		return "Product{" +
 				"id=" + id +
+				", company='" + company + '\'' +
 				", name='" + name + '\'' +
 				", type='" + type + '\'' +
 				", price='" + price + '\'' +

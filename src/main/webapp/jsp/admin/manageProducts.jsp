@@ -56,9 +56,12 @@
 
         <div class="middle">
             <div id="menu">
+                <!-- Add NEW product - STARTS-->
                 <form action="FrontController" method="post">
                     <span><c:out value="${requestScope.isAdded}"/></span>
                     <input type="hidden" name="command" value="addNewProduct"/>
+                    <p><b>Set product company: </b><br/>
+                    <input type="text" name="company" value=""/></p><br/>
                     <p><b>Set product name: </b><br/>
                     <input type="text" name="name" value=""/></p><br/>
                     <p><b>Set product type: </b><br/>
@@ -66,9 +69,10 @@
                     <p><b>Set product price: </b><br/>
                     <input type="text" name="price" value=""/></p><br/>
                     <p><b>Set description: </b><br/>
-                    <textarea rows="10" cols="45" name="description"></textarea></p><br/>
+                    <textarea rows="8" cols="45" name="description"></textarea></p><br/>
                     <p><input type="submit" name="Save_new_product" value="ADD"/></p>
                 </form>
+                <!-- Add NEW product - ENDs-->
             </div>
 
             <div id="content">
@@ -79,19 +83,34 @@
                     </p>
                 </form>
                 <hr/>
-                <H1></H1>
-                <p>HERE ARE</p>
-                <c:forEach items="${requestScope.productArray}" var="productToEdit">
-                    <div style="display:inline-block;">
-                        <p>Id - ${productToEdit.id} | Name - ${productToEdit.name} | Type - ${productToEdit.type} | Price - ${productToEdit.price}</p>
-                        <form action="FrontController" method="post">
-                            <input type="hidden" name="command" value="editProduct" />
-                            <input type="hidden" name="productId" value="${productToEdit.id}" />
-                            <input type="submit" name="edit" value="Edit" /><br/>
-                        </form>
-                    </div>
-                    <hr/>
-                </c:forEach>
+                <br/>
+
+                <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
+                    <tr>
+                        <td>ID</td>
+                        <td>COMPANY</td>
+                        <td>NAME</td>
+                        <td>TYPE</td>
+                        <td>PRICE</td>
+                        <td>Link</td>
+                    </tr>
+                    <c:forEach items="${requestScope.productArray}" var="productToEdit">
+                        <tr>
+                            <td>${productToEdit.id}</td>
+                            <td>${productToEdit.company}</td>
+                            <td>${productToEdit.name}</td>
+                            <td>${productToEdit.type}</td>
+                            <td>${productToEdit.price}</td>
+                            <td>
+                                <form action="FrontController" method="post">
+                                    <input type="hidden" name="command" value="editProduct" />
+                                    <input type="hidden" name="productId" value="${productToEdit.id}" />
+                                    <input type="submit" name="edit" value="Edit" /><br/>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
         </div>
 

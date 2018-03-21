@@ -27,6 +27,7 @@ public class UpdateProductCommand implements Command {
         String lastCMD;
         String goToPage;
         Product product = new Product(Integer.parseInt(request.getParameter("id")),
+                request.getParameter("company"),
                 request.getParameter("name"),
                 request.getParameter("type"),
                 request.getParameter("price"),

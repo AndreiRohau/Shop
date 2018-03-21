@@ -12,27 +12,29 @@ import java.util.ArrayList;
 
 public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 
-	private String FIND_EQUAL_PRODUCT_QUERY = "SELECT * FROM shop.products WHERE name = ? AND type = ? AND price = ?";
-	private String ADD_NEW_PRODUCT_QUERY = "INSERT INTO shop.products (name, type, price, description) VALUES (?,?,?,?)";
+	private String FIND_EQUAL_PRODUCT_QUERY = "SELECT * FROM shop.products WHERE company = ? AND name = ? AND type = ? AND price = ?";
+	private String ADD_NEW_PRODUCT_QUERY = "INSERT INTO shop.products (company, name, type, price, description) VALUES (?,?,?,?,?)";
 	private String SELECT_ALL_PRODUCTS_QUERY = "SELECT * FROM shop.products";
 	private String FIND_PRODUCT_WITH_ID_QUERY = "SELECT * FROM shop.products WHERE id = ?";
-	private String UPDATE_PRODUCT_QUERY = "UPDATE shop.products SET name = ?, type = ?, price = ?, description = ? WHERE id = ?";
+	private String UPDATE_PRODUCT_QUERY = "UPDATE shop.products SET company = ?, name = ?, type = ?, price = ?, description = ? WHERE id = ?";
 	private String DELETE_PRODUCT_QUERY = "DELETE FROM shop.products WHERE id = ?";
 
 	@Override
 	public Product findProduct(Product product) throws DAOException {
 		try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_EQUAL_PRODUCT_QUERY)) {
-			preparedStatement.setString(1, product.getName());
-			preparedStatement.setString(2, product.getType());
-			preparedStatement.setString(3, product.getPrice());
+			preparedStatement.setString(1, product.getCompany());
+			preparedStatement.setString(2, product.getName());
+			preparedStatement.setString(3, product.getType());
+			preparedStatement.setString(4, product.getPrice());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			Product foundProduct = new Product();
 
 			while (resultSet.next()) {
 				foundProduct.setId(resultSet.getInt(1));
-				foundProduct.setName(resultSet.getString(2));
-				foundProduct.setType(resultSet.getString(3));
-				foundProduct.setPrice(resultSet.getString(4));
+				foundProduct.setCompany(resultSet.getString(2));
+				foundProduct.setName(resultSet.getString(3));
+				foundProduct.setType(resultSet.getString(4));
+				foundProduct.setPrice(resultSet.getString(5));
 			}
 			preparedStatement.close();
 			connection.close();
@@ -52,9 +54,10 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 	public boolean addProduct(Product product) throws DAOException {
 		try (PreparedStatement statement = getConnection().prepareStatement(ADD_NEW_PRODUCT_QUERY)) {
 			statement.setString(1, product.getName());
-			statement.setString(2, product.getType());
-			statement.setString(3, product.getPrice());
-			statement.setString(4, product.getDescription());
+			statement.setString(2, product.getName());
+			statement.setString(3, product.getType());
+			statement.setString(4, product.getPrice());
+			statement.setString(5, product.getDescription());
 
 			int result = statement.executeUpdate();
 			statement.close();
@@ -74,17 +77,19 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 			Product product;
 
 			int id;
+			String company;
 			String name;
 			String type;
 			String price;
 			String description;
 			while (resultSet.next()) {
 				id = resultSet.getInt(1);
-				name = resultSet.getString(2);
-				type = resultSet.getString(3);
-				price = resultSet.getString(4);
-				description = resultSet.getString(5);
-				product = new Product(id, name, type, price, description);
+				company = resultSet.getString(2);
+				name = resultSet.getString(3);
+				type = resultSet.getString(4);
+				price = resultSet.getString(5);
+				description = resultSet.getString(6);
+				product = new Product(id, company, name, type, price, description);
 				productArrayList.add(product);
 			}
 			preparedStatement.close();
@@ -106,10 +111,11 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 
 			while (resultSet.next()) {
 				product.setId(resultSet.getInt(1));
-				product.setName(resultSet.getString(2));
-				product.setType(resultSet.getString(3));
-				product.setPrice(resultSet.getString(4));
-				product.setDescription(resultSet.getString(5));
+				product.setCompany(resultSet.getString(2));
+				product.setName(resultSet.getString(3));
+				product.setType(resultSet.getString(4));
+				product.setPrice(resultSet.getString(5));
+				product.setDescription(resultSet.getString(6));
 			}
 			preparedStatement.close();
 			connection.close();
@@ -117,7 +123,7 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 			if (product.getName() != null) {
 				return product;
 			}
-			System.out.println("Did not find User with id = " + product.getId());
+			System.out.println("Did not find Product with id = " + product.getId());
 			return null;
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -127,11 +133,12 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 	@Override
 	public boolean updateProduct(Product product) throws DAOException {
 		try (PreparedStatement statement = getConnection().prepareStatement(UPDATE_PRODUCT_QUERY)) {
-			statement.setString(1, product.getName());
-			statement.setString(2, product.getType());
-			statement.setString(3, product.getPrice());
-			statement.setString(4, product.getDescription());
-			statement.setInt(5, product.getId());
+			statement.setString(1, product.getCompany());
+			statement.setString(2, product.getName());
+			statement.setString(3, product.getType());
+			statement.setString(4, product.getPrice());
+			statement.setString(5, product.getDescription());
+			statement.setInt(6, product.getId());
 
 			int result = statement.executeUpdate();
 			statement.close();
