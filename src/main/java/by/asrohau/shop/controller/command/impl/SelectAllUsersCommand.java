@@ -24,11 +24,26 @@ public class SelectAllUsersCommand implements Command {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
         String goToPage;
-        try {
-            ArrayList<User> userArrayList = userService.getAllUsers();
+        int currentPage;
+        int maxPage;
+        int row;
 
+        currentPage = Integer.parseInt(request.getParameter("page_num"));
+        row = (currentPage - 1)*15;
+
+        try {
+            //count amount of all products
+            maxPage = (int) Math.ceil(((double) userService.countUsers()) / 15);
+            System.out.println("maxPage is " + maxPage);
+
+            ArrayList<User> userArrayList = userService.getAllUsers(row);
             request.setAttribute("usersArray", userArrayList);
-            request.getSession().setAttribute("lastCMD", "FrontController?command=selectAllUsers");
+
+            request.setAttribute("maxPage", maxPage);
+            request.setAttribute("currentPage", currentPage);
+            request.getSession().setAttribute("lastCMD",
+                    "FrontController?command=selectAllUsers&page_num=" + currentPage);
+
             goToPage = "/jsp/admin/manageClients.jsp";
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);

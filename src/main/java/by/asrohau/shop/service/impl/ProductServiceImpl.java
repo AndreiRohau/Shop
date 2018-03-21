@@ -84,7 +84,8 @@ public class ProductServiceImpl implements ProductService {
 		// validation!!! stub
 		if (validation(product)) {
 			try {
-				return productDAO.updateProduct(product);
+				Product productCheck = productDAO.findProduct(product);
+				return (((productCheck == null) || (productCheck.getId() == product.getId())) && productDAO.updateProduct(product));
 			} catch (DAOException e) {
 				throw new ServiceException(e);
 			}

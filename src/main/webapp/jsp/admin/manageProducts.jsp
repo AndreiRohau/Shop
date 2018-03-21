@@ -144,7 +144,7 @@
 
                     <c:if test="${current_page != null}">
                         -->
-                         <a href="FrontController?command=selectAllProducts&page_num=${current_page}">${current_page}</a>
+                         <a href="FrontController?command=selectAllProducts&page_num=${current_page}">Page: ${current_page}</a>
                     </c:if>
                 </p>
             </div>

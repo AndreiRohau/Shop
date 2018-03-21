@@ -13,7 +13,8 @@ public interface UserService {
 	boolean registration(User user) throws ServiceException;
 	boolean changePassword(User user) throws ServiceException;
 	boolean deleteUser(User user) throws ServiceException;
-	ArrayList<User> getAllUsers() throws ServiceException;
+	ArrayList<User> getAllUsers(int row) throws ServiceException;
 	User findUserWithId(User user) throws ServiceException;
 	boolean updateUser(User user) throws ServiceException;
+	int countUsers() throws ServiceException;
 }

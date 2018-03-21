@@ -30,14 +30,14 @@ public class UpdateClientCommand implements Command {
                 request.getParameter("password"));
 
         try {
-            if(userService.updateUser(user)){
-                request.setAttribute("userToEdit", user);
-                lastCMD = "FrontController?command=editClient&userId=" + request.getParameter("id");
-                goToPage = "/jsp/admin/editClient.jsp";
-            } else {
-                lastCMD = "FrontController?command=goToPage&address=manageClients.jsp";
-                goToPage = "error.jsp";
+            if(!userService.updateUser(user)){
+                request.setAttribute("updateFailed", "Update failed");
+                user = userService.findUserWithId(user);
             }
+            request.setAttribute("userToEdit", user);
+            lastCMD = "FrontController?command=editClient&userId=" + request.getParameter("id");
+            goToPage = "/jsp/admin/editClient.jsp";
+
             request.getSession().setAttribute("lastCMD", lastCMD);
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);

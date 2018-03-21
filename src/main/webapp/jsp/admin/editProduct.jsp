@@ -100,6 +100,7 @@
                 <br/>
                 <hr/>
 
+                <c:out value="${requestScope.get('updateFailed')}"/>
                 <form action="FrontController" method="post">
                     <input type="hidden" name="command" value="updateProduct" />
                     <input type="hidden" name="id" value="${product_id}" />

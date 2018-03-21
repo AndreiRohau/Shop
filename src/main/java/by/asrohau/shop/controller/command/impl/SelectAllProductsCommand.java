@@ -31,7 +31,6 @@ public class SelectAllProductsCommand implements Command {
         currentPage = Integer.parseInt(request.getParameter("page_num"));
         row = (currentPage - 1)*15;
 
-
         try {
             //count amount of all products
             maxPage = (int) Math.ceil(((double) productService.countProducts()) / 15);

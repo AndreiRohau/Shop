@@ -66,6 +66,7 @@
                 <form action="FrontController" method="post">
                     <p>Get all users</p>
                     <input type="hidden" name="command" value="selectAllUsers"/>
+                    <input type="hidden" name="page_num" value="1"/>
                     <input type="submit" name="get_users" value="Get them!"/>
                 </form>
             </div>
@@ -97,6 +98,7 @@
                 <hr/>
                 <br/>
 
+                <c:out value="${requestScope.get('updateFailed')}"/>
                 <form action="FrontController" method="post">
                     <input type="hidden" name="command" value="updateClient" />
                     <input type="hidden" name="id" value="${user_id}" />

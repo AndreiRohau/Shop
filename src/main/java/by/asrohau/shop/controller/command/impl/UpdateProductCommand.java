@@ -34,14 +34,14 @@ public class UpdateProductCommand implements Command {
                 request.getParameter("description"));
 
         try {
-            if(productService.updateProduct(product)){
-                request.setAttribute("productToEdit", product);
-                lastCMD = "FrontController?command=editProduct&productId=" + request.getParameter("id");
-                goToPage = "/jsp/admin/editProduct.jsp";
-            } else {
-                lastCMD = "FrontController?command=goToPage&address=manageProducts.jsp";
-                goToPage = "error.jsp";
+            if(!productService.updateProduct(product)){
+                request.setAttribute("updateFailed", "Update failed");
+                product = productService.findProductWithId(product);
             }
+            request.setAttribute("productToEdit", product);
+            lastCMD = "FrontController?command=editProduct&productId=" + request.getParameter("id");
+            goToPage = "/jsp/admin/editProduct.jsp";
+
             request.getSession().setAttribute("lastCMD", lastCMD);
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);

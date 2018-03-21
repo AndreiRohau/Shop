@@ -98,9 +98,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ArrayList<User> getAllUsers() throws ServiceException {
+	public ArrayList<User> getAllUsers(int row) throws ServiceException {
 		try {
-			return userDAO.selectAllUsers();
+			return userDAO.selectAllUsers(row);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
@@ -122,11 +122,21 @@ public class UserServiceImpl implements UserService {
 		// validation!!! stub
 		if (validation(user)) {
 			try {
-				return userDAO.updateUser(user);
+				UserDTO userCheck = userDAO.findUserWithLogin(user);
+				return (((userCheck == null) || (userCheck.getId() == user.getId())) && userDAO.updateUser(user));
 			} catch (DAOException e) {
 				throw new ServiceException(e);
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public int countUsers() throws ServiceException {
+		try {
+			return userDAO.countProducts();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
 	}
 }

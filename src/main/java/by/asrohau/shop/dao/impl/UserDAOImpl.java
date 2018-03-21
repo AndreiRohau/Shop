@@ -18,9 +18,10 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 	private String SAVE_USER_QUERY = "INSERT INTO shop.users (login, password) VALUES (?,?)";
 	private String CHANGE_PASSWORD_QUERY = "UPDATE shop.users SET password = ? WHERE login = ? AND password = ?";
 	private String DELETE_USER_QUERY = "DELETE FROM shop.users WHERE login = ? AND password = ?";
-	private String SELECT_ALL_USERS_QUERY = "SELECT * FROM shop.users";
+	private String SELECT_ALL_USERS_QUERY = "SELECT * FROM shop.users LIMIT ?,?";
 	private String FIND_USER_WITH_ID_QUERY = "SELECT * FROM shop.users WHERE id = ?";
 	private String UPDATE_USER_QUERY = "UPDATE shop.users SET login = ?, password = ? WHERE id = ?";
+	private String COUNT_USERS_QUERY = "SELECT COUNT(*) FROM shop.users";
 
 	@Override
 	public UserDTO findUserWithLoginAndPassword(User user) throws DAOException {
@@ -122,9 +123,11 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 	}
 
 	@Override
-	public ArrayList<User> selectAllUsers() throws DAOException {
+	public ArrayList<User> selectAllUsers(int row) throws DAOException {
 		try (PreparedStatement preparedStatement = getConnection()
 				.prepareStatement(SELECT_ALL_USERS_QUERY)) {
+			preparedStatement.setInt(1, row);
+			preparedStatement.setInt(2, 15);
 			ArrayList<User> userArrayList = new ArrayList<User>();
 			ResultSet resultSet = preparedStatement.executeQuery();
 			User user;
@@ -191,4 +194,18 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 		}
 	}
 
+	@Override
+	public int countProducts() throws DAOException {
+		try (PreparedStatement statement = getConnection().prepareStatement(COUNT_USERS_QUERY)) {
+			ResultSet resultSet = statement.executeQuery();
+
+			resultSet.next();
+			int i = resultSet.getInt(1);
+			statement.close();
+			connection.close();
+			return i;
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
 }

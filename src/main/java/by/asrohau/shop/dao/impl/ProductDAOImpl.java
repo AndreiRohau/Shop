@@ -18,7 +18,7 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 	private String FIND_PRODUCT_WITH_ID_QUERY = "SELECT * FROM shop.products WHERE id = ?";
 	private String UPDATE_PRODUCT_QUERY = "UPDATE shop.products SET company = ?, name = ?, type = ?, price = ?, description = ? WHERE id = ?";
 	private String DELETE_PRODUCT_QUERY = "DELETE FROM shop.products WHERE id = ?";
-	private String COUNT_PRODUCT_QUERY = "SELECT COUNT(*) FROM shop.products";
+	private String COUNT_PRODUCTS_QUERY = "SELECT COUNT(*) FROM shop.products";
 
 	@Override
 	public Product findProduct(Product product) throws DAOException {
@@ -169,7 +169,7 @@ public class ProductDAOImpl extends AbstractDAO<Product> implements ProductDAO {
 
 	@Override
 	public int countProducts() throws DAOException {
-		try (PreparedStatement statement = getConnection().prepareStatement(COUNT_PRODUCT_QUERY)) {
+		try (PreparedStatement statement = getConnection().prepareStatement(COUNT_PRODUCTS_QUERY)) {
 			ResultSet resultSet = statement.executeQuery();
 
 			resultSet.next();
