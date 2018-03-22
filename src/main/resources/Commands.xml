@@ -51,6 +51,10 @@
         <classname>SelectAllProductsCommand</classname>
     </command>
     <command>
+        <webname>selectAllReserved</webname>
+        <classname>SelectAllReservedCommand</classname>
+    </command>
+    <command>
         <webname>editClient</webname>
         <classname>EditClientCommand</classname>
     </command>
@@ -65,5 +69,13 @@
     <command>
         <webname>updateProduct</webname>
         <classname>UpdateProductCommand</classname>
+    </command>
+    <command>
+        <webname>productInfo</webname>
+        <classname>ProductInfoCommand</classname>
+    </command>
+    <command>
+        <webname>addToBasket</webname>
+        <classname>AddToBasketCommand</classname>
     </command>
 </commands>

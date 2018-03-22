@@ -18,14 +18,9 @@
         <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
         <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
         <fmt:message bundle="${loc}" key="local.locbutton.name.ch" var="ch_button" />
-        <fmt:message bundle="${loc}" key="local.changePasswordText" var="changePasswordText" />
-        <fmt:message bundle="${loc}" key="local.deleteAccountText" var="deleteAccountText" />
-        <fmt:message bundle="${loc}" key="local.login" var="login" />
-        <fmt:message bundle="${loc}" key="local.password" var="password" />
-        <fmt:message bundle="${loc}" key="local.newPassword" var="newPassword" />
-        <fmt:message bundle="${loc}" key="local.changePasswordButton" var="changePasswordButton" />
-        <fmt:message bundle="${loc}" key="local.deleteAccountButton" var="deleteAccountButton" />
 
+        <c:set var="current_page" value="${requestScope.get('currentPage')}"/>
+        <c:set var="max_page" value="${requestScope.get('maxPage')}"/>
     </head>
     <body>
         <div class="header">
@@ -67,17 +62,65 @@
 
         <div class="middle">
             <div id="menu">
-                <p>Basket</p>
+                <p><b>Basket</b></p>
+                <hr/>
+                <form action="FrontController" method="post">
+                    <p><b>Get all RESERVED products (or Reload)</b>
+                        <input type="hidden" name="command" value="selectAllReserved"/>
+                        <input type="hidden" name="page_num" value="1"/>
+                        <input type="submit" name="get_reserved" value="Get them!"/>
+                    </p>
+                </form>
             </div>
 
             <div id="content">
-                <H1>SOME IMPORTANT CONTANT OF THIS PAGE</H1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                <c:if test="${current_page != null}">
+                    <H1>Everything you have choosen for purchasing.</H1>
+                    <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
+                        <tr>
+                            <td>INFO</td>
+                            <td>COMPANY</td>
+                            <td>NAME</td>
+                            <td>TYPE</td>
+                            <td>PRICE</td>
+                            <td>DELETE</td>
+                        </tr>
+                        <c:forEach items="${requestScope.productArray}" var="productToEdit">
+                            <tr>
+                                <td>
+                                    <form action="FrontController" method="post">
+                                        <input type="hidden" name="command" value="productInfo" />
+                                        <input type="hidden" name="productId" value="${productToEdit.id}" />
+                                        <input type="submit" name="info" value="INFO" /><br/>
+                                    </form>
+                                </td>
+                                <td>${productToEdit.company}</td>
+                                <td>${productToEdit.name}</td>
+                                <td>${productToEdit.type}</td>
+                                <td>${productToEdit.price}</td>
+                                <td>
+                                    <form action="FrontController" method="post">
+                                        <input type="hidden" name="command" value="removeFromBasket" />
+                                        <input type="hidden" name="productId" value="${productToEdit.id}" />
+                                        <input type="submit" name="remove" value="REMOVE" /><br/>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+
+                    <div width="100%" style="background-color: deepskyblue; font-size: 1em">    
+                        <c:forEach begin="1" end="${max_page}" var="i">
+                                        <c:if test="${i != current_page}">
+                                    		<a href="FrontController?command=selectAllReserved&page_num=${i}">${i}</a>
+                                        </c:if>
+                                        <c:if test="${i == current_page}">
+                                            <c:out value="${i}"/>
+                                    </c:if>
+                                </c:forEach>
+                    </div>
+                </c:if>
             </div>
 
         </div>

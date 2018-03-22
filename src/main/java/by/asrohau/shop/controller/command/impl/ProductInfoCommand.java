@@ -1,10 +1,8 @@
 package by.asrohau.shop.controller.command.impl;
 
 import by.asrohau.shop.bean.Product;
-import by.asrohau.shop.bean.User;
 import by.asrohau.shop.controller.command.Command;
 import by.asrohau.shop.controller.exception.ControllerException;
-import by.asrohau.shop.service.AdminService;
 import by.asrohau.shop.service.ProductService;
 import by.asrohau.shop.service.ServiceFactory;
 import by.asrohau.shop.service.exception.ServiceException;
@@ -14,43 +12,34 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class SelectAllProductsCommand implements Command {
+public class ProductInfoCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
-        System.out.println("We got to SelectAllProductsCommand");
+        System.out.println("We got to ProductInfoCommand");
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ProductService productService = serviceFactory.getProductService();
+        String lastCMD;
         String goToPage;
-        int currentPage;
-        int maxPage;
-        int row;
-
-        currentPage = Integer.parseInt(request.getParameter("page_num"));
-        row = (currentPage - 1)*15;
-
+        Product product  = new Product();
+        product.setId(Integer.parseInt(request.getParameter("productId")));
         try {
-            //count amount of all products
-            maxPage = (int) Math.ceil(((double) productService.countProducts()) / 15);
+            product = productService.findProductWithId(product);
+            if(product != null){
+                request.setAttribute("productToEdit", product);
+                goToPage = "/jsp/user/productInfo.jsp";
+                lastCMD = "FrontController?command=productInfo&productId=" + request.getParameter("productId");
 
-            ArrayList<Product> productArrayList = productService.getAllProducts(row);
-            request.setAttribute("productArray", productArrayList);
-
-            request.setAttribute("maxPage", maxPage);
-            request.setAttribute("currentPage", currentPage);
-            request.getSession().setAttribute("lastCMD",
-                    "FrontController?command=selectAllProducts&page_num=" + currentPage);
-
-            if(!request.getSession().getAttribute("userName").equals("Admin")){
-                goToPage = "/jsp/user/main.jsp";
             } else {
-                goToPage = "/jsp/admin/manageProducts.jsp";
+                goToPage = "error.jsp";
+                lastCMD = "FrontController?command=goToPage&address=main.jsp";
             }
+
             //what if not null??
             request.setAttribute("msg", request.getParameter("msg"));
             // what if not null ??
+            request.getSession().setAttribute("lastCMD", lastCMD);
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
 

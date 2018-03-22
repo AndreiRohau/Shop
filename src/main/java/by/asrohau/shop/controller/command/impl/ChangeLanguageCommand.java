@@ -10,7 +10,7 @@ import by.asrohau.shop.controller.exception.ControllerException;
 
 import java.io.IOException;
 
-public class ChangeLanguageCommand  implements Command {
+public class ChangeLanguageCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {

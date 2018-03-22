@@ -1,6 +1,7 @@
 package by.asrohau.shop.dao;
 
 import by.asrohau.shop.dao.impl.AdminDAOImpl;
+import by.asrohau.shop.dao.impl.OrderDAOImpl;
 import by.asrohau.shop.dao.impl.ProductDAOImpl;
 import by.asrohau.shop.dao.impl.UserDAOImpl;
 
@@ -11,7 +12,8 @@ public class DAOFactory {
 	private final UserDAO userDAO = new UserDAOImpl();
 	private final AdminDAO adminDAO = new AdminDAOImpl();
 	private final ProductDAO productDAO = new ProductDAOImpl();
-	
+	private final OrderDAO orderDAO = new OrderDAOImpl();
+
 	private DAOFactory() {}
 	
 	public UserDAO getUserDAO() {
@@ -24,6 +26,10 @@ public class DAOFactory {
 
 	public AdminDAO getAdminDAO() {
 		return adminDAO;
+	}
+
+	public OrderDAO getOrderDAO() {
+		return orderDAO;
 	}
 
 	public static DAOFactory getInstance(){

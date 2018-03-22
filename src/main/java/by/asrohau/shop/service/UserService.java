@@ -17,4 +17,5 @@ public interface UserService {
 	User findUserWithId(User user) throws ServiceException;
 	boolean updateUser(User user) throws ServiceException;
 	int countUsers() throws ServiceException;
+	UserDTO findIdWithLogin(User user) throws ServiceException;
 }

@@ -139,4 +139,18 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		}
 	}
+
+	@Override
+	public UserDTO findIdWithLogin(User user) throws ServiceException {
+
+		if (!user.getLogin().trim().equals("")){
+			try {
+				return userDAO.findUserWithLogin(user);
+			} catch (DAOException e) {
+				throw new ServiceException(e);
+			}
+		}
+		return null;
+
+	}
 }

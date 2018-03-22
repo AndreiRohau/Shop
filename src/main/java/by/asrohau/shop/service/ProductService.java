@@ -14,9 +14,7 @@ public interface ProductService {
 	boolean updateProduct(Product product) throws ServiceException;
 
 	Product findProduct(Product product) throws ServiceException;
-	Product findProductWithName(Product product) throws ServiceException;
 	boolean deleteProduct(Product product) throws ServiceException;
-	boolean reserveProduct(Product product) throws ServiceException;
 	int countProducts() throws  ServiceException;
 	
 }

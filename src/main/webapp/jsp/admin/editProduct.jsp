@@ -9,7 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
-        <title>Edit Client</title>
+        <title>Edit Product</title>
 
         <fmt:setLocale value="${sessionScope.local}" />
         <fmt:setBundle basename="localization.local" var="loc" />
@@ -69,6 +69,14 @@
                     <input type="hidden" name="page_num" value="1"/>
                     <input type="submit" name="get_products" value="Get them!"/>
                 </form>
+                <br/>
+                <hr/>
+                <br/>
+                <p>
+                    <a href="FrontController?command=goToPage&address=basket.jsp">
+                        ${goToBasket_button}
+                    </a>
+                </p>
             </div>
 
             <div id="content">

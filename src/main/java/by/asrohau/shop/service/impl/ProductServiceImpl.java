@@ -38,11 +38,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product findProductWithName(Product product) throws ServiceException {
-		return null;
-	}
-
-	@Override
 	public boolean addNewProduct(Product newProduct) throws ServiceException {
 		// validation!!! stub
 		if (validation(newProduct)) {
@@ -115,8 +110,4 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 
-	@Override
-	public boolean reserveProduct(Product product) throws ServiceException {
-		return false;
-	}
 }
