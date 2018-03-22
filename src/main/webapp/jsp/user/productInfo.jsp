@@ -18,7 +18,8 @@
     <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
     <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
     <fmt:message bundle="${loc}" key="local.locbutton.name.ch" var="ch_button" />
-    <fmt:message bundle="${loc}" key="local.deleteAccountButton" var="deleteAccountButton" />
+    <fmt:message bundle="${loc}" key="local.goToBasket" var="goToBasket_button" />
+
     <c:set var="product_id" value="${requestScope.get('productToEdit').id}"/>
     <c:set var="product_name" value="${requestScope.get('productToEdit').name}"/>
     <c:set var="product_company" value="${requestScope.get('productToEdit').company}"/>
@@ -67,7 +68,17 @@
             <p>Get all products</p>
             <input type="hidden" name="command" value="selectAllProducts"/>
             <input type="hidden" name="page_num" value="1"/>
-            <input type="submit" name="get_products" value="Get them!"/>
+            <input type="submit" name="get_products" value="Get them all!"/>
+        </form>
+        <br/>
+        <hr/>
+        <br/>
+        <form action="FrontController" method="post">
+            <p><b>Take a look at your basket.</b>
+                <input type="hidden" name="command" value="selectAllReserved"/>
+                <input type="hidden" name="page_num" value="1"/>
+                <input type="submit" name="get_reserved" value="Your basket!"/>
+            </p>
         </form>
     </div>
 

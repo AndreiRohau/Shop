@@ -72,11 +72,6 @@
                 <br/>
                 <hr/>
                 <br/>
-                <p>
-                    <a href="FrontController?command=goToPage&address=basket.jsp">
-                        ${goToBasket_button}
-                    </a>
-                </p>
             </div>
 
             <div id="content">
