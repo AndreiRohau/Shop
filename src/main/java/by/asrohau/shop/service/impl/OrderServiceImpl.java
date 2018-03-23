@@ -1,6 +1,7 @@
 package by.asrohau.shop.service.impl;
 
 import by.asrohau.shop.bean.Order;
+import by.asrohau.shop.bean.Reserve;
 import by.asrohau.shop.bean.Product;
 import by.asrohau.shop.dao.DAOFactory;
 import by.asrohau.shop.dao.exception.DAOException;
@@ -9,6 +10,7 @@ import by.asrohau.shop.service.OrderService;
 import by.asrohau.shop.service.exception.ServiceException;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class OrderServiceImpl implements OrderService{
 
@@ -18,14 +20,14 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public boolean validation(Order order) {
-        return order.getUser_id() != 0 && order.getProduct_id() != 0;
+    public boolean validation(Reserve reserve) {
+        return reserve.getUser_id() != 0 && reserve.getProduct_id() != 0;
     }
 
     @Override
-    public boolean reserveOrder(Order order) throws ServiceException {
+    public boolean saveReserve(Reserve reserve) throws ServiceException {
         try {
-            return validation(order) && orderDAO.saveNewReservation(order);
+            return validation(reserve) && orderDAO.saveNewReservation(reserve);
         } catch(DAOException e){
             throw new ServiceException(e);
         }
@@ -57,4 +59,30 @@ public class OrderServiceImpl implements OrderService{
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public LinkedList<Integer> getAllReservedIds(int user_id) throws ServiceException {
+        try {
+            return orderDAO.selectAllReservedIds(user_id);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteAllReserved(int user_id) throws ServiceException {
+        try {
+            return orderDAO.deleteAllReserved(user_id);
+        } catch(DAOException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean saveNewOrder(Order order) throws ServiceException {
+        try {
+            return orderDAO.insertNewOrder(order);
+        } catch(DAOException e){
+            throw new ServiceException(e);
+        }    }
 }

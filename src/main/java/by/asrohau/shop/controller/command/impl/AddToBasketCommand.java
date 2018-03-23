@@ -1,6 +1,6 @@
 package by.asrohau.shop.controller.command.impl;
 
-import by.asrohau.shop.bean.Order;
+import by.asrohau.shop.bean.Reserve;
 import by.asrohau.shop.bean.User;
 import by.asrohau.shop.controller.command.Command;
 import by.asrohau.shop.controller.exception.ControllerException;
@@ -23,15 +23,15 @@ public class AddToBasketCommand implements Command {
         OrderService orderService = serviceFactory.getOrderService();
         UserService userService = serviceFactory.getUserService();
 
-        Order order;
+        Reserve reserve;
         User user = new User();
 
         try {
             user.setLogin((String) request.getSession().getAttribute("userName"));
-            order = new Order(userService.findIdWithLogin(user).getId(),
+            reserve = new Reserve(userService.findIdWithLogin(user).getId(),
                     Integer.parseInt(request.getParameter("productId")));
             String message;
-            if (orderService.reserveOrder(order)) {
+            if (orderService.saveReserve(reserve)) {
                 message = "You have added new product successfully";
             } else {
                 message = "Can NOT add this product, try again!";

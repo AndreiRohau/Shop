@@ -75,6 +75,10 @@
 						${goToBasket_button}
 					</a>
 				</p>
+				<br/>
+				<hr/>
+
+				<p><b><c:out value="${requestScope.get('msg')}"/></b></p>
 
 			</div>
 

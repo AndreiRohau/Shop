@@ -82,4 +82,8 @@
         <webname>addToBasket</webname>
         <classname>AddToBasketCommand</classname>
     </command>
+    <command>
+        <webname>createOrder</webname>
+        <classname>CreateOrderCommand</classname>
+    </command>
 </commands>

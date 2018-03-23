@@ -80,11 +80,14 @@
                 <input type="submit" name="get_reserved" value="Your basket!"/>
             </p>
         </form>
+        <br/>
+        <hr/>
+
+        <p><b><c:out value="${requestScope.get('msg')}"/></b></p>
     </div>
 
     <div id="content">
 
-        <c:out value="${requestScope.get('msg')}"/>
         <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
             <tr>
                 <td>COMPANY</td>

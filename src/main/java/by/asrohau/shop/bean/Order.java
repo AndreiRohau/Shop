@@ -2,30 +2,20 @@ package by.asrohau.shop.bean;
 
 public class Order {
 
-    private int id;
     private int user_id;
-    private int product_id;
+    private String productIDs;
+    private String user_address;
+    private String user_phone;
+    private boolean status;
 
     public Order() {
     }
 
-    public Order(int user_id, int product_id) {
+    public Order(int user_id, String productIDs, String user_address, String user_phone) {
         this.user_id = user_id;
-        this.product_id = product_id;
-    }
-
-    public Order(int id, int user_id, int product_id) {
-        this.id = id;
-        this.user_id = user_id;
-        this.product_id = product_id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.productIDs = productIDs;
+        this.user_address = user_address;
+        this.user_phone = user_phone;
     }
 
     public int getUser_id() {
@@ -36,12 +26,36 @@ public class Order {
         this.user_id = user_id;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public String getProductIDs() {
+        return productIDs;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProductIDs(String productIDs) {
+        this.productIDs = productIDs;
+    }
+
+    public String getUser_address() {
+        return user_address;
+    }
+
+    public void setUser_address(String user_address) {
+        this.user_address = user_address;
+    }
+
+    public String getUser_phone() {
+        return user_phone;
+    }
+
+    public void setUser_phone(String user_phone) {
+        this.user_phone = user_phone;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override
@@ -51,25 +65,31 @@ public class Order {
 
         Order order = (Order) o;
 
-        if (id != order.id) return false;
         if (user_id != order.user_id) return false;
-        return product_id == order.product_id;
+        if (status != order.status) return false;
+        if (productIDs != null ? !productIDs.equals(order.productIDs) : order.productIDs != null) return false;
+        if (user_address != null ? !user_address.equals(order.user_address) : order.user_address != null) return false;
+        return user_phone != null ? user_phone.equals(order.user_phone) : order.user_phone == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + user_id;
-        result = 31 * result + product_id;
+        int result = user_id;
+        result = 31 * result + (productIDs != null ? productIDs.hashCode() : 0);
+        result = 31 * result + (user_address != null ? user_address.hashCode() : 0);
+        result = 31 * result + (user_phone != null ? user_phone.hashCode() : 0);
+        result = 31 * result + (status ? 1 : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "id=" + id +
-                ", user_id=" + user_id +
-                ", product_id=" + product_id +
+                "user_id=" + user_id +
+                ", productIDs='" + productIDs + '\'' +
+                ", user_address='" + user_address + '\'' +
+                ", user_phone='" + user_phone + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

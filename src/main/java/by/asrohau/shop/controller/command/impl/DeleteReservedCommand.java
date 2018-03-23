@@ -1,12 +1,10 @@
 package by.asrohau.shop.controller.command.impl;
 
-import by.asrohau.shop.bean.Order;
 import by.asrohau.shop.bean.User;
 import by.asrohau.shop.controller.command.Command;
 import by.asrohau.shop.controller.exception.ControllerException;
 import by.asrohau.shop.service.OrderService;
 import by.asrohau.shop.service.ServiceFactory;
-import by.asrohau.shop.service.UserService;
 import by.asrohau.shop.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;

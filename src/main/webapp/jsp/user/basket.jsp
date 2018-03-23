@@ -71,11 +71,28 @@
                         <input type="submit" name="get_reserved" value="Get them!"/>
                     </p>
                 </form>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <hr/>
+                <br/>
+                <form action="FrontController" method="post">
+                    <p><b>Buy all products in basket.</b></p>
+                    <input type="hidden" name="command" value="createOrder"/><br/>
+                    <p>Fill with the address</p>
+                    <input type="text" name="user_address" value="" required/><br/><br/>
+                    <p>Fill with your contact phone number</p>
+                    <input type="text" name="user_phone" value="" required/><br/><br/>
+                    <input type="submit" name="buy" value="Buy now!"/>
+                </form>
             </div>
 
             <div id="content">
+                <br/>
+                <hr/>
 
-                <c:out value="${requestScope.get('msg')}"/>
+                <p><b><c:out value="${requestScope.get('msg')}"/></b></p>
                 <c:if test="${current_page != null}">
                     <H1>Everything you have choosen for purchasing.</H1>
                     <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
@@ -113,13 +130,13 @@
 
                     <div width="100%" style="background-color: deepskyblue; font-size: 1em">    
                         <c:forEach begin="1" end="${max_page}" var="i">
-                                        <c:if test="${i != current_page}">
-                                    		<a href="FrontController?command=selectAllReserved&page_num=${i}">${i}</a>
-                                        </c:if>
-                                        <c:if test="${i == current_page}">
-                                            <c:out value="${i}"/>
-                                    </c:if>
-                                </c:forEach>
+                            <c:if test="${i != current_page}">
+                        		<a href="FrontController?command=selectAllReserved&page_num=${i}">${i}</a>
+                            </c:if>
+                            <c:if test="${i == current_page}">
+                                <c:out value="${i}"/>
+                            </c:if>
+                        </c:forEach>
                     </div>
                 </c:if>
             </div>
