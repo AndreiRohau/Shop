@@ -7,8 +7,14 @@ public class Product {
 	private String type;
 	private String price;
 	private String description;
+	private int reserve_id;
 
 	public Product() {}
+
+	public Product(int id, int reserve_id) {
+		this.id = id;
+		this.reserve_id = reserve_id;
+	}
 
 	public Product(String company, String name, String type, String price) {
 		this.company = company;
@@ -82,6 +88,14 @@ public class Product {
 		this.description = description;
 	}
 
+	public int getReserve_id() {
+		return reserve_id;
+	}
+
+	public void setReserve_id(int reserve_id) {
+		this.reserve_id = reserve_id;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -90,6 +104,7 @@ public class Product {
 		Product product = (Product) o;
 
 		if (id != product.id) return false;
+		if (reserve_id != product.reserve_id) return false;
 		if (company != null ? !company.equals(product.company) : product.company != null) return false;
 		if (name != null ? !name.equals(product.name) : product.name != null) return false;
 		if (type != null ? !type.equals(product.type) : product.type != null) return false;
@@ -105,6 +120,7 @@ public class Product {
 		result = 31 * result + (type != null ? type.hashCode() : 0);
 		result = 31 * result + (price != null ? price.hashCode() : 0);
 		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + reserve_id;
 		return result;
 	}
 
@@ -117,6 +133,7 @@ public class Product {
 				", type='" + type + '\'' +
 				", price='" + price + '\'' +
 				", description='" + description + '\'' +
+				", reserve_id=" + reserve_id +
 				'}';
 	}
 }

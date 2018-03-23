@@ -1,13 +1,14 @@
 package by.asrohau.shop.service.impl;
 
 import by.asrohau.shop.bean.Order;
+import by.asrohau.shop.bean.Product;
 import by.asrohau.shop.dao.DAOFactory;
 import by.asrohau.shop.dao.exception.DAOException;
 import by.asrohau.shop.dao.OrderDAO;
 import by.asrohau.shop.service.OrderService;
 import by.asrohau.shop.service.exception.ServiceException;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class OrderServiceImpl implements OrderService{
 
@@ -22,16 +23,16 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public boolean reserveOrder(Order order) throws SecurityException {
+    public boolean reserveOrder(Order order) throws ServiceException {
         try {
             return validation(order) && orderDAO.saveNewReservation(order);
         } catch(DAOException e){
-            throw new SecurityException(e);
+            throw new ServiceException(e);
         }
     }
 
     @Override
-    public LinkedList<Integer> getAllReserved(int user_id, int row) throws ServiceException {
+    public ArrayList<Product> getAllReserved(int user_id, int row) throws ServiceException {
         try {
             return orderDAO.selectAllReserved(user_id, row);
         } catch (DAOException e) {
@@ -44,6 +45,15 @@ public class OrderServiceImpl implements OrderService{
         try {
             return orderDAO.countReserved(user_id);
         } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteReserved(int reserveId) throws ServiceException {
+        try {
+            return orderDAO.deleteReserved(reserveId);
+        } catch(DAOException e){
             throw new ServiceException(e);
         }
     }

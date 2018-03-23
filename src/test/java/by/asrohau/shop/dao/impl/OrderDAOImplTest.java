@@ -23,10 +23,10 @@ public class OrderDAOImplTest {
         OrderService orderService = sf.getOrderService();
 
         try {
-            LinkedList<Integer> ids = orderService.getAllReserved(user_id, row);
+            ArrayList<Product> ids = orderService.getAllReserved(user_id, row);
 
-            for(int id : ids) {
-                System.out.println(id);
+            for(Product product : ids) {
+                System.out.println(product);
             }
         } catch (ServiceException e) {
             e.printStackTrace();
@@ -37,36 +37,28 @@ public class OrderDAOImplTest {
 
 
         int user_id = 46; // login 1, psw 1
-        int row = 14;
+        int row = 12;
         ServiceFactory sf = ServiceFactory.getInstance();
         OrderService orderService = sf.getOrderService();
         ProductService productService = sf.getProductService();
         try {
-            LinkedList<Integer> ids = orderService.getAllReserved(user_id, row);
+            ArrayList<Product> reservedWithIdsList = orderService.getAllReserved(user_id, row);
 
-            for(int id : ids) {
-                System.out.println(id);
+            for(Product p : reservedWithIdsList) {
+                System.out.println(p);
             }
             System.out.println();
-            ArrayList<Product> reservedList = new ArrayList<>();
-            Product product = new Product();
-            for(int id : ids){
 
-                product.setId(id);
-                reservedList.add(productService.findProductWithId(product));
+            ArrayList<Product> productArray = new ArrayList<>();
+            Product product;
+            for(Product prod : reservedWithIdsList){
+                product = productService.findProductWithId(prod);
+                product.setReserve_id(prod.getReserve_id());
+                productArray.add(product);
                 product = new Product();
             }
-
-//            while(ids.size() != 0){
-//                Product product = new Product();
-//                product.setId(ids.pollFirst());
-//                product = productService.findProductWithId(product);
-//                System.out.println(product);
-//
-//                reservedList.add(product);
-//            }
             System.out.println();
-            for (Product p : reservedList){
+            for (Product p : productArray){
                 System.out.println(p);
             }
 

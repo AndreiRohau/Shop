@@ -46,13 +46,14 @@ public class SelectAllReservedCommand implements Command {
             //count amount of all products
             maxPage = (int) Math.ceil(((double) orderService.countReserved(user_id)) / 15);
 
-            LinkedList<Integer> reservedIdList = orderService.getAllReserved(user_id, row);
+            ArrayList<Product> reservedWithIdsList = orderService.getAllReserved(user_id, row); //product_id & reserve_id
 
             ArrayList<Product> productArray = new ArrayList<>();
 
-            for(int id : reservedIdList){
-                product.setId(id);
-                productArray.add(productService.findProductWithId(product));
+            for(Product prod : reservedWithIdsList){
+                product = productService.findProductWithId(prod);
+                product.setReserve_id(prod.getReserve_id());
+                productArray.add(product);
                 product = new Product();
             }
 
@@ -66,7 +67,7 @@ public class SelectAllReservedCommand implements Command {
             goToPage = "/jsp/user/basket.jsp";
 
             //what if not null??
-            //request.setAttribute("msg", request.getParameter("msg"));
+            request.setAttribute("msg", request.getParameter("msg"));
             // what if not null ??
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);

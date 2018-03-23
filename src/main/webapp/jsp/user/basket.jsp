@@ -75,6 +75,7 @@
 
             <div id="content">
 
+                <c:out value="${requestScope.get('msg')}"/>
                 <c:if test="${current_page != null}">
                     <H1>Everything you have choosen for purchasing.</H1>
                     <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
@@ -101,8 +102,8 @@
                                 <td>${productToEdit.price}</td>
                                 <td>
                                     <form action="FrontController" method="post">
-                                        <input type="hidden" name="command" value="removeFromBasket" />
-                                        <input type="hidden" name="productId" value="${productToEdit.id}" />
+                                        <input type="hidden" name="command" value="deleteReserved" />
+                                        <input type="hidden" name="reserveId" value="${productToEdit.reserve_id}" />
                                         <input type="submit" name="remove" value="REMOVE" /><br/>
                                     </form>
                                 </td>

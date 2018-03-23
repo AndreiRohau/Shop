@@ -23,6 +23,10 @@
         <webname>delete_product</webname>
         <classname>DeleteProductCommand</classname>
     </command>
+    <command>
+        <webname>deleteReserved</webname>
+        <classname>DeleteReservedCommand</classname>
+    </command>
 
     <command>
         <webname>change_language</webname>
