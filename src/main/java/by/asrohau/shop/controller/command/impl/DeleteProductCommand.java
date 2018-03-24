@@ -26,18 +26,16 @@ public class DeleteProductCommand implements Command {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ProductService productService = serviceFactory.getProductService();
         product.setId(Integer.parseInt(request.getParameter("id")));
-        boolean isChanged = false;
         String lastCMD;
         try {
             String goToPage;
             if (productService.deleteProduct(product)) {
                 goToPage = "/jsp/admin/manageProducts.jsp";
-                lastCMD = "FrontController?command=goToPage&address=manageProducts.jsp";
             } else {
-                goToPage = "/jsp/admin/manageProducts.jsp";
+                goToPage = "error.jsp";
                 request.setAttribute("errorMessage", "cannot delete product");
-                lastCMD = "FrontController?command=goToPage&address=manageProducts.jsp";
             }
+            lastCMD = "FrontController?command=goToPage&address=manageProducts.jsp";
             request.getSession().setAttribute("lastCMD", lastCMD);
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);

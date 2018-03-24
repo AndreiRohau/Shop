@@ -66,7 +66,7 @@ public class CreateOrderCommand implements Command {
         user_phone = request.getParameter("user_phone");
 
         //creating order obj
-        Order order = new Order(user_id, productIDs, user_address, user_phone);
+        Order order = new Order(user_id, productIDs, user_address, user_phone, "new");
         //save into orders TABLE
         boolean orderIsSaved = orderService.saveNewOrder(order);
 
@@ -74,7 +74,7 @@ public class CreateOrderCommand implements Command {
             //delete reserved
             boolean reservedIsDeleted = orderService.deleteAllReserved(user_id);
             goToPage = "/jsp/user/main.jsp";
-            message = "Reserve created - wait for the delivery.";
+            message = "Order created - wait for the delivery.";
         } else {
             goToPage = "error.jsp";
             request.setAttribute("errorMessage", "Error while creating the order.");

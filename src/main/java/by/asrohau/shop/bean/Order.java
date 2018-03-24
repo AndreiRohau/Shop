@@ -6,7 +6,7 @@ public class Order {
     private String productIDs;
     private String user_address;
     private String user_phone;
-    private boolean status;
+    private String status;
 
     public Order() {
     }
@@ -16,6 +16,14 @@ public class Order {
         this.productIDs = productIDs;
         this.user_address = user_address;
         this.user_phone = user_phone;
+    }
+
+    public Order(int user_id, String productIDs, String user_address, String user_phone, String status) {
+        this.user_id = user_id;
+        this.productIDs = productIDs;
+        this.user_address = user_address;
+        this.user_phone = user_phone;
+        this.status = status;
     }
 
     public int getUser_id() {
@@ -50,11 +58,11 @@ public class Order {
         this.user_phone = user_phone;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -66,10 +74,10 @@ public class Order {
         Order order = (Order) o;
 
         if (user_id != order.user_id) return false;
-        if (status != order.status) return false;
         if (productIDs != null ? !productIDs.equals(order.productIDs) : order.productIDs != null) return false;
         if (user_address != null ? !user_address.equals(order.user_address) : order.user_address != null) return false;
-        return user_phone != null ? user_phone.equals(order.user_phone) : order.user_phone == null;
+        if (user_phone != null ? !user_phone.equals(order.user_phone) : order.user_phone != null) return false;
+        return status != null ? status.equals(order.status) : order.status == null;
     }
 
     @Override
@@ -78,7 +86,7 @@ public class Order {
         result = 31 * result + (productIDs != null ? productIDs.hashCode() : 0);
         result = 31 * result + (user_address != null ? user_address.hashCode() : 0);
         result = 31 * result + (user_phone != null ? user_phone.hashCode() : 0);
-        result = 31 * result + (status ? 1 : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 
@@ -89,7 +97,7 @@ public class Order {
                 ", productIDs='" + productIDs + '\'' +
                 ", user_address='" + user_address + '\'' +
                 ", user_phone='" + user_phone + '\'' +
-                ", status=" + status +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

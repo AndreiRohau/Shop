@@ -92,7 +92,7 @@ public class ProductServiceImpl implements ProductService {
 	public boolean deleteProduct(Product product) throws ServiceException {
 		// validation!!! stub
 		try {
-			if (productDAO.findProductWithId(product).getName() != null) {
+			if (productDAO.findProductWithId(product) != null) {
 				return productDAO.deleteProduct(product);
 			}
 		} catch (DAOException e) {
