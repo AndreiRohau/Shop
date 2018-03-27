@@ -20,4 +20,16 @@ public interface OrderService {
     boolean deleteAllReserved(int user_id) throws ServiceException;
 
     boolean saveNewOrder(Order order) throws ServiceException;
+
+    int countNewOrders() throws ServiceException;
+
+    ArrayList<Order> getAllNewOrders(int row) throws ServiceException;
+
+    boolean deleteNewOrder(int orderId) throws ServiceException;
+
+    boolean orderSetActive(int orderId) throws ServiceException;
+
+    Order findOrderWithID(int orderId) throws ServiceException;
+
+    boolean deleteProductFromOrder(Order order) throws ServiceException;
 }

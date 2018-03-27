@@ -109,23 +109,23 @@
 							<td>PRICE</td>
 							<td>BUY</td>
 						</tr>
-						<c:forEach items="${requestScope.productArray}" var="productToEdit">
+						<c:forEach items="${requestScope.productArray}" var="product">
 							<tr>
 								<td>
 									<form action="FrontController" method="post">
 										<input type="hidden" name="command" value="productInfo" />
-										<input type="hidden" name="productId" value="${productToEdit.id}" />
+										<input type="hidden" name="productId" value="${product.id}" />
 										<input type="submit" name="info" value="INFO" /><br/>
 									</form>
 								</td>
-								<td>${productToEdit.company}</td>
-								<td>${productToEdit.name}</td>
-								<td>${productToEdit.type}</td>
-								<td>${productToEdit.price}</td>
+								<td>${product.company}</td>
+								<td>${product.name}</td>
+								<td>${product.type}</td>
+								<td>${product.price}</td>
 								<td>
 									<form action="FrontController" method="post">
 										<input type="hidden" name="command" value="addToBasket" />
-										<input type="hidden" name="productId" value="${productToEdit.id}" />
+										<input type="hidden" name="productId" value="${product.id}" />
 										<input type="submit" name="buy" value="BUY" /><br/>
 									</form>
 								</td>

@@ -15,7 +15,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class ReserveDAOImplTest {
+public class OrderDAOImplTest {
 
     @Test
     public void selectAllReservedTest(){
@@ -103,6 +103,20 @@ public class ReserveDAOImplTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void selectAllNewOrdersTest() throws DAOException{
+
+        int user_id = 1; // login 1, psw 1
+
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        OrderDAO orderDAO = daoFactory.getOrderDAO();
+
+        ArrayList<Order> orders = orderDAO.selectAllNewOrders(user_id);
+        for(Order order : orders){
+            System.out.println(order);
+        }
+
+    }
 
     @Test
     public void deleteAllReservedTest() throws DAOException {
@@ -144,6 +158,77 @@ public class ReserveDAOImplTest {
         Order order = new Order(1, "1,2,2,3,3,4,", "minsk", "1234567");
         System.out.println(orderDAO.insertNewOrder(order));
 
+    }
 
+    @Test
+    public void countAllNewOrdersTest() throws DAOException {
+
+        int user_id = 46; // login 1, psw 1
+        int row = 15;
+
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        OrderDAO orderDAO = daoFactory.getOrderDAO();
+
+
+        int i = orderDAO.countNewOrders();
+        System.out.println(i);
+    }
+
+    @Test
+    public void deleteNewOrderTest() throws DAOException {
+
+        int orderId = 2;
+
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        OrderDAO orderDAO = daoFactory.getOrderDAO();
+
+
+        boolean i = orderDAO.deleteNewOrder(orderId);
+        System.out.println(i);
+    }
+    @Test
+    public void updateOrderSetActiveTest() throws DAOException {
+
+        int orderId = 1;
+
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        OrderDAO orderDAO = daoFactory.getOrderDAO();
+
+
+        boolean i = orderDAO.updateOrderSetActive(orderId);
+        System.out.println(i);
+    }
+    @Test
+    public void selectOrderWithIDTest() throws DAOException {
+
+        int orderId = 1;
+
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        OrderDAO orderDAO = daoFactory.getOrderDAO();
+
+
+        Order o = orderDAO.selectOrderWithID(orderId);
+        //System.out.println(i);
+        String[] ids = o.getProductIDs().split(",");
+        for(String id : ids){
+            System.out.println(id);
+        }
+    }
+
+    @Test
+    public void updateOrdersProductsTest() throws DAOException {
+
+        int orderId = 1;
+        String pIDs = "1,2,2,3,3,4,";
+        //String pIDs = "1,2,3,4,";
+        Order order = new Order();
+        order.setId(orderId);
+        order.setProductIDs(pIDs);
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        OrderDAO orderDAO = daoFactory.getOrderDAO();
+
+
+        boolean i = orderDAO.updateOrdersProducts(order);
+        System.out.println(i);
     }
 }

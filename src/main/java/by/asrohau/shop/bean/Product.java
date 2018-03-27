@@ -8,6 +8,7 @@ public class Product {
 	private String price;
 	private String description;
 	private int reserve_id;
+	private int order_id;
 
 	public Product() {}
 
@@ -96,6 +97,14 @@ public class Product {
 		this.reserve_id = reserve_id;
 	}
 
+	public int getOrder_id() {
+		return order_id;
+	}
+
+	public void setOrder_id(int order_id) {
+		this.order_id = order_id;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -105,6 +114,7 @@ public class Product {
 
 		if (id != product.id) return false;
 		if (reserve_id != product.reserve_id) return false;
+		if (order_id != product.order_id) return false;
 		if (company != null ? !company.equals(product.company) : product.company != null) return false;
 		if (name != null ? !name.equals(product.name) : product.name != null) return false;
 		if (type != null ? !type.equals(product.type) : product.type != null) return false;
@@ -121,6 +131,7 @@ public class Product {
 		result = 31 * result + (price != null ? price.hashCode() : 0);
 		result = 31 * result + (description != null ? description.hashCode() : 0);
 		result = 31 * result + reserve_id;
+		result = 31 * result + order_id;
 		return result;
 	}
 
@@ -134,6 +145,7 @@ public class Product {
 				", price='" + price + '\'' +
 				", description='" + description + '\'' +
 				", reserve_id=" + reserve_id +
+				", order_id=" + order_id +
 				'}';
 	}
 }

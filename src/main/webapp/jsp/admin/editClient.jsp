@@ -118,7 +118,19 @@
                     <br/>
                     <input type="submit" name="edit" value="Edit" />
                 </form>
-                
+
+                <br/>
+                <br/>
+                <hr/>
+                <br/>
+                <br/>
+
+                <%--todo - show active and new orders somehow--%>
+                <%--<form title="Find all active orders with user ID" action="FrontController" method="post">--%>
+                    <%--<input type="hidden" name="command" value="editClient" />--%>
+                    <%--<input type="hidden" name="orderId" value="${user_id}" />--%>
+                    <%--<input type="submit" name="show" value="Show" /><br/>--%>
+                <%--</form>--%>
             </div>
         </div>
     

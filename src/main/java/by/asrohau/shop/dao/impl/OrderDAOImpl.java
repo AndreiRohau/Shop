@@ -3,6 +3,7 @@ package by.asrohau.shop.dao.impl;
 import by.asrohau.shop.bean.Order;
 import by.asrohau.shop.bean.Reserve;
 import by.asrohau.shop.bean.Product;
+import by.asrohau.shop.bean.User;
 import by.asrohau.shop.dao.AbstractDAO;
 import by.asrohau.shop.dao.exception.DAOException;
 import by.asrohau.shop.dao.OrderDAO;
@@ -22,7 +23,13 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
     private String DELETE_RESERVED_QUERY = "DELETE FROM shop.reserve WHERE id = ?";
     private String SELECT_ALL_RESERVED_IDS_QUERY = "SELECT * FROM shop.reserve WHERE user_id = ?";
     private String DELETE_ALL_RESERVED_QUERY = "DELETE FROM shop.reserve WHERE user_id = ?";
-    private String SAVE_NEW_ORDER_QUERY = "INSERT INTO shop.orders (user, products, address, phone) VALUES (?,?,?,?)";
+    private String SAVE_NEW_ORDER_QUERY = "INSERT INTO shop.orders (user, products, address, phone, status) VALUES (?,?,?,?,?)";
+    private String COUNT_All_NEW_ORDERS_QUERY = "SELECT COUNT(*) FROM shop.orders WHERE status = \'new\'";
+    private String SELECT_ALL_NEW_ORDERS_QUERY = "SELECT * FROM shop.orders WHERE status = \'new\' LIMIT ?, ?";
+    private String DELETE_NEW_ORDER_QUERY = "DELETE FROM shop.orders WHERE id = ?";
+    private String UPDATE_SET_ORDER_ACTIVE_QUERY = "UPDATE shop.orders SET status = \'active\' WHERE id = ?";
+    private String SELECT_ORDER_WITH_ID_QUERY = "SELECT * FROM shop.orders WHERE id = ?";
+    private String UPDATE_ORDERS_PRODUCTS_QUERY = "UPDATE shop.orders SET products = ? WHERE id = ?";
 
     @Override
     public boolean saveNewReservation(Reserve reserve) throws DAOException {
@@ -141,6 +148,132 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
             statement.setString(2, order.getProductIDs());
             statement.setString(3, order.getUser_address());
             statement.setString(4, order.getUser_phone());
+            statement.setString(5, order.getStatus());
+
+            int result = statement.executeUpdate();
+            statement.close();
+            connection.close();
+            return (result > 0);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public int countNewOrders() throws DAOException {
+        try (PreparedStatement statement = getConnection().prepareStatement(COUNT_All_NEW_ORDERS_QUERY)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            resultSet.next();
+            int i = resultSet.getInt(1);
+            statement.close();
+            connection.close();
+            return i;
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public ArrayList<Order> selectAllNewOrders(int row) throws DAOException {
+        try (PreparedStatement preparedStatement = getConnection()
+                .prepareStatement(SELECT_ALL_NEW_ORDERS_QUERY)) {
+
+            preparedStatement.setInt(1, row);
+            preparedStatement.setInt(2, 15);
+            ArrayList<Order> productList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int order_id;
+            int user_id;
+            String productIDs;
+            String user_address;
+            String user_phone;
+            String status;
+            Order order;
+            while (resultSet.next()) {
+
+                order_id = resultSet.getInt(1);
+                user_id = resultSet.getInt(2);
+                productIDs = resultSet.getString(3);
+                user_address =  resultSet.getString(4);
+                user_phone =  resultSet.getString(5);
+                status =  resultSet.getString(6);
+                order = new Order(order_id, user_id, productIDs, user_address, user_phone, status);
+                productList.add(order);
+            }
+            preparedStatement.close();
+            connection.close();
+            return productList;
+
+        } catch (SQLException e) {
+            System.out.println("dao exception while get all reserved");
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteNewOrder(int orderId) throws DAOException {
+        try (PreparedStatement statement = getConnection().prepareStatement(DELETE_NEW_ORDER_QUERY)) {
+            statement.setInt(1, orderId);
+
+            int result = statement.executeUpdate();
+            statement.close();
+            connection.close();
+            return (result != 0);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public boolean updateOrderSetActive(int orderId) throws DAOException {
+        try (PreparedStatement statement = getConnection().prepareStatement(UPDATE_SET_ORDER_ACTIVE_QUERY)) {
+            statement.setInt(1, orderId);
+
+            int result = statement.executeUpdate();
+            statement.close();
+            connection.close();
+            return (result > 0);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public Order selectOrderWithID(int orderId) throws DAOException {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(SELECT_ORDER_WITH_ID_QUERY)) {
+            preparedStatement.setInt(1, orderId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Order foundOrder = new Order();
+
+            while (resultSet.next()) {
+                foundOrder.setId(resultSet.getInt(1));
+                foundOrder.setUser_id(resultSet.getInt(2));
+                foundOrder.setProductIDs(resultSet.getString(3));
+                foundOrder.setUser_address(resultSet.getString(4));
+                foundOrder.setUser_phone(resultSet.getString(5));
+                foundOrder.setStatus(resultSet.getString(6));
+            }
+            preparedStatement.close();
+            connection.close();
+
+            if (foundOrder.getStatus() != null) {
+                System.out.println("foundOrder.getStatus() != null : " + foundOrder.toString());
+                return foundOrder;
+            }
+            System.out.println("Did not find = " + foundOrder.toString());
+            return null;
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public boolean updateOrdersProducts(Order order) throws DAOException {
+        try (PreparedStatement statement = getConnection().prepareStatement(UPDATE_ORDERS_PRODUCTS_QUERY)) {
+            statement.setString(1, order.getProductIDs());
+            statement.setInt(2, order.getId());
 
             int result = statement.executeUpdate();
             statement.close();

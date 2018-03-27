@@ -84,5 +84,61 @@ public class OrderServiceImpl implements OrderService{
             return orderDAO.insertNewOrder(order);
         } catch(DAOException e){
             throw new ServiceException(e);
-        }    }
+        }
+    }
+
+    @Override
+    public int countNewOrders() throws ServiceException {
+        try {
+            return orderDAO.countNewOrders();
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public ArrayList<Order> getAllNewOrders(int row)  throws ServiceException{
+        try {
+            return orderDAO.selectAllNewOrders(row);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+
+    }
+
+    @Override
+    public boolean deleteNewOrder(int orderId) throws ServiceException {
+        try {
+            return orderDAO.deleteNewOrder(orderId);
+        } catch(DAOException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean orderSetActive(int orderId) throws ServiceException {
+        try {
+            return orderDAO.updateOrderSetActive(orderId);
+        } catch(DAOException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Order findOrderWithID(int orderId)  throws ServiceException{
+        try {
+            return orderDAO.selectOrderWithID(orderId);
+        } catch(DAOException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteProductFromOrder(Order order) throws ServiceException {
+        try {
+            return orderDAO.updateOrdersProducts(order);
+        } catch(DAOException e){
+            throw new ServiceException(e);
+        }
+    }
 }

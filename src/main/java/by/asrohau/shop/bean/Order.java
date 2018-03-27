@@ -2,6 +2,7 @@ package by.asrohau.shop.bean;
 
 public class Order {
 
+    private int id;
     private int user_id;
     private String productIDs;
     private String user_address;
@@ -24,6 +25,23 @@ public class Order {
         this.user_address = user_address;
         this.user_phone = user_phone;
         this.status = status;
+    }
+
+    public Order(int id, int user_id, String productIDs, String user_address, String user_phone, String status) {
+        this.id = id;
+        this.user_id = user_id;
+        this.productIDs = productIDs;
+        this.user_address = user_address;
+        this.user_phone = user_phone;
+        this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUser_id() {
@@ -73,6 +91,7 @@ public class Order {
 
         Order order = (Order) o;
 
+        if (id != order.id) return false;
         if (user_id != order.user_id) return false;
         if (productIDs != null ? !productIDs.equals(order.productIDs) : order.productIDs != null) return false;
         if (user_address != null ? !user_address.equals(order.user_address) : order.user_address != null) return false;
@@ -82,7 +101,8 @@ public class Order {
 
     @Override
     public int hashCode() {
-        int result = user_id;
+        int result = id;
+        result = 31 * result + user_id;
         result = 31 * result + (productIDs != null ? productIDs.hashCode() : 0);
         result = 31 * result + (user_address != null ? user_address.hashCode() : 0);
         result = 31 * result + (user_phone != null ? user_phone.hashCode() : 0);
@@ -93,7 +113,8 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "user_id=" + user_id +
+                "id=" + id +
+                ", user_id=" + user_id +
                 ", productIDs='" + productIDs + '\'' +
                 ", user_address='" + user_address + '\'' +
                 ", user_phone='" + user_phone + '\'' +

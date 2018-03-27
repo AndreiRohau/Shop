@@ -3,6 +3,7 @@ package by.asrohau.shop.dao;
 import by.asrohau.shop.bean.Order;
 import by.asrohau.shop.bean.Reserve;
 import by.asrohau.shop.bean.Product;
+import by.asrohau.shop.bean.User;
 import by.asrohau.shop.dao.exception.DAOException;
 
 import java.util.ArrayList;
@@ -20,4 +21,16 @@ public interface OrderDAO {
     boolean deleteAllReserved(int user_id) throws DAOException;
 
     boolean insertNewOrder(Order order) throws DAOException;
+
+    int countNewOrders() throws DAOException;
+
+    ArrayList<Order> selectAllNewOrders(int row) throws DAOException;
+
+    boolean deleteNewOrder(int orderId) throws DAOException;
+
+    boolean updateOrderSetActive(int orderId) throws DAOException;
+
+    Order selectOrderWithID(int orderId) throws DAOException;
+
+    boolean updateOrdersProducts(Order order) throws DAOException;
 }

@@ -86,4 +86,24 @@
         <webname>createOrder</webname>
         <classname>CreateOrderCommand</classname>
     </command>
+    <command>
+        <webname>selectAllNewOrders</webname>
+        <classname>SelectAllNewOrdersCommand</classname>
+    </command>
+    <command>
+        <webname>editNewOrder</webname>
+        <classname>EditNewOrderCommand</classname>
+    </command>
+    <command>
+        <webname>orderSetActive</webname>
+        <classname>OrderSetActiveCommand</classname>
+    </command>
+    <command>
+        <webname>deleteNewOrder</webname>
+        <classname>DeleteNewOrderCommand</classname>
+    </command>
+    <command>
+        <webname>deleteFromOrder</webname>
+        <classname>DeleteFromOrderCommand</classname>
+    </command>
 </commands>
