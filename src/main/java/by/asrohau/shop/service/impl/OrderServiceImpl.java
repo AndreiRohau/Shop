@@ -141,4 +141,21 @@ public class OrderServiceImpl implements OrderService{
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public ArrayList<Order> getAllActiveOrders(int row) throws ServiceException {
+        try {
+            return orderDAO.selectAllActiveOrders(row);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public ArrayList<Order> getAllSuccessOrders(int row) throws ServiceException {
+        try {
+            return orderDAO.selectAllSuccessOrders(row);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }    }
 }

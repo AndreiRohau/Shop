@@ -30,6 +30,8 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
     private String UPDATE_SET_ORDER_ACTIVE_QUERY = "UPDATE shop.orders SET status = \'active\' WHERE id = ?";
     private String SELECT_ORDER_WITH_ID_QUERY = "SELECT * FROM shop.orders WHERE id = ?";
     private String UPDATE_ORDERS_PRODUCTS_QUERY = "UPDATE shop.orders SET products = ? WHERE id = ?";
+    private String SELECT_ALL_ACTIVE_ORDERS_QUERY = "SELECT * FROM shop.orders WHERE status = \'active\' LIMIT ?, ?";
+    private String SELECT_ALL_SUCCESS_ORDERS_QUERY = "SELECT * FROM shop.orders WHERE status = \'success\' LIMIT ?, ?";
 
     @Override
     public boolean saveNewReservation(Reserve reserve) throws DAOException {
@@ -283,4 +285,77 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
             throw new DAOException(e);
         }
     }
+
+    @Override
+    public ArrayList<Order> selectAllActiveOrders(int row) throws DAOException {
+        try (PreparedStatement preparedStatement = getConnection()
+                .prepareStatement(SELECT_ALL_ACTIVE_ORDERS_QUERY)) {
+
+            preparedStatement.setInt(1, row);
+            preparedStatement.setInt(2, 15);
+            ArrayList<Order> orderList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int order_id;
+            int user_id;
+            String productIDs;
+            String user_address;
+            String user_phone;
+            String status;
+            Order order;
+            while (resultSet.next()) {
+
+                order_id = resultSet.getInt(1);
+                user_id = resultSet.getInt(2);
+                productIDs = resultSet.getString(3);
+                user_address =  resultSet.getString(4);
+                user_phone =  resultSet.getString(5);
+                status =  resultSet.getString(6);
+                order = new Order(order_id, user_id, productIDs, user_address, user_phone, status);
+                orderList.add(order);
+            }
+            preparedStatement.close();
+            connection.close();
+            return orderList;
+
+        } catch (SQLException e) {
+            System.out.println("dao exception while get all active orders");
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public ArrayList<Order> selectAllSuccessOrders(int row) throws DAOException {
+        try (PreparedStatement preparedStatement = getConnection()
+                .prepareStatement(SELECT_ALL_SUCCESS_ORDERS_QUERY)) {
+
+            preparedStatement.setInt(1, row);
+            preparedStatement.setInt(2, 15);
+            ArrayList<Order> orderList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int order_id;
+            int user_id;
+            String productIDs;
+            String user_address;
+            String user_phone;
+            String status;
+            Order order;
+            while (resultSet.next()) {
+
+                order_id = resultSet.getInt(1);
+                user_id = resultSet.getInt(2);
+                productIDs = resultSet.getString(3);
+                user_address =  resultSet.getString(4);
+                user_phone =  resultSet.getString(5);
+                status =  resultSet.getString(6);
+                order = new Order(order_id, user_id, productIDs, user_address, user_phone, status);
+                orderList.add(order);
+            }
+            preparedStatement.close();
+            connection.close();
+            return orderList;
+
+        } catch (SQLException e) {
+            System.out.println("dao exception while get all SUCCESS orders");
+            throw new DAOException(e);
+        }    }
 }

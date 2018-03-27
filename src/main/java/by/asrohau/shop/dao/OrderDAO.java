@@ -33,4 +33,8 @@ public interface OrderDAO {
     Order selectOrderWithID(int orderId) throws DAOException;
 
     boolean updateOrdersProducts(Order order) throws DAOException;
+
+    ArrayList<Order> selectAllActiveOrders(int row) throws DAOException;
+
+    ArrayList<Order> selectAllSuccessOrders(int row) throws DAOException;
 }

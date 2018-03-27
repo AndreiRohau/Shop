@@ -32,4 +32,8 @@ public interface OrderService {
     Order findOrderWithID(int orderId) throws ServiceException;
 
     boolean deleteProductFromOrder(Order order) throws ServiceException;
+
+    ArrayList<Order> getAllActiveOrders(int row) throws ServiceException;
+
+    ArrayList<Order> getAllSuccessOrders(int row) throws ServiceException;
 }

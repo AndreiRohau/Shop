@@ -47,14 +47,14 @@ public class SelectAllActiveOrdersCommand implements Command {
             //count amount of all NEW orders
             maxPage = (int) Math.ceil(((double) orderService.countNewOrders()) / 15);
 
-            ArrayList<Order> newOrdersList = orderService.getAllNewOrders(row);
+            ArrayList<Order> newOrdersList = orderService.getAllActiveOrders(row);
             request.setAttribute("array", newOrdersList);
 
             request.setAttribute("maxPage", maxPage);
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("command", "deleteOrder");  // todo
             request.getSession().setAttribute("lastCMD",
-                    "FrontController?command=selectAllNewOrders&page_num=" + currentPage);
+                    "FrontController?command=selectAllActiveOrders&page_num=" + currentPage);
 
             goToPage = "/jsp/admin/manageOrders.jsp";
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
