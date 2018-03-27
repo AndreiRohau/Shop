@@ -6,6 +6,7 @@ import by.asrohau.shop.service.OrderService;
 import by.asrohau.shop.service.ServiceFactory;
 import by.asrohau.shop.service.exception.ServiceException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -29,10 +30,16 @@ public class OrderSetActiveCommand implements Command {
                 System.out.println(message);
             }
 
-            response.sendRedirect(String.valueOf(request.getSession(true).getAttribute("lastCMD"))
-                    + "&msg=" + message);
+            if(request.getParameter("from").matches("manageOrders")){
+                response.sendRedirect(String.valueOf(request.getSession(true).getAttribute("lastCMD"))
+                        + "&msg=" + message);
+            }else{
+                request.getSession().setAttribute("lastCMD",
+                        "FrontController?command=goToPage&address=manageOrders.jsp");
+                request.getRequestDispatcher("/jsp/admin/manageOrders.jsp").forward(request, response);
+            }
 
-        } catch (ServiceException | IOException e) {
+        } catch (ServiceException | ServletException | IOException e) {
             throw new ControllerException(e);
         }
     }

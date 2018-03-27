@@ -65,6 +65,7 @@
         <p>Status :
             <form title="Set status = ACTIVE" action="FrontController" method="post">
                 <input type="hidden" name="command" value="orderSetActive" />
+                <input type="hidden" name="from" value="editOrder" />
                 <input type="hidden" name="orderId" value="${orderId}" />
                 <input type="submit" name="status" value="Set_Active" /><br/>
             </form>

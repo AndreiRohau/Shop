@@ -132,6 +132,7 @@
                             <td>
                                 <form title="Set status = ACTIVE" action="FrontController" method="post">
                                     <input type="hidden" name="command" value="orderSetActive" />
+                                    <input type="hidden" name="from" value="manageOrders" />
                                     <input type="hidden" name="orderId" value="${element.id}" />
                                     <input type="submit" name="status" value="${element.status}" /><br/>
                                 </form>
