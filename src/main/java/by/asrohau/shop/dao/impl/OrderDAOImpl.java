@@ -24,10 +24,10 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
     private String SELECT_ALL_RESERVED_IDS_QUERY = "SELECT * FROM shop.reserve WHERE user_id = ?";
     private String DELETE_ALL_RESERVED_QUERY = "DELETE FROM shop.reserve WHERE user_id = ?";
     private String SAVE_NEW_ORDER_QUERY = "INSERT INTO shop.orders (user, products, address, phone, status) VALUES (?,?,?,?,?)";
-    private String COUNT_All_NEW_ORDERS_QUERY = "SELECT COUNT(*) FROM shop.orders WHERE status = \'new\'";
-    private String SELECT_ALL_NEW_ORDERS_QUERY = "SELECT * FROM shop.orders WHERE status = \'new\' LIMIT ?, ?";
+    private String COUNT_All_ORDERS_QUERY = "SELECT COUNT(*) FROM shop.orders WHERE status = ?";
+    private String SELECT_ALL_ORDERS_QUERY = "SELECT * FROM shop.orders WHERE status = ? LIMIT ?, ?";
     private String DELETE_NEW_ORDER_QUERY = "DELETE FROM shop.orders WHERE id = ?";
-    private String UPDATE_SET_ORDER_ACTIVE_QUERY = "UPDATE shop.orders SET status = \'active\' WHERE id = ?";
+    private String UPDATE_SET_ORDER_STATUS_QUERY = "UPDATE shop.orders SET status = ? WHERE id = ?";
     private String SELECT_ORDER_WITH_ID_QUERY = "SELECT * FROM shop.orders WHERE id = ?";
     private String UPDATE_ORDERS_PRODUCTS_QUERY = "UPDATE shop.orders SET products = ? WHERE id = ?";
     private String SELECT_ALL_ACTIVE_ORDERS_QUERY = "SELECT * FROM shop.orders WHERE status = \'active\' LIMIT ?, ?";
@@ -162,8 +162,9 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
     }
 
     @Override
-    public int countNewOrders() throws DAOException {
-        try (PreparedStatement statement = getConnection().prepareStatement(COUNT_All_NEW_ORDERS_QUERY)) {
+    public int countOrders(String status) throws DAOException {
+        try (PreparedStatement statement = getConnection().prepareStatement(COUNT_All_ORDERS_QUERY)) {
+            statement.setString(1, status);
             ResultSet resultSet = statement.executeQuery();
 
             resultSet.next();
@@ -177,12 +178,13 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
     }
 
     @Override
-    public ArrayList<Order> selectAllNewOrders(int row) throws DAOException {
+    public ArrayList<Order> selectAllOrders(int row, String status) throws DAOException {
         try (PreparedStatement preparedStatement = getConnection()
-                .prepareStatement(SELECT_ALL_NEW_ORDERS_QUERY)) {
+                .prepareStatement(SELECT_ALL_ORDERS_QUERY)) {
 
-            preparedStatement.setInt(1, row);
-            preparedStatement.setInt(2, 15);
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, row);
+            preparedStatement.setInt(3, 15);
             ArrayList<Order> productList = new ArrayList<>();
             ResultSet resultSet = preparedStatement.executeQuery();
             int order_id;
@@ -190,7 +192,7 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
             String productIDs;
             String user_address;
             String user_phone;
-            String status;
+            String found_status;
             Order order;
             while (resultSet.next()) {
 
@@ -199,8 +201,8 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
                 productIDs = resultSet.getString(3);
                 user_address =  resultSet.getString(4);
                 user_phone =  resultSet.getString(5);
-                status =  resultSet.getString(6);
-                order = new Order(order_id, user_id, productIDs, user_address, user_phone, status);
+                found_status =  resultSet.getString(6);
+                order = new Order(order_id, user_id, productIDs, user_address, user_phone, found_status);
                 productList.add(order);
             }
             preparedStatement.close();
@@ -208,13 +210,13 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
             return productList;
 
         } catch (SQLException e) {
-            System.out.println("dao exception while get all reserved");
+            System.out.println("dao exception while get all orders, status - " + status);
             throw new DAOException(e);
         }
     }
 
     @Override
-    public boolean deleteNewOrder(int orderId) throws DAOException {
+    public boolean deleteOrder(int orderId) throws DAOException {
         try (PreparedStatement statement = getConnection().prepareStatement(DELETE_NEW_ORDER_QUERY)) {
             statement.setInt(1, orderId);
 
@@ -228,9 +230,10 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
     }
 
     @Override
-    public boolean updateOrderSetActive(int orderId) throws DAOException {
-        try (PreparedStatement statement = getConnection().prepareStatement(UPDATE_SET_ORDER_ACTIVE_QUERY)) {
-            statement.setInt(1, orderId);
+    public boolean updateOrderSetStatus(int orderId, String status) throws DAOException {
+        try (PreparedStatement statement = getConnection().prepareStatement(UPDATE_SET_ORDER_STATUS_QUERY)) {
+            statement.setString(1, status);
+            statement.setInt(2, orderId);
 
             int result = statement.executeUpdate();
             statement.close();

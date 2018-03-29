@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SelectAllActiveOrdersCommand implements Command {
+public class SelectAllSuccessfulOrdersCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
-        System.out.println("We got to SelectAllActiveOrdersCommand");
+        System.out.println("We got to SelectAllSuccessfulOrdersCommand");
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         OrderService orderService = serviceFactory.getOrderService();
@@ -25,7 +25,7 @@ public class SelectAllActiveOrdersCommand implements Command {
         int currentPage;
         int maxPage;
         int row;
-        String status = "active";
+        String status = "successful";
         currentPage = Integer.parseInt(request.getParameter("page_num"));
         row = (currentPage - 1)*15;
 
@@ -39,10 +39,10 @@ public class SelectAllActiveOrdersCommand implements Command {
             request.setAttribute("maxPage", maxPage);
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("command_2", "inspectOrder");
-            request.setAttribute("command_3", "orderSetSuccessful");
-            request.setAttribute("command_4", "deleteOrder");
+            request.setAttribute("command_3", "archiveOrder");
+            request.setAttribute("command_4", "archiveOrder");
             request.getSession().setAttribute("lastCMD",
-                    "FrontController?command=selectAllActiveOrders&page_num=" + currentPage);
+                    "FrontController?command=selectAllSuccessfulOrders&page_num=" + currentPage);
 
             String goToPage = "/jsp/admin/manageOrders.jsp";
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);

@@ -95,6 +95,10 @@
         <classname>SelectAllActiveOrdersCommand</classname>
     </command>
     <command>
+        <webname>selectAllSuccessfulOrders</webname>
+        <classname>SelectAllSuccessfulOrdersCommand</classname>
+    </command>
+    <command>
         <webname>selectAllSuccessOrders</webname>
         <classname>SelectAllSuccessOrdersCommand</classname>
     </command>
@@ -103,12 +107,16 @@
         <classname>EditNewOrderCommand</classname>
     </command>
     <command>
-        <webname>orderSetActive</webname>
-        <classname>OrderSetActiveCommand</classname>
+        <webname>inspectOrder</webname>
+        <classname>InspectOrderCommand</classname>
     </command>
     <command>
-        <webname>deleteNewOrder</webname>
-        <classname>DeleteNewOrderCommand</classname>
+        <webname>orderSetStatus</webname>
+        <classname>OrderSetStatusCommand</classname>
+    </command>
+    <command>
+        <webname>deleteOrder</webname>
+        <classname>DeleteOrderCommand</classname>
     </command>
     <command>
         <webname>deleteFromOrder</webname>

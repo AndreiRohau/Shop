@@ -16,14 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/*
-returns new ORDERS list:   user_id - forward edit user!
-                           order_id
-                           STATUS SET-ACTIVE adds command to change status
-                           EDIT is .....
-                            forward to page with detailed list of products and total sum of payment
-                            and here you can delete order
- */
 public class SelectAllNewOrdersCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
@@ -32,31 +24,29 @@ public class SelectAllNewOrdersCommand implements Command {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         OrderService orderService = serviceFactory.getOrderService();
 
-        //return
-
-        String goToPage;
         int currentPage;
         int maxPage;
         int row;
-
+        String status = "new";
         currentPage = Integer.parseInt(request.getParameter("page_num"));
         row = (currentPage - 1)*15;
 
         try {
             //count amount of all NEW orders
-            maxPage = (int) Math.ceil(((double) orderService.countNewOrders()) / 15);
+            maxPage = (int) Math.ceil(((double) orderService.countOrders(status)) / 15);
 
-            ArrayList<Order> newOrdersList = orderService.getAllNewOrders(row);
+            ArrayList<Order> newOrdersList = orderService.getAllOrders(row, status);
             request.setAttribute("array", newOrdersList);
 
             request.setAttribute("maxPage", maxPage);
             request.setAttribute("currentPage", currentPage);
-            request.setAttribute("command", "deleteNewOrder");
-            request.setAttribute("cmd", "selectAllNewOrders");
+            request.setAttribute("command_2", "editNewOrder");
+            request.setAttribute("command_3", "orderSetActive");
+            request.setAttribute("command_4", "deleteOrder");
             request.getSession().setAttribute("lastCMD",
                     "FrontController?command=selectAllNewOrders&page_num=" + currentPage);
 
-            goToPage = "/jsp/admin/manageOrders.jsp";
+            String goToPage = "/jsp/admin/manageOrders.jsp";
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
 

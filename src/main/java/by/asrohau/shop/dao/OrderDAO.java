@@ -22,13 +22,13 @@ public interface OrderDAO {
 
     boolean insertNewOrder(Order order) throws DAOException;
 
-    int countNewOrders() throws DAOException;
+    int countOrders(String status) throws DAOException;
 
-    ArrayList<Order> selectAllNewOrders(int row) throws DAOException;
+    ArrayList<Order> selectAllOrders(int row, String status) throws DAOException;
 
-    boolean deleteNewOrder(int orderId) throws DAOException;
+    boolean deleteOrder(int orderId) throws DAOException;
 
-    boolean updateOrderSetActive(int orderId) throws DAOException;
+    boolean updateOrderSetStatus(int orderId, String status) throws DAOException;
 
     Order selectOrderWithID(int orderId) throws DAOException;
 

@@ -107,11 +107,11 @@ public class OrderDAOImplTest {
     public void selectAllNewOrdersTest() throws DAOException{
 
         int user_id = 1; // login 1, psw 1
-
+        String status = "new";
         DAOFactory daoFactory = DAOFactory.getInstance();
         OrderDAO orderDAO = daoFactory.getOrderDAO();
 
-        ArrayList<Order> orders = orderDAO.selectAllNewOrders(user_id);
+        ArrayList<Order> orders = orderDAO.selectAllOrders(user_id, status);
         for(Order order : orders){
             System.out.println(order);
         }
@@ -165,12 +165,13 @@ public class OrderDAOImplTest {
 
         int user_id = 46; // login 1, psw 1
         int row = 15;
+        String status = "successful";
 
         DAOFactory daoFactory = DAOFactory.getInstance();
         OrderDAO orderDAO = daoFactory.getOrderDAO();
 
 
-        int i = orderDAO.countNewOrders();
+        int i = orderDAO.countOrders(status);
         System.out.println(i);
     }
 
@@ -183,19 +184,19 @@ public class OrderDAOImplTest {
         OrderDAO orderDAO = daoFactory.getOrderDAO();
 
 
-        boolean i = orderDAO.deleteNewOrder(orderId);
+        boolean i = orderDAO.deleteOrder(orderId);
         System.out.println(i);
     }
     @Test
     public void updateOrderSetActiveTest() throws DAOException {
 
         int orderId = 1;
-
+        String status = "active";
         DAOFactory daoFactory = DAOFactory.getInstance();
         OrderDAO orderDAO = daoFactory.getOrderDAO();
 
 
-        boolean i = orderDAO.updateOrderSetActive(orderId);
+        boolean i = orderDAO.updateOrderSetStatus(orderId, status);
         System.out.println(i);
     }
     @Test

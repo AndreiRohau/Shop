@@ -100,4 +100,15 @@ public class FastTest {
 
 
     }
+
+    @Test
+    public void stringSplitTest(){
+        String s = "orderSetSuccessful";
+        String[]sa = s.split("Set");
+        for(String x : sa){
+            System.out.println("E [" + x + "]");
+        }
+
+        System.out.println("[" + s.split("Set")[1].toLowerCase() + "]");
+    }
 }

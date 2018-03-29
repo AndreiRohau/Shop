@@ -88,18 +88,18 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public int countNewOrders() throws ServiceException {
+    public int countOrders(String status) throws ServiceException {
         try {
-            return orderDAO.countNewOrders();
+            return orderDAO.countOrders(status);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public ArrayList<Order> getAllNewOrders(int row)  throws ServiceException{
+    public ArrayList<Order> getAllOrders(int row, String status)  throws ServiceException{
         try {
-            return orderDAO.selectAllNewOrders(row);
+            return orderDAO.selectAllOrders(row, status);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -107,18 +107,18 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public boolean deleteNewOrder(int orderId) throws ServiceException {
+    public boolean deleteOrder(int orderId) throws ServiceException {
         try {
-            return orderDAO.deleteNewOrder(orderId);
+            return orderDAO.deleteOrder(orderId);
         } catch(DAOException e){
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public boolean orderSetActive(int orderId) throws ServiceException {
+    public boolean orderSetStatus(int orderId, String status) throws ServiceException {
         try {
-            return orderDAO.updateOrderSetActive(orderId);
+            return orderDAO.updateOrderSetStatus(orderId, status);
         } catch(DAOException e){
             throw new ServiceException(e);
         }

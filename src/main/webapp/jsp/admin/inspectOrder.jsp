@@ -62,29 +62,29 @@
 <div class="middle">
     <div id="menu">
         <p>Order ID : ${requestScope.get("orderId")}</p>
-        <p>Status ${requestScope.status}:
-            <form title="Set status = ${requestScope.get('new_status')}" action="FrontController" method="post">
-                <input type="hidden" name="command" value="orderSetStatus" />
-                <input type="hidden" name="new_status" value="${requestScope.get('new_status')}" />
-                <input type="hidden" name="from" value="editOrder" />
-                <input type="hidden" name="orderId" value="${orderId}" />
-                <input type="submit" name="status" value="${requestScope.get('new_status')}" /><br/>
-            </form>
+        <p>Status :
+        <form title="Set status = ${requestScope.get('new_status')}" action="FrontController" method="post">
+            <input type="hidden" name="command" value="orderSetStatus" />
+            <input type="hidden" name="new_status" value="${requestScope.get('new_status')}" />
+            <input type="hidden" name="from" value="editOrder" />
+            <input type="hidden" name="orderId" value="${orderId}" />
+            <input type="submit" name="status" value="${requestScope.get('new_status')}" /><br/>
+        </form>
         </p>
         <p>Delete order :
-            <form title="Delete Order" action="FrontController" method="post">
-                <input type="hidden" name="command" value="deleteOrder" />
-                <input type="hidden" name="from" value="editOrder" />
-                <input type="hidden" name="orderId" value="${orderId}" />
-                <input type="submit" name="edit" value="DELETE" /><br/>
-            </form>
+        <form title="Delete Order" action="FrontController" method="post">
+            <input type="hidden" name="command" value="deleteOrder" />
+            <input type="hidden" name="from" value="editOrder" />
+            <input type="hidden" name="orderId" value="${orderId}" />
+            <input type="submit" name="edit" value="DELETE" /><br/>
+        </form>
         </p>
         <p>Inspect user :
-            <form title="Go to user" action="FrontController" method="post">
-                <input type="hidden" name="command" value="editClient" />
-                <input type="hidden" name="orderId" value="${orderId}" />
-                <input type="submit" name="userId" value="${requestScope.get('userId')}" /><br/>
-            </form>
+        <form title="Go to user" action="FrontController" method="post">
+            <input type="hidden" name="command" value="editClient" />
+            <input type="hidden" name="orderId" value="${orderId}" />
+            <input type="submit" name="userId" value="${requestScope.get('userId')}" /><br/>
+        </form>
         </p>
         <p>Address : ${requestScope.get("address")}</p>
         <p>Phone : ${requestScope.get("phone")}</p>
@@ -104,9 +104,6 @@
                     <td>NAME</td>
                     <td>TYPE</td>
                     <td>PRICE</td>
-                    <c:if test="${!requestScope.lastCMD.matches('inspectOrder')}">
-                        <td>Link</td>
-                    </c:if>
                 </tr>
                 <c:set value="1" var="indexRemovingProduct"/>
                 <c:forEach items="${requestScope.productArray}" var="product">
@@ -116,34 +113,20 @@
                         <td>${product.name}</td>
                         <td>${product.type}</td>
                         <td>${product.price}</td>
-                        <c:if test="${!requestScope.lastCMD.matches('inspectOrder')}">
-                            <td>
-                                <form action="FrontController" method="post">
-                                    <%--todo DeleteFromOrderCommand--%>
-                                    <input type="hidden" name="command" value="deleteFromOrder" />
-                                    <input type="hidden" name="product_id" value="${product.id}" />
-                                    <input type="hidden" name="indexRemovingProduct" value="${indexRemovingProduct}" />
-                                    <input type="hidden" name="currentPage" value="${current_page}" />
-                                    <input type="hidden" name="productIDsString" value="<c:out value="${productIDsString}"/> " />
-                                    <input type="hidden" name="orderId" value="${product.order_id}" />
-                                    <input type="submit" name="remove" value="REMOVE" /><br/>
-                                </form>
-                                <c:set value="${indexRemovingProduct + 1}" var="indexRemovingProduct"/>
-                            </td>
-                        </c:if>
+
                     </tr>
                 </c:forEach>
             </table>
 
             <div width="100%" style="background-color: deepskyblue; font-size: 1em">    
                 <c:forEach begin="1" end="${max_page}" var="i">
-                    <c:if test="${i != current_page}">
-                        <a href="FrontController?command=editNewOrder&page_num=${i}">${i}</a>
-                    </c:if>
-                    <c:if test="${i == current_page}">
-                        <c:out value="${i}"/>
-                    </c:if>
-                </c:forEach>
+                                <c:if test="${i != current_page}">
+                                    <a href="FrontController?command=editNewOrder&page_num=${i}">${i}</a>
+                                </c:if>
+                                <c:if test="${i == current_page}">
+                                    <c:out value="${i}"/>
+                            </c:if>
+                        </c:forEach>
             </div>
         </c:if>
     </div>

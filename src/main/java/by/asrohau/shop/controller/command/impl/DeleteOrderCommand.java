@@ -11,18 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class DeleteNewOrderCommand implements Command {
+public class DeleteOrderCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
-        System.out.println("We got to DeleteNewOrderCommand");
+        System.out.println("We got to DeleteOrderCommand");
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         OrderService orderService = serviceFactory.getOrderService();
 
         try {
             String message;
-            if (orderService.deleteNewOrder(Integer.parseInt(request.getParameter("orderId")))) {
+            if (orderService.deleteOrder(Integer.parseInt(request.getParameter("orderId")))) {
                 message = "You have REMOVED new ORDER successfully";
                 System.out.println(message);
             } else {
@@ -32,8 +32,7 @@ public class DeleteNewOrderCommand implements Command {
 
             if(request.getParameter("from").matches("manageOrders")) {
                 response.sendRedirect(String.valueOf(request.getSession(true).getAttribute("lastCMD"))
-                        + "&msg=" + message
-                        + "&from=" + request.getParameter("editOrder"));
+                        + "&msg=" + message);
             }else{
                 request.getSession().setAttribute("lastCMD",
                         "FrontController?command=goToPage&address=manageOrders.jsp");
