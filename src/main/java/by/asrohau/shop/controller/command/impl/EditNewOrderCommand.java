@@ -181,6 +181,13 @@ public class EditNewOrderCommand implements Command {
                             + "&address=" + order.getUser_address()
                             + "&phone=" + order.getUser_phone()
                             + "&new_status=" + String.valueOf(request.getParameter("new_status")));
+            request.setAttribute("lastCMDneedPage",
+                    "FrontController?command=editNewOrder&orderId=" + orderID
+                            + "&userId=" + order.getUser_id()
+                            + "&address=" + order.getUser_address()
+                            + "&phone=" + order.getUser_phone()
+                            + "&new_status=" + String.valueOf(request.getParameter("new_status"))
+                            + "&page_num=");
 
             //what if not null??
             request.setAttribute("msg", request.getParameter("msg"));

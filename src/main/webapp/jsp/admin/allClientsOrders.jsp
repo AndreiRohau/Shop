@@ -9,7 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
-        <title>Manage Clients</title>
+        <title>All Clients Orders</title>
 
         <fmt:setLocale value="${sessionScope.local}" />
         <fmt:setBundle basename="localization.local" var="loc" />
@@ -21,6 +21,7 @@
 
         <c:set var="current_page" value="${requestScope.get('currentPage')}"/>
         <c:set var="max_page" value="${requestScope.get('maxPage')}"/>
+        <c:set var="user_id" value="${requestScope.get('userId')}"/>
 
     </head>
     <body>
@@ -59,48 +60,66 @@
 
         <div class="middle">
             <div id="menu">
+                <form action="FrontController" method="post">
+                    <p><b>Get ALL orders</b>
+                        <input type="hidden" name="command" value="showAllClientsOrders"/>
+                        <input type="hidden" name="page_num" value="1"/>
+                        <input type="hidden" name="userId" value="${user_id}"/><br/>
+                        <input type="submit" name="get_orders" value="Show ALL Orders!"/>
+                    </p>
+                </form>
+                <br/>
+                <br/>
+                <hr/>
+                <br/>
+                <p><b><c:out value="${requestScope.get('msg')}"/></b></p>
 
             </div>
 
             <div id="content">
-                <form action="FrontController" method="post">
-                    <p><b>Get all users</b>
-                        <input type="hidden" name="command" value="selectAllUsers"/>
-                        <input type="hidden" name="page_num" value="1"/>
-                        <input type="submit" name="get_users" value="Get them!"/>
-                    </p>
-                </form>
-                <hr/>
-                <br/>
+
                 <c:if test="${current_page != null}">
                     <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
                         <tr>
-                            <td>ID</td>
-                            <td>LOGIN</td>
-                            <td>PASSWORD</td>
-                            <td>LINK</td>
+                            <td>USER</td>
+                            <td>ORDER</td>
+                            <td>STATUS</td>
                         </tr>
-                        <c:forEach items="${requestScope.usersArray}" var="userToEdit">
+                        <c:forEach items="${requestScope.array}" var="element">
                             <tr>
-                                <td>${userToEdit.id}</td>
-                                <td>${userToEdit.login}</td>
-                                <td>${userToEdit.password}</td>
+                                    <%--new: Client ID - edit client --%>
                                 <td>
-                                    <form action="FrontController" method="post">
+                                    <form title="Go to user" action="FrontController" method="post">
                                         <input type="hidden" name="command" value="editClient" />
-                                        <input type="hidden" name="userId" value="${userToEdit.id}" />
-                                        <input type="submit" name="edit" value="Edit" /><br/>
+                                        <input type="hidden" name="orderId" value="${element.id}" />
+                                        <input type="submit" name="userId" value="${element.user_id}" /><br/>
                                     </form>
+                                </td>
+                                    <%--order id - open order--%>
+                                <td>
+                                    <form title="Observe the order" action="FrontController" method="post">
+                                        <input type="hidden" name="command" value="inspectOrder" />
+                                        <input type="hidden" name="from" value="allClientsOrders" />
+                                        <input type="hidden" name="page_num" value="1"/>
+                                        <input type="hidden" name="orderId" value="${element.id}" />
+                                        <input type="submit" name="button_ok" value="${element.id}" /><br/>
+                                    </form>
+                                </td>
+                                    <%--set-active--%>
+                                <td>
+                                    <p>
+                                        ${element.status}
+                                    </p>
                                 </td>
                             </tr>
                         </c:forEach>
                     </table>
-                <%--</c:if>--%>
-                <%--<c:if test="${current_page != null}">--%>
+
+
                     <div width="100%" style="background-color: deepskyblue; font-size: 1em">    
                         <c:forEach begin="1" end="${max_page}" var="i">
                             <c:if test="${i != current_page}">
-                                <a href="FrontController?command=selectAllUsers&page_num=${i}">${i}</a>
+                                <a href="FrontController?command=showAllClientsOrders&userId=${user_id}&page_num=${i}">${i}</a>
                             </c:if>
                             <c:if test="${i == current_page}">
                                 <c:out value="${i}"/>
@@ -117,13 +136,18 @@
                 <p>
                     <a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
                     -->
-                    <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
-                    -->
-                    <a href="FrontController?command=goToPage&address=manageClients.jsp">CLIENTS</a>
-                    <c:if test="${current_page != null}">
+                    <c:if test="${requestScope.get('for_user') != 'for_user'}">
+                        <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
                         -->
-                         <a href="FrontController?command=selectAllUsers&page_num=${current_page}">Page: ${current_page}</a>
+                        <a href="FrontController?command=goToPage&address=manageOrders.jsp">ORDERS</a>
                     </c:if>
+                    <c:if test="${requestScope.get('for_user') == 'for_user'}">
+                        <a href="FrontController?command=goToPage&address=main.jsp">MAIN</a>
+                        -->
+                        <a href="FrontController?command=goToPage&address=basket.jsp">BASKET</a>
+                    </c:if>
+                    -->
+                    <a href="FrontController?command=showAllClientsOrders&userId=${user_id}&page_num=${current_page}">Page: ${current_page}</a>
                 </p>
             </div>
         </div>

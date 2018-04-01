@@ -103,6 +103,14 @@
         <classname>SelectAllSuccessOrdersCommand</classname>
     </command>
     <command>
+        <webname>showAllClientsOrders</webname>
+        <classname>ShowAllClientsOrdersCommand</classname>
+    </command>
+    <command>
+        <webname>showAllMyOrders</webname>
+        <classname>ShowAllMyOrdersCommand</classname>
+    </command>
+    <command>
         <webname>editNewOrder</webname>
         <classname>EditNewOrderCommand</classname>
     </command>

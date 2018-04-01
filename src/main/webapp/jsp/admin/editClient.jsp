@@ -69,6 +69,18 @@
                     <input type="hidden" name="page_num" value="1"/>
                     <input type="submit" name="get_users" value="Get them!"/>
                 </form>
+                <br/>
+                <br/>
+                <hr/>
+                <br/>
+                <form action="FrontController" method="post">
+                    <p><b>Get ALL orders</b>
+                        <input type="hidden" name="command" value="showAllClientsOrders"/>
+                        <input type="hidden" name="page_num" value="1"/>
+                        <input type="hidden" name="userId" value="${user_id}"/><br/>
+                        <input type="submit" name="get_orders" value="Show ALL Orders!"/>
+                    </p>
+                </form>
             </div>
         
             <div id="content">
@@ -125,12 +137,6 @@
                 <br/>
                 <br/>
 
-                <%--todo - show active and new orders somehow--%>
-                <%--<form title="Find all active orders with user ID" action="FrontController" method="post">--%>
-                    <%--<input type="hidden" name="command" value="editClient" />--%>
-                    <%--<input type="hidden" name="orderId" value="${user_id}" />--%>
-                    <%--<input type="submit" name="show" value="Show" /><br/>--%>
-                <%--</form>--%>
             </div>
         </div>
     

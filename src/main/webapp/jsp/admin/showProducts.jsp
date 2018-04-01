@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Inspect order</title>
+    <title>Show products</title>
 
     <fmt:setLocale value="${sessionScope.local}" />
     <fmt:setBundle basename="localization.local" var="loc" />
@@ -62,25 +62,7 @@
 <div class="middle">
     <div id="menu">
         <p>Order ID : ${requestScope.get("orderId")}</p>
-        <p>Status :
-        <form title="Set status = ${requestScope.get('new_status')}" action="FrontController" method="post">
-            <input type="hidden" name="command" value="orderSetStatus" />
-            <input type="hidden" name="new_status" value="${requestScope.get('new_status')}" />
-            <input type="hidden" name="from" value="editOrder" />
-            <input type="hidden" name="orderId" value="${orderId}" />
-            <input type="submit" name="status" value="${requestScope.get('new_status')}" /><br/>
-        </form>
-        </p>
-        <c:if test="${requestScope.get('new_status') != 'archiveOrder'}">
-            <p>Delete order :
-            <form title="Delete Order" action="FrontController" method="post">
-                <input type="hidden" name="command" value="deleteOrder" />
-                <input type="hidden" name="from" value="editOrder" />
-                <input type="hidden" name="orderId" value="${orderId}" />
-                <input type="submit" name="edit" value="DELETE" /><br/>
-            </form>
-            </p>
-        </c:if>
+        <p>Status ${requestScope.status}</p>
         <p>Inspect user :
         <form title="Go to user" action="FrontController" method="post">
             <input type="hidden" name="command" value="editClient" />
@@ -107,7 +89,6 @@
                     <td>TYPE</td>
                     <td>PRICE</td>
                 </tr>
-                <c:set value="1" var="indexRemovingProduct"/>
                 <c:forEach items="${requestScope.productArray}" var="product">
                     <tr>
                         <td>${product.id}</td>
@@ -115,7 +96,6 @@
                         <td>${product.name}</td>
                         <td>${product.type}</td>
                         <td>${product.price}</td>
-
                     </tr>
                 </c:forEach>
             </table>
@@ -140,14 +120,18 @@
         <p>
             <a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
             -->
-            <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
-            -->
-            <a href="FrontController?command=goToPage&address=manageOrders.jsp">ORDERS</a>
-
-            <c:if test="${current_page != null}">
+            <c:if test="${requestScope.get('for_user') != 'for_user'}">
+                <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
                 -->
-                 <a href="${requestScope.get('lastCMDneedPage')}${current_page}">Page: ${current_page}</a>
+                <a href="FrontController?command=goToPage&address=manageOrders.jsp">ORDERS</a>
             </c:if>
+            <c:if test="${requestScope.get('for_user') == 'for_user'}">
+                <a href="FrontController?command=goToPage&address=main.jsp">MAIN</a>
+                -->
+                <a href="FrontController?command=goToPage&address=basket.jsp">BASKET</a>
+            </c:if>
+             -->
+            <a href="${requestScope.get('lastCMDneedPage')}${current_page}">Page: ${current_page}</a>
         </p>
     </div>
 </div>

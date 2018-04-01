@@ -38,6 +38,7 @@ public class SelectAllActiveOrdersCommand implements Command {
 
             request.setAttribute("maxPage", maxPage);
             request.setAttribute("currentPage", currentPage);
+            request.setAttribute("command", "selectAllActiveOrders");
             request.setAttribute("command_2", "inspectOrder");
             request.setAttribute("command_3", "orderSetSuccessful");
             request.setAttribute("command_4", "deleteOrder");

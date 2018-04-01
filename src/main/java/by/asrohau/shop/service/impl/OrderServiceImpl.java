@@ -157,5 +157,24 @@ public class OrderServiceImpl implements OrderService{
             return orderDAO.selectAllSuccessOrders(row);
         } catch (DAOException e) {
             throw new ServiceException(e);
-        }    }
+        }
+    }
+
+    @Override
+    public int countClientOrders(int user_id) throws ServiceException {
+        try {
+            return orderDAO.countClientsOrders(user_id);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public ArrayList<Order> getAllClientsOrders(int row, int user_id) throws ServiceException {
+        try {
+            return orderDAO.selectAllClientsOrders(row, user_id);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

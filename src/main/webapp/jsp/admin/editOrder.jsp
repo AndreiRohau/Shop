@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>ManageShop</title>
+    <title>Edit order</title>
 
     <fmt:setLocale value="${sessionScope.local}" />
     <fmt:setBundle basename="localization.local" var="loc" />
@@ -119,7 +119,6 @@
                         <c:if test="${!requestScope.lastCMD.matches('inspectOrder')}">
                             <td>
                                 <form action="FrontController" method="post">
-                                    <%--todo DeleteFromOrderCommand--%>
                                     <input type="hidden" name="command" value="deleteFromOrder" />
                                     <input type="hidden" name="product_id" value="${product.id}" />
                                     <input type="hidden" name="indexRemovingProduct" value="${indexRemovingProduct}" />
@@ -138,7 +137,7 @@
             <div width="100%" style="background-color: deepskyblue; font-size: 1em">    
                 <c:forEach begin="1" end="${max_page}" var="i">
                     <c:if test="${i != current_page}">
-                        <a href="FrontController?command=editNewOrder&page_num=${i}">${i}</a>
+                        <a href="${requestScope.get('lastCMDneedPage')}${i}">${i}</a>
                     </c:if>
                     <c:if test="${i == current_page}">
                         <c:out value="${i}"/>
@@ -161,7 +160,7 @@
 
             <c:if test="${current_page != null}">
                 -->
-                 <a href="${sessionScope.get('lastCMD')}">Page: ${current_page}</a>
+                 <a href="${requestScope.get('lastCMDneedPage')}${current_page}">Page: ${current_page}</a>
             </c:if>
         </p>
     </div>

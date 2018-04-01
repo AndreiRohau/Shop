@@ -102,62 +102,63 @@
             <div id="content">
 
                 <c:if test="${current_page != null}">
-                <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
-                    <tr>
-                        <td>USER</td>
-                        <td>ORDER</td>
-                        <td>STATUS</td>
-                        <td>INFO</td>
-                    </tr>
-                    <c:forEach items="${requestScope.array}" var="element">
+                    <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
                         <tr>
-                            <%--new: Client ID - edit client --%>
-                            <td>
-                                <form title="Go to user" action="FrontController" method="post">
-                                    <input type="hidden" name="command" value="editClient" />
-                                    <input type="hidden" name="orderId" value="${element.id}" />
-                                    <input type="submit" name="userId" value="${element.user_id}" /><br/>
-                                </form>
-                            </td>
-                                <%--order id - open order--%>
-                            <td>
-                                <form title="Observe the order" action="FrontController" method="post">
-                                    <input type="hidden" name="command" value="${requestScope.get('command_2')}" />
-                                    <input type="hidden" name="new_status" value="${requestScope.get('command_3')}" />
-                                    <input type="hidden" name="from" value="manageOrders" />
-                                    <input type="hidden" name="page_num" value="1"/>
-                                    <input type="hidden" name="userId" value="${element.user_id}" />
-                                    <input type="submit" name="orderId" value="${element.id}" /><br/>
-                                </form>
-                            </td>
-                                <%--set-active--%>
-                            <td>
-                                <form title="Set status = ${requestScope.get('command_3')}" action="FrontController" method="post">
-                                    <input type="hidden" name="command" value="orderSetStatus" />
-                                    <input type="hidden" name="new_status" value="${requestScope.get('command_3')}" />
-                                    <input type="hidden" name="from" value="manageOrders" />
-                                    <input type="hidden" name="orderId" value="${element.id}" />
-                                    <input type="submit" name="status" value="${element.status}" /><br/>
-                                </form>
-                            </td>
-                                <%--delete--%>
-                            <td>
-                                <form title="${requestScope.get('command_4')}" action="FrontController" method="post">
-                                    <input type="hidden" name="command" value="${requestScope.get('command_4')}" />
-                                    <input type="hidden" name="from" value="manageOrders" />
-                                    <input type="hidden" name="orderId" value="${element.id}" />
-                                    <input type="submit" name="edit" value="DELETE" /><br/>
-                                </form>
-                            </td>
+                            <td>USER</td>
+                            <td>ORDER</td>
+                            <td>STATUS</td>
+                            <td>INFO</td>
                         </tr>
-                    </c:forEach>
-                </table>
-
+                        <c:forEach items="${requestScope.array}" var="element">
+                            <tr>
+                                <%--new: Client ID - edit client --%>
+                                <td>
+                                    <form title="Go to user" action="FrontController" method="post">
+                                        <input type="hidden" name="command" value="editClient" />
+                                        <input type="hidden" name="orderId" value="${element.id}" />
+                                        <input type="submit" name="userId" value="${element.user_id}" /><br/>
+                                    </form>
+                                </td>
+                                    <%--order id - open order--%>
+                                <td>
+                                    <form title="Observe the order" action="FrontController" method="post">
+                                        <input type="hidden" name="command" value="${requestScope.get('command_2')}" />
+                                        <input type="hidden" name="new_status" value="${requestScope.get('command_3')}" />
+                                        <input type="hidden" name="from" value="manageOrders" />
+                                        <input type="hidden" name="page_num" value="1"/>
+                                        <input type="hidden" name="userId" value="${element.user_id}" />
+                                        <input type="submit" name="orderId" value="${element.id}" /><br/>
+                                    </form>
+                                </td>
+                                    <%--set-active--%>
+                                <td>
+                                    <form title="Set status = ${requestScope.get('command_3')}" action="FrontController" method="post">
+                                        <input type="hidden" name="command" value="orderSetStatus" />
+                                        <input type="hidden" name="new_status" value="${requestScope.get('command_3')}" />
+                                        <input type="hidden" name="from" value="manageOrders" />
+                                        <input type="hidden" name="orderId" value="${element.id}" />
+                                        <input type="submit" name="status" value="${element.status}" /><br/>
+                                    </form>
+                                </td>
+                                    <%--delete--%>
+                                <td>
+                                    <c:if test="${requestScope.get('command_4') != 'archiveOrder'}">
+                                        <form title="${requestScope.get('command_4')}" action="FrontController" method="post">
+                                            <input type="hidden" name="command" value="${requestScope.get('command_4')}" />
+                                            <input type="hidden" name="from" value="manageOrders" />
+                                            <input type="hidden" name="orderId" value="${element.id}" />
+                                            <input type="submit" name="edit" value="DELETE" /><br/>
+                                        </form>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
 
                     <div width="100%" style="background-color: deepskyblue; font-size: 1em">    
                         <c:forEach begin="1" end="${max_page}" var="i">
                             <c:if test="${i != current_page}">
-                                <a href="${sessionScope.get('lastCMD')}${i}">${i}</a>
+                                <a href="FrontController?command=${requestScope.get('command')}&page_num=${i}">${i}</a>
                             </c:if>
                             <c:if test="${i == current_page}">
                                 <c:out value="${i}"/>
@@ -179,7 +180,7 @@
                     <a href="FrontController?command=goToPage&address=manageOrders.jsp">ORDERS</a>
                     <c:if test="${current_page != null}">
                         -->
-                         <a href="${sessionScope.get('lastCMD')}">Page: ${current_page}</a>
+                         <a href="FrontController?command=${requestScope.get('command')}&page_num=${current_page}">Page: ${current_page}</a>
                     </c:if>
                 </p>
             </div>

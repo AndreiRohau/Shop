@@ -37,4 +37,8 @@ public interface OrderDAO {
     ArrayList<Order> selectAllActiveOrders(int row) throws DAOException;
 
     ArrayList<Order> selectAllSuccessOrders(int row) throws DAOException;
+
+    int countClientsOrders(int user_id) throws DAOException;
+
+    ArrayList<Order> selectAllClientsOrders(int row, int user_id) throws DAOException;
 }

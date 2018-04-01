@@ -28,8 +28,10 @@ public class InspectOrderCommand implements Command {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         OrderService orderService = serviceFactory.getOrderService();
+        UserService userService = serviceFactory.getUserService();
         ProductService productService = serviceFactory.getProductService();
-
+        User user = new User();
+        user.setLogin((String) request.getSession().getAttribute("userName"));
         Product product = new Product();
 
         int currentPage= Integer.parseInt(request.getParameter("page_num"));
@@ -65,13 +67,21 @@ public class InspectOrderCommand implements Command {
                 product = new Product();
             }
 
+            String for_user;
+            if(user.getLogin().equals("Admin")){
+                for_user = "Admin";
+            }else {
+                for_user = "for_user";
+            }
             request.setAttribute("productArray", productArray);
             request.setAttribute("productIDsString", productIDsString);
             request.setAttribute("new_status", request.getParameter("new_status"));
             request.setAttribute("orderId", order.getId());
             request.setAttribute("userId", order.getUser_id());
+            request.setAttribute("for_user", for_user);
             request.setAttribute("address", order.getUser_address());
             request.setAttribute("phone", order.getUser_phone());
+            request.setAttribute("status", order.getStatus());
             request.setAttribute("maxPage", maxPage);
             request.setAttribute("currentPage", currentPage);
             request.getSession().setAttribute("lastCMD",
@@ -80,12 +90,28 @@ public class InspectOrderCommand implements Command {
                             + "&userId=" + order.getUser_id()
                             + "&address=" + order.getUser_address()
                             + "&phone=" + order.getUser_phone()
-                            + "&new_status=" + String.valueOf(request.getParameter("new_status")));
+                            + "&new_status=" + String.valueOf(request.getParameter("new_status"))
+                            + "&from=" + request.getParameter("from"));
+
+            request.setAttribute("lastCMDneedPage",
+                    "FrontController?command=inspectOrder"
+                            + "&orderId=" + orderID
+                            + "&userId=" + order.getUser_id()
+                            + "&address=" + order.getUser_address()
+                            + "&phone=" + order.getUser_phone()
+                            + "&new_status=" + String.valueOf(request.getParameter("new_status"))
+                            + "&from=" + request.getParameter("from")
+                            + "&page_num=");
 
             //what if not null??
             request.setAttribute("msg", request.getParameter("msg"));
             // what if not null ??
-            String goToPage = "/jsp/admin/inspectOrder.jsp";
+            String goToPage;
+            if(request.getParameter("from").equals("manageOrders")) {
+                goToPage = "/jsp/admin/inspectOrder.jsp";
+            }else {
+                goToPage = "/jsp/admin/showProducts.jsp";
+            }
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
 

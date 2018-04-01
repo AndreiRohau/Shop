@@ -40,6 +40,7 @@ public class SelectAllNewOrdersCommand implements Command {
 
             request.setAttribute("maxPage", maxPage);
             request.setAttribute("currentPage", currentPage);
+            request.setAttribute("command", "selectAllNewOrders");
             request.setAttribute("command_2", "editNewOrder");
             request.setAttribute("command_3", "orderSetActive");
             request.setAttribute("command_4", "deleteOrder");

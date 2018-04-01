@@ -62,6 +62,15 @@
 
         <div class="middle">
             <div id="menu">
+                <p><b>Get ALL orders</b>
+                    <form action="FrontController" method="post">
+                        <input type="hidden" name="command" value="showAllMyOrders"/>
+                        <input type="hidden" name="page_num" value="1"/>
+                        <input type="submit" name="get_orders" value="Show ALL Orders!"/>
+                    </form>
+                </p>
+                <br/>
+                <br/>
                 <p><b>Basket</b></p>
                 <hr/>
                 <form action="FrontController" method="post">
@@ -71,8 +80,6 @@
                         <input type="submit" name="get_reserved" value="Get them!"/>
                     </p>
                 </form>
-                <br/>
-                <br/>
                 <br/>
                 <br/>
                 <hr/>
