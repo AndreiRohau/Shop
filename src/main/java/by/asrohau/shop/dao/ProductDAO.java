@@ -16,4 +16,7 @@ public interface ProductDAO {
 	boolean deleteProduct(Product product) throws DAOException;
 	int countProducts() throws DAOException;
 
+    int countProductsComprehensive(Product product) throws DAOException;
+	ArrayList<Product> selectProductsComprehensive(Product product, int row) throws DAOException;
+
 }

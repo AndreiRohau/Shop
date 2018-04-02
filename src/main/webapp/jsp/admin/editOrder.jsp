@@ -62,7 +62,7 @@
 <div class="middle">
     <div id="menu">
         <p>Order ID : ${requestScope.get("orderId")}</p>
-        <p>Status ${requestScope.status}:
+        <p>Status ${requestScope.get('status')}:
             <form title="Set status = ${requestScope.get('new_status')}" action="FrontController" method="post">
                 <input type="hidden" name="command" value="orderSetStatus" />
                 <input type="hidden" name="new_status" value="${requestScope.get('new_status')}" />

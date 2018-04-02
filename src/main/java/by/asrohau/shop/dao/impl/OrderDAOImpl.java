@@ -23,6 +23,7 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
     private String DELETE_RESERVED_QUERY = "DELETE FROM shop.reserve WHERE id = ?";
     private String SELECT_ALL_RESERVED_IDS_QUERY = "SELECT * FROM shop.reserve WHERE user_id = ?";
     private String DELETE_ALL_RESERVED_QUERY = "DELETE FROM shop.reserve WHERE user_id = ?";
+    private String DELETE_ALL_ORDERS_WITH_USER_ID_QUERY = "DELETE FROM shop.orders WHERE user = ?";
     private String SAVE_NEW_ORDER_QUERY = "INSERT INTO shop.orders (user, products, address, phone, status) VALUES (?,?,?,?,?)";
     private String COUNT_All_ORDERS_QUERY = "SELECT COUNT(*) FROM shop.orders WHERE status = ?";
     private String SELECT_ALL_ORDERS_QUERY = "SELECT * FROM shop.orders WHERE status = ? LIMIT ?, ?";
@@ -134,6 +135,20 @@ public class OrderDAOImpl extends AbstractDAO<Reserve> implements OrderDAO {
     @Override
     public boolean deleteAllReserved(int user_id) throws DAOException {
         try (PreparedStatement statement = getConnection().prepareStatement(DELETE_ALL_RESERVED_QUERY)) {
+            statement.setInt(1, user_id);
+
+            int result = statement.executeUpdate();
+            statement.close();
+            connection.close();
+            return (result != 0);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteAllOrdersWithUserID(int user_id) throws DAOException {
+        try (PreparedStatement statement = getConnection().prepareStatement(DELETE_ALL_ORDERS_WITH_USER_ID_QUERY)) {
             statement.setInt(1, user_id);
 
             int result = statement.executeUpdate();

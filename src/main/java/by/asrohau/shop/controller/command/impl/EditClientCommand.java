@@ -35,6 +35,7 @@ public class EditClientCommand implements Command {
                 lastCMD = "FrontController?command=editClient&userId=" + request.getParameter("userId");
 
             } else {
+                request.setAttribute("errorMessage", "Probably user does not exists!");
                 goToPage = "error.jsp";
                 lastCMD = "FrontController?command=goToPage&address=manageClients.jsp";
             }

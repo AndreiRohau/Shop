@@ -70,7 +70,7 @@
                     </form>
                 </p>
                 <br/>
-                <br/>
+                <hr/>
                 <p><b>Basket</b></p>
                 <hr/>
                 <form action="FrontController" method="post">
@@ -81,15 +81,14 @@
                     </p>
                 </form>
                 <br/>
-                <br/>
                 <hr/>
                 <br/>
                 <form action="FrontController" method="post">
                     <p><b>Buy all products in basket.</b></p>
                     <input type="hidden" name="command" value="createOrder"/><br/>
-                    <p>Fill with the address</p>
+                    <p>Fill with the address:</p>
                     <input type="text" name="user_address" value="" required/><br/><br/>
-                    <p>Fill with your contact phone number</p>
+                    <p>Fill with your contact phone number:</p>
                     <input type="text" name="user_phone" value="" required/><br/><br/>
                     <input type="submit" name="buy" value="Buy now!"/>
                 </form>
@@ -102,6 +101,7 @@
                 <p><b><c:out value="${requestScope.get('msg')}"/></b></p>
                 <c:if test="${current_page != null}">
                     <H1>Everything you have choosen for purchasing.</H1>
+                    <hr/>
                     <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
                         <tr>
                             <td>INFO</td>

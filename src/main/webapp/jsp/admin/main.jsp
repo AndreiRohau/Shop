@@ -22,7 +22,8 @@
     <fmt:message bundle="${loc}" key="local.manageClients" var="manageClients" />
     <fmt:message bundle="${loc}" key="local.manageOrders" var="manageOrders" />
 
-
+    <c:set var="current_page" value="${requestScope.get('currentPage')}"/>
+    <c:set var="max_page" value="${requestScope.get('maxPage')}"/>
 </head>
 <body>
 <div class="header">
@@ -75,8 +76,64 @@
     </div>
 
     <div id="content">
-        <H1>GREETINGS!</H1>
-        <p>CHOOSE WHAT YOU WANT TO DO!</p>
+        <form action="FrontController" method="post">
+            <p><b>Fill</b>
+                <input type="hidden" name="command" value="findSuitable"/>
+                <input type="hidden" name="page_num" value="1"/>
+                <input title="company" type="text" name="company" value="" />
+                <input title="name" type="text" name="name" value="" />
+                <input title="type" type="text" name="type" value="" />
+                <input title="price" type="text" name="price" value="" />
+                <input type="submit" name="get_products" value="Find it!"/>
+            </p>
+        </form>
+        <br/>
+        <hr/>
+        <c:if test="${current_page != null}">
+            <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bgcolor="#ffebcd">
+                <tr>
+                    <td>INFO</td>
+                    <td>COMPANY</td>
+                    <td>NAME</td>
+                    <td>TYPE</td>
+                    <td>PRICE</td>
+                    <td>BUY</td>
+                </tr>
+                <c:forEach items="${requestScope.productArray}" var="product">
+                    <tr>
+                        <td>
+                            <form action="FrontController" method="post">
+                                <input type="hidden" name="command" value="productInfo" />
+                                <input type="hidden" name="productId" value="${product.id}" />
+                                <input type="submit" name="info" value="INFO" /><br/>
+                            </form>
+                        </td>
+                        <td>${product.company}</td>
+                        <td>${product.name}</td>
+                        <td>${product.type}</td>
+                        <td>${product.price}</td>
+                        <td>
+                            <form action="FrontController" method="post">
+                                <input type="hidden" name="command" value="addToBasket" />
+                                <input type="hidden" name="productId" value="${product.id}" />
+                                <input type="submit" name="buy" value="BUY" /><br/>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+
+            <div width="100%" style="background-color: deepskyblue; font-size: 1em">    
+                <c:forEach begin="1" end="${max_page}" var="i">
+                                <c:if test="${i != current_page}">
+                            		<a href="${sessionScope.get('lastCMDneedPage')}${i}">${i}</a>
+                                </c:if>
+                                <c:if test="${i == current_page}">
+                                    <c:out value="${i}"/>
+                            </c:if>
+                        </c:forEach>
+            </div>
+        </c:if>
     </div>
 
 </div>
@@ -88,6 +145,10 @@
                     <a href="FrontController?command=goToPage&address=index.jsp">INDEX</a>
                       -->
                     <a href="FrontController?command=goToPage&address=main.jsp">ADMINISTRATION</a>
+                    <c:if test="${current_page != null}">
+                        -->
+                         <a href="${sessionScope.get('lastCMDneedPage')}${current_page}">Page: ${current_page}</a>
+                    </c:if>
                 </p>
             </div>
         </div>

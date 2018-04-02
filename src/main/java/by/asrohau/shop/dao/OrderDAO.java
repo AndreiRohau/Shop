@@ -19,6 +19,7 @@ public interface OrderDAO {
     LinkedList<Integer> selectAllReservedIds(int user_id) throws DAOException;
 
     boolean deleteAllReserved(int user_id) throws DAOException;
+    boolean deleteAllOrdersWithUserID(int user_id) throws DAOException;
 
     boolean insertNewOrder(Order order) throws DAOException;
 

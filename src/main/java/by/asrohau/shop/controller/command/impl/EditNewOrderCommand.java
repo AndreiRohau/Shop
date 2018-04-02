@@ -168,6 +168,7 @@ public class EditNewOrderCommand implements Command {
             request.setAttribute("productArray", productArray);
             request.setAttribute("productIDsString", productIDsString);
             request.setAttribute("new_status", request.getParameter("new_status"));
+            request.setAttribute("status", order.getStatus());
             request.setAttribute("orderId", order.getId());
             request.setAttribute("userId", order.getUser_id());
             request.setAttribute("address", order.getUser_address());

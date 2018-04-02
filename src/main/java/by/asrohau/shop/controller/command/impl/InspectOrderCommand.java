@@ -76,6 +76,7 @@ public class InspectOrderCommand implements Command {
             request.setAttribute("productArray", productArray);
             request.setAttribute("productIDsString", productIDsString);
             request.setAttribute("new_status", request.getParameter("new_status"));
+            request.setAttribute("status", order.getStatus());
             request.setAttribute("orderId", order.getId());
             request.setAttribute("userId", order.getUser_id());
             request.setAttribute("for_user", for_user);

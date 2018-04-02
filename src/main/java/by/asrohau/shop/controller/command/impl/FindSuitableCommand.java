@@ -1,10 +1,8 @@
 package by.asrohau.shop.controller.command.impl;
 
 import by.asrohau.shop.bean.Product;
-import by.asrohau.shop.bean.User;
 import by.asrohau.shop.controller.command.Command;
 import by.asrohau.shop.controller.exception.ControllerException;
-import by.asrohau.shop.service.AdminService;
 import by.asrohau.shop.service.ProductService;
 import by.asrohau.shop.service.ServiceFactory;
 import by.asrohau.shop.service.exception.ServiceException;
@@ -16,13 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SelectAllProductsCommand implements Command {
+public class FindSuitableCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
-        System.out.println("We got to SelectAllProductsCommand");
-
+        System.out.println("We got to FindSuitableCommand");
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ProductService productService = serviceFactory.getProductService();
+
         String goToPage;
         int currentPage;
         int maxPage;
@@ -31,31 +29,58 @@ public class SelectAllProductsCommand implements Command {
         currentPage = Integer.parseInt(request.getParameter("page_num"));
         row = (currentPage - 1)*15;
 
+        String check = "";
+        String company = request.getParameter("company").trim();
+        String name = request.getParameter("name").trim();
+        String type = request.getParameter("type").trim();
+        String price = request.getParameter("price").trim();
+
+        Product product = new Product();
+        if (!company.equals(check)) {
+            product.setCompany(company);
+        }
+        if (!name.equals(check)) {
+            product.setName(name);
+        }
+        if (!type.equals(check)) {
+            product.setType(type);
+        }
+        if (!price.equals(check)) {
+            product.setPrice(price);
+        }
+
         try {
             //count amount of all products
-            maxPage = (int) Math.ceil(((double) productService.countProducts()) / 15);
+            maxPage = (int) Math.ceil(((double) productService.countProductsComprehensive(product)) / 15);
 
-            ArrayList<Product> productArrayList = productService.getAllProducts(row);
+            ArrayList<Product> productArrayList = productService.findProductsComprehensive(product, row);
             request.setAttribute("productArray", productArrayList);
 
             request.setAttribute("maxPage", maxPage);
             request.setAttribute("currentPage", currentPage);
             request.getSession().setAttribute("lastCMD",
-                    "FrontController?command=selectAllProducts&page_num=" + currentPage);
+                    "FrontController?command=findSuitable"
+                            + "&company=" + company
+                            + "&name=" + name
+                            + "&type=" + type
+                            + "&price=" + price
+                            + "&page_num=" + currentPage);
             request.getSession().setAttribute("lastCMDneedPage",
-                    "FrontController?command=selectAllProducts&page_num=");
+                    "FrontController?command=findSuitable"
+                            + "&company=" + company
+                            + "&name=" + name
+                            + "&type=" + type
+                            + "&price=" + price
+                            + "&page_num=");
 
             if(!request.getSession().getAttribute("userName").equals("Admin")){
                 goToPage = "/jsp/user/main.jsp";
             } else {
                 goToPage = "/jsp/admin/manageProducts.jsp";
             }
-            //what if not null??
-            request.setAttribute("msg", request.getParameter("msg"));
-            // what if not null ??
+
             RequestDispatcher dispatcher = request.getRequestDispatcher(goToPage);
             dispatcher.forward(request, response);
-
         } catch (ServiceException | ServletException | IOException e) {
             throw new ControllerException(e);
         }

@@ -55,6 +55,10 @@
         <classname>SelectAllProductsCommand</classname>
     </command>
     <command>
+        <webname>findSuitable</webname>
+        <classname>FindSuitableCommand</classname>
+    </command>
+    <command>
         <webname>selectAllReserved</webname>
         <classname>SelectAllReservedCommand</classname>
     </command>

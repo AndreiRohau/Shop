@@ -110,4 +110,21 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 
+	@Override
+	public int countProductsComprehensive(Product product) throws ServiceException {
+		try {
+			return productDAO.countProductsComprehensive(product);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public ArrayList<Product> findProductsComprehensive(Product product, int row) throws ServiceException {
+		try {
+			return productDAO.selectProductsComprehensive(product, row);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
 }

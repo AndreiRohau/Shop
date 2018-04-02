@@ -77,6 +77,14 @@ public class OrderServiceImpl implements OrderService{
             throw new ServiceException(e);
         }
     }
+    @Override
+    public boolean deleteAllOrdersWithUserID(int user_id) throws ServiceException {
+        try {
+            return orderDAO.deleteAllOrdersWithUserID(user_id);
+        } catch(DAOException e){
+            throw new ServiceException(e);
+        }
+    }
 
     @Override
     public boolean saveNewOrder(Order order) throws ServiceException {

@@ -16,5 +16,7 @@ public interface ProductService {
 	Product findProduct(Product product) throws ServiceException;
 	boolean deleteProduct(Product product) throws ServiceException;
 	int countProducts() throws  ServiceException;
-	
+
+	int countProductsComprehensive(Product product) throws  ServiceException;
+	ArrayList<Product>  findProductsComprehensive(Product product, int row) throws  ServiceException;
 }

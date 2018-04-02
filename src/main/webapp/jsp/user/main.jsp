@@ -83,12 +83,20 @@
 			</div>
 
 			<div id="content">
-				<p><a href="" >Search.</a></p>
-
+				<form action="FrontController" method="post">
+					<p><b>Fill</b>
+						<input type="hidden" name="command" value="findSuitable"/>
+						<input type="hidden" name="page_num" value="1"/>
+						<input title="company" type="text" name="company" value="" />
+						<input title="name" type="text" name="name" value="" />
+						<input title="type" type="text" name="type" value="" />
+						<input title="price" type="text" name="price" value="" />
+						<input type="submit" name="get_products" value="Find it!"/>
+					</p>
+				</form>
 				<br/>
 				<hr/>
 
-				<c:out value="${requestScope.get('msg')}"/>
 				<form action="FrontController" method="post">
 					<p><b>Get all products</b>
 						<input type="hidden" name="command" value="selectAllProducts"/>
@@ -136,7 +144,7 @@
 					<div width="100%" style="background-color: deepskyblue; font-size: 1em">    
 						<c:forEach begin="1" end="${max_page}" var="i">
 				            <c:if test="${i != current_page}">
-				        		<a href="FrontController?command=selectAllProducts&page_num=${i}">${i}</a>
+				        		<a href="${sessionScope.get('lastCMDneedPage')}${i}">${i}</a>
 				            </c:if>
 				            <c:if test="${i == current_page}">
 				                <c:out value="${i}"/>
@@ -158,7 +166,7 @@
 
 					<c:if test="${current_page != null}">
 						-->
-						 <a href="FrontController?command=selectAllProducts&page_num=${current_page}">Page: ${current_page}</a>
+						 <a href="${sessionScope.get('lastCMDneedPage')}${current_page}">Page: ${current_page}</a>
 					</c:if>
 				</p>
 			</div>

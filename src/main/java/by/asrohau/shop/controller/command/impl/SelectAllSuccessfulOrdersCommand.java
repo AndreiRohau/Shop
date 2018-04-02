@@ -40,8 +40,8 @@ public class SelectAllSuccessfulOrdersCommand implements Command {
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("command", "selectAllSuccessfulOrders");
             request.setAttribute("command_2", "inspectOrder");
-            request.setAttribute("command_3", "archiveOrder");
-            request.setAttribute("command_4", "archiveOrder");
+            request.setAttribute("command_3", "archiveSetOrder");
+            request.setAttribute("command_4", "archiveSetOrder");
             request.getSession().setAttribute("lastCMD",
                     "FrontController?command=selectAllSuccessfulOrders&page_num=" + currentPage);
 

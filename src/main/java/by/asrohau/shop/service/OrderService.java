@@ -18,6 +18,7 @@ public interface OrderService {
     LinkedList<Integer> getAllReservedIds(int user_id) throws ServiceException;
 
     boolean deleteAllReserved(int user_id) throws ServiceException;
+    boolean deleteAllOrdersWithUserID(int user_id) throws ServiceException;
 
     boolean saveNewOrder(Order order) throws ServiceException;
 

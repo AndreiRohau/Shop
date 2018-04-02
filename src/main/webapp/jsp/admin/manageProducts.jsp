@@ -80,6 +80,19 @@
 
             <div id="content">
                 <form action="FrontController" method="post">
+                    <p><b>Fill</b>
+                        <input type="hidden" name="command" value="findSuitable"/>
+                        <input type="hidden" name="page_num" value="1"/>
+                        <input title="company" type="text" name="company" value="" />
+                        <input title="name" type="text" name="name" value="" />
+                        <input title="type" type="text" name="type" value="" />
+                        <input title="price" type="text" name="price" value="" />
+                        <input type="submit" name="get_products" value="Find it!"/>
+                    </p>
+                </form>
+                <br/>
+                <hr/>
+                <form action="FrontController" method="post">
                     <p><b>Get all products</b>
                         <input type="hidden" name="command" value="selectAllProducts"/>
                         <input type="hidden" name="page_num" value="1"/>
